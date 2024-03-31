@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { AuthLayout } from "@/components";
 import { Card, Col, Row, Typography } from "antd";
 
 const Integrations = () => {

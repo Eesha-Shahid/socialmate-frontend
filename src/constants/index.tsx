@@ -1,5 +1,6 @@
-// import { navigationItems } from "./navigationItems";
+import { navigationIcons, navigationItems } from "./topNavItems";
 
-// export {
-//     navigationItems
-// }
+export {
+    navigationItems,
+    navigationIcons
+}

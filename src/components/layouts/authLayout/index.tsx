@@ -2,13 +2,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { Navbar } from '@/components';
-// import { topNavItems } from '@/constants/topNavItems';
-
 const { Header, Footer } = Layout;
-
-interface AuthLayoutProps {
-  children: React.ReactNode; 
-}
   
 const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (

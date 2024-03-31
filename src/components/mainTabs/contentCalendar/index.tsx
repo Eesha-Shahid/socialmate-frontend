@@ -1,6 +1,5 @@
 'use client'
 import React from "react";
-import { AuthLayout } from "@/components";
 import { Calendar } from 'antd';
 import type { CalendarProps } from 'antd';
 import { Dayjs } from "dayjs";
