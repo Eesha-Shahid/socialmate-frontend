@@ -3,7 +3,7 @@ import React from "react";
 import { Image, Row, Col, Typography } from "antd";
 const { Title } = Typography;
 
-const Navbar: React.FC = () => {
+const UnuthNavbar: React.FC = () => {
   return (
     <>
       <Row style={{ width: "100%" }} justify="space-between" align="middle">
@@ -23,4 +23,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default UnuthNavbar;

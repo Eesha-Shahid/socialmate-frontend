@@ -8,6 +8,7 @@ import FacebookIcon from './FacebookIcon';
 import InstagramIcon from './InstagramIcon';
 import RedditIcon from './RedditIcon';
 import InstagramMediumIcon from './InstagramMediumIcon';
+import GoogleIcon from './GoogleIcon';
 
 export {
     FollowersIcon,
@@ -19,5 +20,6 @@ export {
     FacebookIcon,
     InstagramIcon,
     InstagramMediumIcon,
-    RedditIcon
+    RedditIcon,
+    GoogleIcon
 }

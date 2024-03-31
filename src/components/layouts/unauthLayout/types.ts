@@ -1,3 +1,3 @@
-interface AuthLayoutProps {
+interface UnauthLayoutProps {
   children: React.ReactNode; 
 }
