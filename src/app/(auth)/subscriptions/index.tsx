@@ -20,11 +20,11 @@ const Subscriptions = () => {
       address2: `London No. ${index} Lake Park`,
       address3: `Sydney No. ${index} Lake Park`,
     }));
-  
+
     return data;
   };
 
-  const tblRef: Parameters<typeof Table>[0]['ref'] = React.useRef(null);
+  const tblRef: Parameters<typeof Table>[0]["ref"] = React.useRef(null);
   const data = React.useMemo(() => getData(count), [count]);
 
   const mergedColumns = React.useMemo<typeof fixedColumns>(() => {
@@ -39,21 +39,24 @@ const Subscriptions = () => {
     return fixedColumns?.map((col) => ({ ...col, onCell: undefined }));
   }, [expanded, fixed]);
 
-  const expandableProps = React.useMemo<TableProps<RecordType>['expandable']>(() => {
+  const expandableProps = React.useMemo<
+    TableProps<RecordType>["expandable"]
+  >(() => {
     if (!expanded) {
       return undefined;
     }
 
     return {
       columnWidth: 48,
-      expandedRowRender: (record) => <p style={{ margin: 0 }}>🎉 Expanded {record.address1}</p>,
+      expandedRowRender: (record) => (
+        <p style={{ margin: 0 }}>🎉 Expanded {record.address1}</p>
+      ),
       rowExpandable: (record) => record.id % 2 === 0,
     };
   }, [expanded]);
   return (
-    <AuthLayout>
-      <div style={{ padding: 64 }}>
-      <Space direction="vertical" style={{ width: '100%' }}>
+    <div style={{ padding: 64 }}>
+      <Space direction="vertical" style={{ width: "100%" }}>
         <Space>
           <Switch
             checked={bordered}
@@ -84,15 +87,15 @@ const Subscriptions = () => {
             onChange={(value: number) => setCount(value)}
             options={[
               {
-                label: 'None',
+                label: "None",
                 value: 0,
               },
               {
-                label: 'Less',
+                label: "Less",
                 value: 4,
               },
               {
-                label: 'Lot',
+                label: "Lot",
                 value: 10000,
               },
             ]}
@@ -122,7 +125,7 @@ const Subscriptions = () => {
             expanded
               ? undefined
               : {
-                  type: 'radio',
+                  type: "radio",
                   columnWidth: 48,
                 }
           }
@@ -130,7 +133,6 @@ const Subscriptions = () => {
         />
       </Space>
     </div>
-    </AuthLayout>
   );
 };
 

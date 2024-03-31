@@ -1,6 +1,6 @@
 import axiosInstance from "@/utils/axiosInstace";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getAccountDetailsSummarySuccess, getAnalyticsSummarySuccess, getAudienceInsightsSummarySuccess, getProfileViewsSummarySuccess } from "../reducers/instagramSummaryReducer";
+import { getAccountDetailsSummarySuccess, getAnalyticsSummarySuccess, getAudienceInsightsSummarySuccess, getGoalsSummarySuccess, getMilestonesSummarySuccess, getProfileViewsSummarySuccess } from "../reducers/instagramSummaryReducer";
 
 axiosInstance.interceptors.request.use(
   (config) => {
@@ -71,12 +71,48 @@ export const getAccountDetailsSummary = createAsyncThunk(
 );
 
 export const getAudienceInsightsSummary = createAsyncThunk(
-  "instagramSummary/etAudienceInsightsSummary",
+  "instagramSummary/getAudienceInsightsSummary",
   async (_, thunkAPI) => {
     try {
       const { dispatch } = thunkAPI;
       const response = await axiosInstance.get(`/user/audientce-insights/instagram`);
       dispatch(getAudienceInsightsSummarySuccess(response.data));
+    } catch (err: any) {
+      if (err.response?.status === 400) { 
+        return thunkAPI.rejectWithValue(err?.response.data.message[0]);
+      }
+      else{
+        return thunkAPI.rejectWithValue(err.response.data)
+      }
+    }
+  }
+);
+
+export const getMilestonesSummary = createAsyncThunk(
+  "instagramSummary/getMilestonesSummary",
+  async (_, thunkAPI) => {
+    try {
+      const { dispatch } = thunkAPI;
+      const response = await axiosInstance.get(`/user/milestones/instagram`);
+      dispatch(getMilestonesSummarySuccess(response.data));
+    } catch (err: any) {
+      if (err.response?.status === 400) { 
+        return thunkAPI.rejectWithValue(err?.response.data.message[0]);
+      }
+      else{
+        return thunkAPI.rejectWithValue(err.response.data)
+      }
+    }
+  }
+);
+
+export const getGoalsSummary = createAsyncThunk(
+  "instagramSummary/getGoalsSummary",
+  async (_, thunkAPI) => {
+    try {
+      const { dispatch } = thunkAPI;
+      const response = await axiosInstance.get(`/user/goals/instagram`);
+      dispatch(getGoalsSummarySuccess(response.data));
     } catch (err: any) {
       if (err.response?.status === 400) { 
         return thunkAPI.rejectWithValue(err?.response.data.message[0]);

@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 
-interface IItem {
+export interface IItem {
   key: string; 
   label: string;
   icon: any;
-  route: string;
+  content: string;
 }
 
 export interface TopNavigationProps {

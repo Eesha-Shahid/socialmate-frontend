@@ -4,6 +4,10 @@ import HeartIcon from './HeartIcon';
 import ReachIcon from './ReachIcon';
 import UpArrowIcon from './UpArrowIcon';
 import DownArrowIcon from './DownArrowIcon';
+import FacebookIcon from './FacebookIcon';
+import InstagramIcon from './InstagramIcon';
+import RedditIcon from './RedditIcon';
+import InstagramMediumIcon from './InstagramMediumIcon';
 
 export {
     FollowersIcon,
@@ -11,5 +15,9 @@ export {
     CommentsIcon,
     ReachIcon,
     UpArrowIcon,
-    DownArrowIcon
+    DownArrowIcon,
+    FacebookIcon,
+    InstagramIcon,
+    InstagramMediumIcon,
+    RedditIcon
 }

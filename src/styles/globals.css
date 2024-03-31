@@ -157,6 +157,26 @@ body {
 .ant-card-bordered {
 }
 
+.needle {
+  display: none;
+}
+
+.gradient-text {
+  font-size: 2rem;
+  font-weight: 500;
+  background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-bold {
+  font-weight: 500 !important;
+}
+
+.text-mute {
+  color: #666666 !important;
+}
+
 /* Components */
 @import url(../components/analyticsCard/index.css);
 

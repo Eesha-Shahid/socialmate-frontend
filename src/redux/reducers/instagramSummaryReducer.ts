@@ -28,7 +28,6 @@ const instagramSummarySlice = createSlice({
       { payload }: PayloadAction<IAnalyticsSummary>
     ) => {
       state.analyticsSummary = payload;
-      console.log(state.analyticsSummary);
       state.analyticsSummaryLoading = false;
     },
     getAnalyticsSummaryFailure: (state) => {

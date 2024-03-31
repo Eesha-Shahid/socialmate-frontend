@@ -5,14 +5,12 @@ import { Card, Col, Row, Space, Typography } from "antd";
 const { Text } = Typography;
 
 const AnalyticsCard: React.FC<IAnalyticsCardProps> = ({ title, data, icon }) => {
-  console.log(data);
-
   let isDecreased = null;
   let percentage = null;
 
   if (data.last_value !== null && data.value !== null){
     isDecreased = data.last_value >= data.value ? true : false;
-    percentage = Math.round(((data.value - data.last_value) / data.last_value) * 10);
+    percentage = Math.round(Math.abs((data.value - data.last_value) / data.last_value) * 10);
   }
 
   return(
@@ -23,16 +21,16 @@ const AnalyticsCard: React.FC<IAnalyticsCardProps> = ({ title, data, icon }) => 
             <Icon component={icon} />
           </Col>
           <Col>
-            <Text>{title}</Text>
+            <Text className="text-bold">{title}</Text>
           </Col>
         </Row>
         <Row>
-          <span>{data?.value}</span>
+          <span className="gradient-text">{data?.value}</span>
         </Row>
         <Row>
           <Space>
             {isDecreased !== null && isDecreased ? <DownArrowIcon/> : <UpArrowIcon/>}
-            <Text style={{ color: isDecreased ? getColor('green') : getColor('red') }}>{percentage}% vs last 7 days</Text>
+            <Text style={{ color: isDecreased ? getColor('red') : getColor('green') }}>{percentage}% vs last 7 days</Text>
           </Space>
         </Row>
       </Space>

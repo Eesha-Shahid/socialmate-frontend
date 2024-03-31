@@ -1,12 +1,10 @@
-import ContentCalendar from "./(auth)/calendar/page";
+import ContentCalendar from "./(auth)/calendar";
 import Dashboard from "./(auth)/dashboard";
-import PageContent from "./(auth)/dashboard";
-import Integrations from "./(auth)/integrations/page";
+import Integrations from "./(auth)/integrations";
 import SchedulerHub from "./(auth)/schedulerHub";
 import Subscriptions from "./(auth)/subscriptions";
 
 export {
-    PageContent,
     Dashboard,
     ContentCalendar,
     Integrations, 

@@ -1,12 +1,16 @@
 'use client'
 import React from 'react';
-import { Dashboard, SchedulerHub, Subscriptions } from './index';
+import { AuthLayout } from '@/components';
 
-const Home: React.FC = () => {
-  return (
-    <Dashboard/>
-    // <SchedulerHub/>
-    // <Subscriptions/>
+interface HomeProps {
+  children: React.ReactNode; 
+}
+
+const Home: React.FC<HomeProps> = ({ children }) => {
+  return(
+    <AuthLayout>
+      {children}
+    </AuthLayout>
   );
 };
 

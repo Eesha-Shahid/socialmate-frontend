@@ -10,9 +10,7 @@ const ContentCalendar = () => {
     console.log(value.format('YYYY-MM-DD'), mode);
   };
   return (
-    <AuthLayout>
-      <Calendar style={{ margin: '2rem', background: 'none' }} onPanelChange={onPanelChange} />
-    </AuthLayout>
+    <Calendar style={{ margin: '2rem', background: 'none' }} onPanelChange={onPanelChange} />
   );
 };
 

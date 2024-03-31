@@ -46,9 +46,17 @@ interface ICampaignSummary {
 }
 
 interface IMilestonesSummary {
-
+    impressions?: number;
+    followers?: number;
+    likes?:number;
+    comments?:number
+    reach?: number;
 }
 
 interface IGoalsSummary {
-
+    impressions?: number;
+    followers?: number;
+    likes?:number;
+    comments?:number
+    reach?: number;
 }
