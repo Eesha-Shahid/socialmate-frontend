@@ -22,7 +22,6 @@ const authSlice = createSlice({
       state.token = authToken;
       state.isAuthenticated = payload.isAuthenticated;
       state.loading = false;
-      console.log('Loaded user in state: ',state.user)
     },
     registerSuccess: (state) => {
       return state;

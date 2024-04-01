@@ -1,21 +1,21 @@
 import { combineReducers } from "redux";
 import authReducer, { AuthSelector } from "./authReducer";
 import instagramSummaryReducer, { InstagramSummarySelector } from "./instagramSummaryReducer";
-// import userReducer, { UserSelector } from "./userReducer";
-// import projectReducer, { ProjectSelector } from "./projectReducer";
+import contentCalendarReducer, { ContentCalendarSelector } from "./contentCalendarReducer";
+import subscriptionReducer, { SubscriptionSelector } from "./subscriptionReducer";
 
 export const appReducer = combineReducers({
   auth: authReducer,
-  instagramSummary: instagramSummaryReducer
-//   user: userReducer,
-//   project: projectReducer,
+  instagramSummary: instagramSummaryReducer,
+  contentCalendar: contentCalendarReducer,
+  subscription: subscriptionReducer
 });
 
 export {
-    InstagramSummarySelector
-//   AuthSelector,
-//   UserSelector,
-//   ProjectSelector
+    AuthSelector,
+    InstagramSummarySelector,
+    ContentCalendarSelector,
+    SubscriptionSelector
 }
 
 export type RootState = ReturnType<typeof appReducer>;

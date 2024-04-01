@@ -10,9 +10,7 @@ export const login = createAsyncThunk(
   async (formData: ILoginFormData, thunkAPI) => {
     try {
       const { dispatch } = thunkAPI;
-      console.log(formData);
       const response = await axiosInstance.post("/auth/login", formData);
-      console.log(response.data);
       const responseData = response.data as IloginResponseData;
       localStorage.setItem('token', responseData.token)
       dispatch(loginSuccess());
@@ -64,9 +62,7 @@ export const loadUser = createAsyncThunk(
         setAuthToken(authToken);
       }
       const res = await axiosInstance.get('/user/profile');
-      console.log('Result from backend: ',res);
       const user = res.data;
-      console.log('Loaded user in function: ',user);
 
       dispatch(
         userLoaded({
