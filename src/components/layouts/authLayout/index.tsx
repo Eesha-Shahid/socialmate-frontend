@@ -10,7 +10,6 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
       <Header style={{ height: '65px', background: 'none', justifyContent: 'space-between', alignItems: 'center' }}>
         <Navbar/>
       </Header>
-      {children}
       <Footer style={{ background: 'none' }} />
     </Layout>
   );

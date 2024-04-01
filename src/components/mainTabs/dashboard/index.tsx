@@ -28,7 +28,9 @@ import AccountDetailsSummary from "./accountDetailsSummary";
 import AudienceInsightsSummary from "./audienceInsightsSummary";
 import MilestonesSummary from "./milestonesSummary";
 import GoalsSummary from "./goalsSummary";
+import { AuthSelector } from "@/redux/reducers/authReducer";
 const Dashboard: React.FC = () => {
+  const { user } = useSelector(AuthSelector);
   const dispatch = useAppDispatch();
 
   const {
@@ -59,7 +61,7 @@ const Dashboard: React.FC = () => {
     return (
       <Row justify="space-between" align="middle">
         <Typography.Title className="gradient-text">
-          Hello Vania
+          Hello {user?.username}
         </Typography.Title>
         <Col>
           <Space size={8}>

@@ -20,8 +20,6 @@ const GoalsSummary: React.FC<IGoalsSummaryProps> = ({
     ) {
       remaining = goalsData.reach - analyticsData.reach.value;
       percentage = analyticsData.reach.value / goalsData.reach;
-      console.log(remaining);
-      console.log(percentage);
     }
 
     return (

@@ -1,12 +1,36 @@
 "use client";
 import React from "react";
-import { Button, Image, Tabs, Space, Row, Col, Typography } from "antd";
+import { Button, Image, Tabs, Space, Row, Col, Typography, Dropdown, MenuProps } from "antd";
 import { Bell, Gear, Moon, Person } from "akar-icons";
 import TabPane from "antd/es/tabs/TabPane";
-import { navigationIcons, navigationItems } from "@/constants";
+import { navigationIcons, navigationItems, profileDropdownItems } from "@/constants";
+import { logout } from "@/redux/actions/authAction";
+import { useAppDispatch } from "@/redux/store";
 const { Title } = Typography;
 
 const Navbar: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+  const items: MenuProps['items'] = [
+    {
+      label: <a href="https://www.antgroup.com">View Profile</a>,
+      key: '0',
+    },
+    {
+      label: <a href="https://www.aliyun.com">Option 2</a>,
+      key: '1',
+    },
+    {
+      type: 'divider',
+    },
+    {
+      label: <a onClick={handleLogout}>Log Out</a>,
+      key: '3',
+    },
+  ];
+  
   return (
     <>
       <Row style={{ width: "100%" }} justify="space-between" align="middle">
@@ -38,11 +62,13 @@ const Navbar: React.FC = () => {
               type="text"
               icon={<Bell strokeWidth={1.5} />}
             />
-            <Button
-              style={{ color: "black" }}
-              type="text"
-              icon={<Person strokeWidth={1.5} />}
-            />
+            <Dropdown menu={{ items }} trigger={['click']}>
+              <Button
+                style={{ color: "black" }}
+                type="text"
+                icon={<Person strokeWidth={1.5} />}
+              />
+            </Dropdown>
           </Space>
         </Col>
       </Row>

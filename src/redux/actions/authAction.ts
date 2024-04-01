@@ -1,12 +1,22 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/utils/axiosInstace";
+import { ILoginFormData, ISignupFormData, IUser, IloginResponseData } from "../types/auth/reducer";
+import { authReset, loginSuccess, userLoaded } from "../reducers/authReducer";
+import { setAuthToken } from "@/utils/authToken";
+import store from "../store";
 
 export const login = createAsyncThunk(
-  "login",
-  async (data: ILogin, thunkAPI) => {
+  "auth/login",
+  async (formData: ILoginFormData, thunkAPI) => {
     try {
-      const response = await axiosInstance.post("/auth/login", data);
-      localStorage.setItem('token', response.data.token)
+      const { dispatch } = thunkAPI;
+      console.log(formData);
+      const response = await axiosInstance.post("/auth/login", formData);
+      console.log(response.data);
+      const responseData = response.data as IloginResponseData;
+      localStorage.setItem('token', responseData.token)
+      dispatch(loginSuccess());
+      dispatch(loadUser());
       return response.data;
     } catch (err: any) {
       if (err.response?.status === 401) { 
@@ -20,11 +30,15 @@ export const login = createAsyncThunk(
 );
 
 export const register = createAsyncThunk(
-  "auth/signup",
-  async (data: ISignup, thunkAPI) => {
+  "auth/register",
+  async (formData: ISignupFormData, thunkAPI) => {
     try {
-      const response = await axiosInstance.post("/auth/signup", data);
-      localStorage.setItem('token', response.data.token)
+      const { dispatch } = thunkAPI;
+      const response = await axiosInstance.post("/auth/signup", formData);
+      const responseData = response.data as IloginResponseData;
+      localStorage.setItem('token', responseData.token)
+      dispatch(loginSuccess());
+      dispatch(loadUser());
       return response.data;
     } catch (err: any) {
       if (err.response?.status === 400) { 
@@ -40,8 +54,42 @@ export const register = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk("logout", async () => {
-  localStorage.removeItem("token");
+export const loadUser = createAsyncThunk(
+  'auth/loadUser', 
+  async (_, thunkAPI) => {
+    try {
+      const { dispatch } = thunkAPI;
+      const authToken = localStorage.getItem('token')
+      if (authToken){
+        setAuthToken(authToken);
+      }
+      const res = await axiosInstance.get('/user/profile');
+      console.log('Result from backend: ',res);
+      const user = res.data;
+      console.log('Loaded user in function: ',user);
+
+      dispatch(
+        userLoaded({
+          user: { ...res.data.user } as IUser,
+          role: user.user_type,
+          token: localStorage.getItem('token'),
+          isAuthenticated: true
+        })
+      );
+      localStorage.removeItem('token')
+      return true;
+    } catch (err) {
+      return false;
+    }
+});
+
+export const logout = createAsyncThunk(
+  "auth/logout", 
+  async (_, thunkAPI) => {
+    localStorage.removeItem("token");
+    const { dispatch } = thunkAPI;
+    dispatch(authReset());
+    store.dispatch({type: "RESET"})
 });
 
 export const authThunks = {

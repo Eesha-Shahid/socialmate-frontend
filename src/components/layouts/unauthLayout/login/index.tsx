@@ -2,10 +2,14 @@ import { Row } from "antd";
 import React from "react";
 import Illustration from "../illustration";
 import UnauthForm from "../unauthForm";
+import { useAppDispatch } from "@/redux/store";
+import { login } from "@/redux/actions/authAction";
 
 const Login: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const handleFinish = (values: any) => {
-    console.log("Form submitted with values:", values);
+    dispatch(login(values));
   };
 
   const handleFinishFailed = (errorInfo: any) => {

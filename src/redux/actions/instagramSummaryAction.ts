@@ -2,20 +2,6 @@ import axiosInstance from "@/utils/axiosInstace";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getAccountDetailsSummarySuccess, getAnalyticsSummarySuccess, getAudienceInsightsSummarySuccess, getGoalsSummarySuccess, getMilestonesSummarySuccess, getProfileViewsSummarySuccess } from "../reducers/instagramSummaryReducer";
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    // const token = localStorage.getItem("token");
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MDg4MDU4Yzg4MjRmMjhlZWU1Mjg3NSIsImlhdCI6MTcxMTgzMzE4MCwiZXhwIjoxNzEyMDkyMzgwfQ.ZsFO6rfr53yHWc4v80E4q6iox5qDlt6Jt09GWSq5vmM'
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 export const getAnalyticsSummary = createAsyncThunk(
   "instagramSummary/getAnalyticsSummary",
   async (_, thunkAPI) => {

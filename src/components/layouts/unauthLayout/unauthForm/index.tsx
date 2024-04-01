@@ -63,6 +63,7 @@ const UnauthForm: React.FC<IUnauthFormProps> = ({
         )}
         <Col span={24}>
           <Form
+            validateTrigger= "onBlur"
             requiredMark={false}
             layout="vertical"
             name="basic"
@@ -108,7 +109,7 @@ const UnauthForm: React.FC<IUnauthFormProps> = ({
                 hasFeedback
                 rules={[
                   { required: true, message: "Please input your password!" },
-                  { min: 8 },
+                  { min: 7 },
                 ]}
               >
                 <Input.Password />

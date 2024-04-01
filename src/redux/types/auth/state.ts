@@ -1,9 +1,11 @@
-interface AuthState {
-  basicUserInfo: UserProfileData | null;
-  token: string | null;
-  authState: boolean;
-  loading: boolean;
-  registerError: string | null,
-  loginError: string | null,
-  logoutError: string | null
+import { UserRoles } from "@/types";
+import { IUser } from "./reducer";
+export interface AuthState {
+  user?: IUser | null;
+  role?: UserRoles | null;
+  token?: string | null;
+  isAuthenticated?: boolean;
+  loading?: boolean;
+  // invalidToken?: boolean | null;
 };
+
