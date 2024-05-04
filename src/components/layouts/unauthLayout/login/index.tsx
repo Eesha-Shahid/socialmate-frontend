@@ -17,26 +17,26 @@ const Login: React.FC = () => {
   };
 
   return (
-    <Row
-      style={{ alignItems: "center", justifyContent: "center" }}
-      gutter={[16, 16]}
-    >
-      <Illustration
-        heading="Effortless Access, Endless Possibilities:"
-        subheading="Log In to SocialMate."
-      />
+    // <Row
+    //   style={{ alignItems: "center", justifyContent: "center" }}
+    //   gutter={[16, 16]}
+    // >
+    //   <Illustration
+    //     heading="Effortless Access, Endless Possibilities:"
+    //     subheading="Log In to SocialMate."
+    //   />
       <UnauthForm
-        label="Sign In"
-        action="Sign In"
-        fields={{
-          email: true,
-          password: true,
-        }}
-        extra="Don&apos;t have an account?"
-        onFinish={handleFinish}
-        onFinishFailed={handleFinishFailed}
+        // label="Sign In"
+        // action="Sign In"
+        // fields={{
+        //   email: true,
+        //   password: true,
+        // }}
+        // extra="Don&apos;t have an account?"
+        // onFinish={handleFinish}
+        // onFinishFailed={handleFinishFailed}
       />
-    </Row>
+    // </Row>
   );
 };
 

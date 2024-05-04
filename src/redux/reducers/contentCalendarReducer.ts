@@ -17,7 +17,6 @@ const contentCalendarSlice = createSlice({
     ) => {
     state.scheduledPosts = payload;
     state.scheduledPostsLoading = false;
-    console.log(state.scheduledPosts);
     },
     getScheduledPostsFailure: (state) => {
       state.scheduledPostsLoading = false;

@@ -1,26 +1,31 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/utils/axiosInstace";
-import { ILoginFormData, ISignupFormData, IUser, IloginResponseData } from "../types/auth/reducer";
+import { IForgotPassowrdFormData, ILoginFormData, IResetPasswordFormData, ISignupFormData, IUser, IloginResponseData } from "../types/auth/reducer";
 import { authReset, loginSuccess, userLoaded } from "../reducers/authReducer";
 import { setAuthToken } from "@/utils/authToken";
 import store from "../store";
+import { updateAlert } from "./alertAction";
+import { NotificationType } from "@/types";
 
 export const login = createAsyncThunk(
   "auth/login",
   async (formData: ILoginFormData, thunkAPI) => {
+    const { dispatch } = thunkAPI;
     try {
-      const { dispatch } = thunkAPI;
       const response = await axiosInstance.post("/auth/login", formData);
       const responseData = response.data as IloginResponseData;
       localStorage.setItem('token', responseData.token)
       dispatch(loginSuccess());
+      dispatch(updateAlert({ type: NotificationType.Success, message: response.data.message }))
       dispatch(loadUser());
       return response.data;
     } catch (err: any) {
       if (err.response?.status === 401) { 
+        dispatch(updateAlert({ type: NotificationType.Error, message: err?.response.data.message }))
         return thunkAPI.rejectWithValue(err?.response.data.message);
       }
       else{
+        dispatch(updateAlert({ type: NotificationType.Error, message: err.response.data }))
         return thunkAPI.rejectWithValue(err.response.data)
       }
     }
@@ -36,6 +41,7 @@ export const register = createAsyncThunk(
       const responseData = response.data as IloginResponseData;
       localStorage.setItem('token', responseData.token)
       dispatch(loginSuccess());
+      dispatch(updateAlert({ type: NotificationType.Success, message: response.data.message }))
       dispatch(loadUser());
       return response.data;
     } catch (err: any) {
@@ -79,6 +85,24 @@ export const loadUser = createAsyncThunk(
     }
 });
 
+export const forgotPassword = createAsyncThunk(
+  'auth/forgotPassword', 
+  async (formData: IForgotPassowrdFormData, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    const response = await axiosInstance.post("/auth/send-forgot-email", formData);
+    dispatch(updateAlert({ type: response.data.success? NotificationType.Success : NotificationType.Error, message: response.data.message }))
+  }
+)
+
+export const resetPassword = createAsyncThunk(
+  'auth/resetPassword', 
+  async (formData: IResetPasswordFormData, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    const response = await axiosInstance.patch("/auth/reset-password", formData);
+    dispatch(updateAlert({ type: response.data.success? NotificationType.Success : NotificationType.Error, message: response.data.message }))
+  }
+)
+
 export const logout = createAsyncThunk(
   "auth/logout", 
   async (_, thunkAPI) => {
@@ -92,4 +116,6 @@ export const authThunks = {
   login,
   register,
   logout,
+  forgotPassword,
+  resetPassword
 };

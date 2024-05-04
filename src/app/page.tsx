@@ -6,7 +6,7 @@ import store from '@/redux/store';
 import { useSelector } from 'react-redux';
 import { AuthSelector } from '@/redux/reducers/authReducer';
 import { Spin } from 'antd';
-import { AuthLayout } from '@/components';
+import { Alert, AuthLayout } from '@/components';
 
 interface HomeProps {
   children: React.ReactNode; 
@@ -17,11 +17,12 @@ const Home: React.FC<HomeProps> = ({ children }) => {
   const { isAuthenticated, loading } = useSelector(AuthSelector);
   
   useEffect(() => {
-    store.dispatch(loadUser());
+    if (isAuthenticated) store.dispatch(loadUser());
   }, []);
 
   return(
     <>
+      <Alert/>
       { loading ? (
         <Spin size='large'/>
       ) : isAuthenticated ? (

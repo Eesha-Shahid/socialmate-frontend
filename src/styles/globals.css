@@ -10,22 +10,6 @@ body {
   background: #F7F8FC !important;
 }
 
-.ant-typography {
-  font-family: "Poppins", sans-serif !important;
-}
-
-.ant-col {
-  font-family: "Poppins", sans-serif !important;
-}
-
-.ant-btn {
-  font-family: "Poppins", sans-serif !important;
-}
-
-.ant-checkbox-wrapper {
-  font-family: "Poppins", sans-serif !important;
-}
-
 /* .poppins-thin {
   font-family: "Poppins", sans-serif;
   font-weight: 100;
@@ -188,7 +172,7 @@ body {
 }
 
 .text-mute {
-  color: #666666 !important;
+  color: #797878 !important;
 }
 
 /* Button */
@@ -220,5 +204,31 @@ body {
 
 /* Components */
 @import url(../components/analyticsCard/index.css);
+@import url(../components/mainTabs/contentCalendar/index.css);
+@import url(../components/textWithGradientBorder/index.css);
 
 /* Views */
+
+body {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-typography {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-col {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-btn {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-checkbox-wrapper {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-drawer {
+  font-family: "Poppins", sans-serif !important;
+}

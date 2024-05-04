@@ -3,19 +3,25 @@ import authReducer, { AuthSelector } from "./authReducer";
 import instagramSummaryReducer, { InstagramSummarySelector } from "./instagramSummaryReducer";
 import contentCalendarReducer, { ContentCalendarSelector } from "./contentCalendarReducer";
 import subscriptionReducer, { SubscriptionSelector } from "./subscriptionReducer";
+import schedulerHubReducer, { SchedulerHubSelector } from "./schedulerHubReducer";
+import alertReducer, { AlertSelector } from "./alertReducer";
 
 export const appReducer = combineReducers({
   auth: authReducer,
   instagramSummary: instagramSummaryReducer,
   contentCalendar: contentCalendarReducer,
-  subscription: subscriptionReducer
+  subscription: subscriptionReducer,
+  schedulerHub: schedulerHubReducer,
+  alert: alertReducer
 });
 
 export {
     AuthSelector,
     InstagramSummarySelector,
     ContentCalendarSelector,
-    SubscriptionSelector
+    SubscriptionSelector,
+    SchedulerHubSelector,
+    AlertSelector
 }
 
 export type RootState = ReturnType<typeof appReducer>;

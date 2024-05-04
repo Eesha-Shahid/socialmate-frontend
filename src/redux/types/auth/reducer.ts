@@ -18,7 +18,9 @@ export interface ISignupFormData {
 
 export interface ILoginFormData extends Omit<ISignupFormData, 'username'> {}
 export interface IForgotPassowrdFormData extends Pick<ISignupFormData, 'email'> {}
-export interface IResetPasswordFormData extends Pick<ISignupFormData, 'password'> {}
+export interface IResetPasswordFormData extends Pick<ISignupFormData, 'password'> {
+  resetToken: string;
+}
 
 export interface IloginResponseData {
   token: string;

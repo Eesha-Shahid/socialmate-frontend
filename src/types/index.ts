@@ -13,3 +13,10 @@ export enum SubscriptionStatus {
   Active = 'Active',
   Inactive = 'Inactive'
 }
+
+export enum NotificationType {
+  Success = 'success',
+  Info = 'info',
+  Warning = 'warning',
+  Error = 'error',
+}

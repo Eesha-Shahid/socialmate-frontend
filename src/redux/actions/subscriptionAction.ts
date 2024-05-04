@@ -8,7 +8,6 @@ export const getPaymentMethods = createAsyncThunk(
     try {
       const { dispatch } = thunkAPI;
       const response = await axiosInstance.get(`/user/payment-methods`);
-      console.log('Payment Method: ',response.data)
       dispatch(getPaymentMethodsSuccess(response.data.data));
     } catch (err: any) {
       if (err.response?.status === 400) {
@@ -26,7 +25,6 @@ export const getSubscriptionHistry = createAsyncThunk(
       try {
         const { dispatch } = thunkAPI;
         const response = await axiosInstance.get(`/user/subscription-history`);
-        console.log('Subscription Method: ',response.data)
         dispatch(getSubscriptionHistorySuccess(response.data.data));
       } catch (err: any) {
         if (err.response?.status === 400) {

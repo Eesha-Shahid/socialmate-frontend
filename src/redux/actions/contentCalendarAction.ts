@@ -3,12 +3,11 @@ import { getScheduledPostsSuccess } from "../reducers/contentCalendarReducer";
 import axiosInstance from "@/utils/axiosInstace";
 
 export const getScheduledPosts = createAsyncThunk(
-  "instagramSummary/getAnalyticsSummary",
+  "instagramSummary/getScheduledPosts",
   async (_, thunkAPI) => {
     try {
       const { dispatch } = thunkAPI;
       const response = await axiosInstance.get(`/user/scheduled-posts`);
-      console.log(response);
       dispatch(getScheduledPostsSuccess(response.data.data));
     } catch (err: any) {
       if (err.response?.status === 400) {

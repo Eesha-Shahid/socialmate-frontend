@@ -8,7 +8,6 @@ import {
   Typography,
 } from "antd";
 import { FacebookIcon, InstagramIcon, RedditIcon } from "@/assets/icons";
-import GaugeChart from "react-gauge-chart";
 import Icon, { UserOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { InstagramSummarySelector } from "@/redux/reducers";
@@ -21,7 +20,6 @@ import {
   getProfileViewsSummary,
 } from "@/redux/actions/instagramSummaryAction";
 import { useAppDispatch } from "@/redux/hooks";
-import { getColor } from "@/colors";
 import AnalyticsSummary from "./analyticsSummary";
 import ProfileViewsSummary from "./profileViewsSummary";
 import AccountDetailsSummary from "./accountDetailsSummary";
@@ -29,6 +27,7 @@ import AudienceInsightsSummary from "./audienceInsightsSummary";
 import MilestonesSummary from "./milestonesSummary";
 import GoalsSummary from "./goalsSummary";
 import { AuthSelector } from "@/redux/reducers/authReducer";
+import { loadUser } from "@/redux/actions/authAction";
 const Dashboard: React.FC = () => {
   const { user } = useSelector(AuthSelector);
   const dispatch = useAppDispatch();
@@ -49,6 +48,7 @@ const Dashboard: React.FC = () => {
   } = useSelector(InstagramSummarySelector);
 
   useEffect(() => {
+    dispatch(loadUser());
     dispatch(getAnalyticsSummary());
     dispatch(getProfileViewsSummary());
     dispatch(getAccountDetailsSummary());
@@ -80,9 +80,7 @@ const Dashboard: React.FC = () => {
                   <Avatar
                     style={{ border: "5px solid white" }}
                     size={80}
-                    src={
-                      "https://ph-static.z-dn.net/files/df8/95df01df140ac863ca9260409a932cee.jpeg"
-                    }
+                    src={user?.profile_pic}
                     icon={<UserOutlined />}
                   />
                 </div>
@@ -106,9 +104,7 @@ const Dashboard: React.FC = () => {
                   <Avatar
                     style={{ border: "5px solid white" }}
                     size={80}
-                    src={
-                      "https://ph-static.z-dn.net/files/df8/95df01df140ac863ca9260409a932cee.jpeg"
-                    }
+                    src={user?.profile_pic}
                     icon={<UserOutlined />}
                   />
                 </div>
@@ -132,9 +128,7 @@ const Dashboard: React.FC = () => {
                   <Avatar
                     style={{ border: "5px solid white" }}
                     size={80}
-                    src={
-                      "https://ph-static.z-dn.net/files/df8/95df01df140ac863ca9260409a932cee.jpeg"
-                    }
+                    src={user?.profile_pic}
                     icon={<UserOutlined />}
                   />
                 </div>

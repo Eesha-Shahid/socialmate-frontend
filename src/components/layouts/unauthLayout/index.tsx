@@ -1,12 +1,11 @@
 'use client'
 import React from 'react';
-import { Layout, Spin } from 'antd';
-import { Dashboard, Footer } from '@/components';
+import { Layout } from 'antd';
+import { Footer } from '@/components';
 import UnuthNavbar from './navbar';
 import { Content } from 'antd/es/layout/layout';
 import Login from './login';
-import { useSelector } from 'react-redux';
-import { AuthSelector } from '@/redux/reducers/authReducer';
+import UnauthForm from './unauthForm';
 const { Header } = Layout;
   
 const UnauthLayout: React.FC<UnauthLayoutProps> = ({ children }) => {
@@ -17,7 +16,8 @@ const UnauthLayout: React.FC<UnauthLayoutProps> = ({ children }) => {
         <UnuthNavbar/>
       </Header>
       <Content>
-        <Login/>
+        {/* <Login/> */}
+        <UnauthForm/>
       </Content>
       <Footer />
     </Layout>

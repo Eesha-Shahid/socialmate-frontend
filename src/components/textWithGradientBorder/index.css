@@ -1,0 +1,9 @@
+.outer-gradient-border {
+    position: relative;
+    background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%);
+    padding: 2px;
+}
+
+.inner-text {
+    background: white;
+}

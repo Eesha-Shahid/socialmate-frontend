@@ -13,25 +13,25 @@ const ForgotPassword: React.FC = () => {
   };
 
   return (
-    <Row
-      style={{ alignItems: "center", justifyContent: "center" }}
-      gutter={[16, 16]}
-    >
-      <Illustration
-        heading="Forgot Password?"
-        subheading="No worries, we’ll send you reset instructions."
-      />
+    // <Row
+    //   style={{ alignItems: "center", justifyContent: "center" }}
+    //   gutter={[16, 16]}
+    // >
+    //   <Illustration
+    //     heading="Forgot Password?"
+    //     subheading="No worries, we’ll send you reset instructions."
+    //   />
       <UnauthForm
-        label="Forgot Password"
-        action="Verify Email"
-        fields={{
-          email: true
-        }}
-        extra="Back to"
-        onFinish={handleFinish}
-        onFinishFailed={handleFinishFailed}
+        // label="Forgot Password"
+        // action="Verify Email"
+        // fields={{
+        //   email: true
+        // }}
+        // extra="Back to Login"
+        // onFinish={handleFinish}
+        // onFinishFailed={handleFinishFailed}
       />
-    </Row>
+    // </Row>
   );
 };
 

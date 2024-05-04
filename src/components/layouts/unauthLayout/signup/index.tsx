@@ -19,18 +19,18 @@ const Signup: React.FC = () => {
     <Row style={{ alignItems: 'center', justifyContent: 'center'}} gutter={[16, 16]}>      
       <Illustration heading='Effortless Access, Endless Possibilities:' subheading="Log In to SocialMate." />
       <UnauthForm 
-        label="Sign Up" 
-        action="Sign Up" 
-        fields={{ 
-            username: true,
-            email: true,
-            password: true,
-            confirmPassword: true,
-            agree: true,
-        }}
-        extra="Already have an account?"
-        onFinish={handleFinish} 
-        onFinishFailed={handleFinishFailed}
+        // label="Sign Up" 
+        // action="Sign Up" 
+        // fields={{ 
+        //     username: true,
+        //     email: true,
+        //     password: true,
+        //     confirmPassword: true,
+        //     agree: true,
+        // }}
+        // extra="Already have an account?"
+        // onFinish={handleFinish} 
+        // onFinishFailed={handleFinishFailed}
       />
     </Row>
   );

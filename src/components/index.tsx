@@ -7,6 +7,7 @@ import Integrations from "./mainTabs/integrations";
 import SchedulerHub from "./mainTabs/schedulerHub";
 import Subscriptions from "./mainTabs/subscriptions";
 import Dashboard from "./mainTabs/dashboard";
+import Alert from "./alert";
 
 export {
     Navbar,
@@ -17,5 +18,6 @@ export {
     Integrations,
     SchedulerHub,
     Subscriptions,
-    AnalyticsCard
+    AnalyticsCard,
+    Alert
 }
