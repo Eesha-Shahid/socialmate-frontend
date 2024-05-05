@@ -3,9 +3,9 @@ import React from "react";
 import { Button, Image, Tabs, Space, Row, Col, Typography, Dropdown, MenuProps } from "antd";
 import { Bell, Gear, Moon, Person } from "akar-icons";
 import TabPane from "antd/es/tabs/TabPane";
-import { navigationIcons, navigationItems, profileDropdownItems } from "@/constants";
 import { logout } from "@/redux/actions/authAction";
 import { useAppDispatch } from "@/redux/store";
+import { navigationIcons, navigationItems } from "@/constants/topNavItems";
 const { Title } = Typography;
 
 const Navbar: React.FC = () => {
@@ -30,6 +30,59 @@ const Navbar: React.FC = () => {
       key: '3',
     },
   ];
+
+  const renderTabs = () => (
+    <Tabs centered defaultActiveKey="1">
+      {navigationIcons.map((Icon, i) => {
+        const id = String(i + 1);
+        const item = navigationItems
+          ? navigationItems[i]
+          : { key: 1, label: 1, children: <div /> };
+        return (
+          <TabPane
+            style={{ color: "red" }}
+            animated={true}
+            key={id}
+            tab={
+              <div className="auth-nav-item">
+                <Icon style={{ marginRight: "8px" }} />
+                {item.label}
+              </div>
+            }
+          >
+            {item.children}
+          </TabPane>
+        );
+      })}
+    </Tabs>
+  )
+
+  const renderIcons = () => (
+    <Space size="middle">
+      <Button
+        style={{ color: "black" }}
+        type="text"
+        icon={<Moon strokeWidth={1.5} />}
+      />
+      <Button
+        style={{ color: "black" }}
+        type="text"
+        icon={<Gear strokeWidth={1.5} />}
+      />
+      <Button
+        style={{ color: "black" }}
+        type="text"
+        icon={<Bell strokeWidth={1.5} />}
+      />
+      <Dropdown menu={{ items }} trigger={['click']}>
+        <Button
+          style={{ color: "black" }}
+          type="text"
+          icon={<Person strokeWidth={1.5} />}
+        />
+      </Dropdown>
+    </Space>
+  )
   
   return (
     <>
@@ -46,63 +99,12 @@ const Navbar: React.FC = () => {
           </Row>
         </Col>
         <Col style={{ display: "flex", justifyContent: "end" }} md={4}>
-          <Space size="middle">
-            <Button
-              style={{ color: "black" }}
-              type="text"
-              icon={<Moon strokeWidth={1.5} />}
-            />
-            <Button
-              style={{ color: "black" }}
-              type="text"
-              icon={<Gear strokeWidth={1.5} />}
-            />
-            <Button
-              style={{ color: "black" }}
-              type="text"
-              icon={<Bell strokeWidth={1.5} />}
-            />
-            <Dropdown menu={{ items }} trigger={['click']}>
-              <Button
-                style={{ color: "black" }}
-                type="text"
-                icon={<Person strokeWidth={1.5} />}
-              />
-            </Dropdown>
-          </Space>
+          {renderIcons()}
         </Col>
       </Row>
       <Row>
         <Col span={24}>
-          <Tabs centered defaultActiveKey="1">
-            {navigationIcons.map((Icon, i) => {
-              const id = String(i + 1);
-              const item = navigationItems
-                ? navigationItems[i]
-                : { key: 1, label: 1, children: <div /> };
-              return (
-                <TabPane
-                  style={{ color: "red" }}
-                  animated={true}
-                  key={id}
-                  tab={
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Icon style={{ marginRight: "8px" }} />
-                      {item.label}
-                    </div>
-                  }
-                >
-                  {item.children}
-                </TabPane>
-              );
-            })}
-          </Tabs>
+          {renderTabs()}
         </Col>
       </Row>
     </>

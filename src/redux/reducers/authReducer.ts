@@ -30,6 +30,9 @@ const authSlice = createSlice({
     loginFailure: (state) => {
       return state;
     },
+    setLoading: (state, { payload }: PayloadAction<{ loading: boolean }>) => {
+      state.loading = payload.loading;
+    },
     authReset: () => {
       return initialState;
     },
@@ -41,7 +44,8 @@ export const {
   authReset,
   userLoaded,
   registerSuccess,
-  loginSuccess 
+  loginSuccess,
+  setLoading 
 } = authSlice.actions;
 
 export default authSlice.reducer;

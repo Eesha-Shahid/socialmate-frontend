@@ -27,6 +27,7 @@ const instagramSummarySlice = createSlice({
       state,
       { payload }: PayloadAction<IAnalyticsSummary>
     ) => {
+      state.analyticsSummaryLoading = true;
       state.analyticsSummary = payload;
       state.analyticsSummaryLoading = false;
     },
@@ -37,6 +38,7 @@ const instagramSummarySlice = createSlice({
       state,
       { payload }: PayloadAction<IUpcomingPostsSummary>
     ) => {
+      state.upcomingPostsLoading = true;
       state.upcomingPosts = payload;
       state.upcomingPostsLoading = false;
     },
@@ -47,6 +49,7 @@ const instagramSummarySlice = createSlice({
       state,
       { payload }: PayloadAction<IAccountDetailsSummary>
     ) => {
+      state.accountDetailsSummaryLoading = true;
       state.accountDetailsSummary = payload;
       state.accountDetailsSummaryLoading = false;
     },
@@ -57,6 +60,7 @@ const instagramSummarySlice = createSlice({
       state,
       { payload }: PayloadAction<IProfileViewsSummary>
     ) => {
+      state.profileViewsSummaryLoading = true;
       state.profileViewsSummary = payload;
       state.profileViewsSummaryLoading = false;
     },
@@ -67,6 +71,7 @@ const instagramSummarySlice = createSlice({
       state,
       { payload }: PayloadAction<IAudienceInsightsSummary>
     ) => {
+      state.audienceInsightsSummaryLoading = true;
       state.audienceInsightsSummary = payload;
       state.audienceInsightsSummaryLoading = false;
     },
@@ -77,6 +82,7 @@ const instagramSummarySlice = createSlice({
       state,
       { payload }: PayloadAction<ICampaignSummary>
     ) => {
+      state.campaignSummaryLoading = true;
       state.campaignSummary = payload;
       state.campaignSummaryLoading = false;
     },
@@ -87,6 +93,7 @@ const instagramSummarySlice = createSlice({
       state,
       { payload }: PayloadAction<IMilestonesSummary>
     ) => {
+      state.milestonesSummaryLoading = true;
       state.milestonesSummary = payload;
       state.milestonesSummaryLoading = false;
     },
@@ -97,6 +104,7 @@ const instagramSummarySlice = createSlice({
       state,
       { payload }: PayloadAction<IGoalsSummary>
     ) => {
+      state.goalsSummaryLoading = true;
       state.goalsSummary = payload;
       state.goalsSummaryLoading = false;
     },

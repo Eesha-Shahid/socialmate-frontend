@@ -7,3 +7,36 @@
 .inner-text {
     background: white;
 }
+
+.inner-text .ant-input {
+    padding: 2px !important;
+}
+
+.inner-text .ant-input-affix-wrapper{
+    padding: 0px !important;
+    padding-bottom: 25px !important;
+}
+
+.inner-text .ant-input-outlined:focus-within{
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.emoji-picker-container{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 9999;
+    margin-top: 5px;
+}
+
+.emoji-button-container {
+    margin-top: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.emoji-button {
+    cursor: pointer;
+}

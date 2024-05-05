@@ -157,33 +157,14 @@ body {
   display: none;
 }
 
-/* Textx */
-
-.gradient-text {
-  font-size: 2rem;
-  font-weight: 500;
-  background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-bold {
-  font-weight: 500 !important;
-}
-
-.text-mute {
-  color: #797878 !important;
-}
-
 /* Button */
-
 .ant-btn-primary{
   background: #343434 !important;
   /* padding: 1.5rem 0 !important; */
 }
 
 .ant-btn:hover{
-  color: #644b85 !important;
+  color: #b3aaaa !important;
 }
 
 /* Form fields */
@@ -197,19 +178,28 @@ body {
 }
 
 .ant-input-outlined:focus-within{
-  border-color: #9972cb93 !important;
-  box-shadow: 0px 1px 4px 0px #9972CB !important;
+  border-color: white !important;
+  box-shadow: 0px 1px 4px 0px #957bb9 !important;
 }
 
+/* Error */
+.ant-form-item-explain-error {
+  font-family: "Poppins", sans-serif !important;
+  /* color: #ff4d4f; -> current */
+}
 
-/* Components */
-@import url(../components/analyticsCard/index.css);
-@import url(../components/mainTabs/contentCalendar/index.css);
-@import url(../components/textWithGradientBorder/index.css);
+/* Textarea */
+.ant-input-data-count{
+  bottom: -3px !important;
+}
 
 /* Views */
 
 body {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-input {
   font-family: "Poppins", sans-serif !important;
 }
 
@@ -232,3 +222,31 @@ body {
 .ant-drawer {
   font-family: "Poppins", sans-serif !important;
 }
+
+input {
+  font-family: "Poppins", sans-serif !important;
+}
+
+/* Text */
+.gradient-text {
+  font-size: 2rem;
+  font-weight: 500;
+  background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-bold {
+  font-weight: 500 !important;
+}
+
+.text-mute {
+  color: #797878 !important;
+}
+
+
+/* Components */
+@import url(../components/layouts/authLayout/navbar/index.css);
+@import url(../components/mainTabs/contentCalendar/index.css);
+@import url(../components/textWithGradientBorder/index.css);
+@import url(../components/mainTabs/schedulerHub/index.css);

@@ -23,16 +23,14 @@ const Home: React.FC<HomeProps> = ({ children }) => {
   return(
     <>
       <Alert/>
-      { loading ? (
-        <Spin size='large'/>
-      ) : isAuthenticated ? (
-        <AuthLayout>
-          {children}
-        </AuthLayout>
-      ) : (
+      { loading || !isAuthenticated ? (
         <UnauthLayout>
           {children}
         </UnauthLayout>
+      ) : (
+        <AuthLayout>
+          {children}
+        </AuthLayout>
       )}
     </>
   );

@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Badge, Calendar, Space, Drawer, Typography, Divider, Carousel, Image } from 'antd';
+import { Avatar, Badge, Calendar, Space } from 'antd';
 import { FacebookIcon, InstagramMediumIcon, RedditIcon } from "@/assets/icons";
 import { Dayjs } from "dayjs";
 import { useAppDispatch } from "@/redux/store";
 import { getScheduledPosts } from "@/redux/actions/contentCalendarAction";
 import { useSelector } from "react-redux";
 import { ContentCalendarSelector } from "@/redux/reducers";
-import TextWithGradientBorder from "@/components/textWithGradientBorder";
-
-import { Calendar as CalendarIcon, Clock } from "akar-icons";
 import PostDetails from "@/components/postDetails";
-
-const { Title, Text } = Typography;
 
 const ContentCalendar = () => {
   const dispatch = useAppDispatch();
@@ -21,8 +16,10 @@ const ContentCalendar = () => {
 
   useEffect(() => {
     dispatch(getScheduledPosts());
-  }, [scheduledPosts]);
-
+    if (!sidebarVisible) {
+      setSelectedPost(null);
+    }
+  }, [scheduledPosts, sidebarVisible]);
   
   const onPanelChange = (value: Dayjs, mode: string) => {
     console.log(value.format('YYYY-MM-DD'), mode);
@@ -79,8 +76,8 @@ const ContentCalendar = () => {
 
   return (
     <div>
-      <Calendar style={{ margin: '2rem', background: 'none' }} dateCellRender={dateCellRender} onPanelChange={onPanelChange} />
-      <PostDetails selectedPost={selectedPost} sidebarVisible={sidebarVisible} closeSidebar={closeSidebar} />
+      <Calendar style={{ margin: '2rem', background: 'none' }} cellRender={dateCellRender} onPanelChange={onPanelChange} />
+      {selectedPost && <PostDetails selectedPost={selectedPost} sidebarVisible={sidebarVisible} closeSidebar={closeSidebar} />}
     </div>
   );
 };

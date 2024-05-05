@@ -9,5 +9,4 @@ export interface IAlert {
     description?: string;
     duration?: number;
     placement?: NotificationPlacement
-    shown: boolean;
 }

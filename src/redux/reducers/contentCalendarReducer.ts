@@ -21,6 +21,14 @@ const contentCalendarSlice = createSlice({
     getScheduledPostsFailure: (state) => {
       state.scheduledPostsLoading = false;
     },
+    updateScheduledPosts: (state, {payload}: PayloadAction<IScheduledPost>) => {
+      if (state.scheduledPosts !== null) {
+        const index = state.scheduledPosts.findIndex(post => post._id === payload._id);
+        if (index !== -1) {
+          state.scheduledPosts[index] = payload;
+        }
+      }
+    },
     ContentCalendarReset: () => {
       return initialState;
     },
@@ -29,7 +37,9 @@ const contentCalendarSlice = createSlice({
 
 export const {
     getScheduledPostsSuccess,
-    getScheduledPostsFailure
+    getScheduledPostsFailure,
+    updateScheduledPosts,
+    ContentCalendarReset
 } = contentCalendarSlice.actions;
 
 export default contentCalendarSlice.reducer;

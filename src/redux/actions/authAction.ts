@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/utils/axiosInstace";
 import { IForgotPassowrdFormData, ILoginFormData, IResetPasswordFormData, ISignupFormData, IUser, IloginResponseData } from "../types/auth/reducer";
-import { authReset, loginSuccess, userLoaded } from "../reducers/authReducer";
+import { authReset, loginSuccess, setLoading, userLoaded } from "../reducers/authReducer";
 import { setAuthToken } from "@/utils/authToken";
 import store from "../store";
 import { updateAlert } from "./alertAction";
@@ -12,6 +12,7 @@ export const login = createAsyncThunk(
   async (formData: ILoginFormData, thunkAPI) => {
     const { dispatch } = thunkAPI;
     try {
+      dispatch(setLoading({loading: true}))
       const response = await axiosInstance.post("/auth/login", formData);
       const responseData = response.data as IloginResponseData;
       localStorage.setItem('token', responseData.token)
@@ -37,6 +38,7 @@ export const register = createAsyncThunk(
   async (formData: ISignupFormData, thunkAPI) => {
     try {
       const { dispatch } = thunkAPI;
+      dispatch(setLoading({loading: true}))
       const response = await axiosInstance.post("/auth/signup", formData);
       const responseData = response.data as IloginResponseData;
       localStorage.setItem('token', responseData.token)

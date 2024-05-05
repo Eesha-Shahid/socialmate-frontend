@@ -8,9 +8,9 @@ export const updateAlert = createAsyncThunk(
   async (alertData: Omit<IAlert, 'id' | 'shown'>, thunkAPI) => {
     const { dispatch } = thunkAPI;
     const id = v4();
-    dispatch(setAlert({ ...alertData, id, shown: false }));
+    dispatch(setAlert({ ...alertData, id }));
     setTimeout(() => {
-      dispatch(removeAlert({ id }));
+      dispatch(removeAlert({ message: alertData.message }));
     }, alertData.duration? alertData.duration: 4.5);
     return id;
   },
@@ -18,8 +18,8 @@ export const updateAlert = createAsyncThunk(
   
 export const deleteAlert = createAsyncThunk(
   'alert/removeAlert',
-  async (id: string, { dispatch }) => {
-    dispatch(removeAlert({ id }));
+  async (message: string, { dispatch }) => {
+    dispatch(removeAlert({ message }));
   }
 );
 

@@ -1,7 +1,11 @@
 interface ITextWithGradientBorderProps {
-    text: string;
+    text?: string;
     className?: string;
     style?: string;
     gradientText?: boolean;
-    size?: 'small' | 'normal'
+    editable?: boolean;
+    maxLength?: number;
+    onTextChange?: (text: string) => void;
+    emoji?: boolean;
+    placeholder?: string;
 }

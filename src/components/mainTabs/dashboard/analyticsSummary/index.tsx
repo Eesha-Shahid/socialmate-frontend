@@ -4,7 +4,7 @@ import {
   CommentsIcon,
   ReachIcon,
 } from "@/assets/icons";
-import { AnalyticsCard } from "@/components";
+import { AnalyticsCard } from 'components';
 import { Row, Col, Skeleton } from "antd";
 
 const AnalyticsSummary: React.FC<IAnalyticsSummaryProps> = ({

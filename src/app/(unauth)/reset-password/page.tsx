@@ -12,10 +12,7 @@ import {
 } from "antd";
 import Link from "antd/es/typography/Link";
 import React from "react";
-import Illustration from "../../../components/layouts/unauthLayout/illustration";
-
-import { Footer } from '@/components';
-import UnuthNavbar from '@/components/layouts/unauthLayout/navbar';
+import { Footer, UnauthNavbar, Illustration } from 'components';
 import { Content } from 'antd/es/layout/layout';
 import { useAppDispatch } from "@/redux/hooks";
 import { resetPassword } from "@/redux/actions/authAction";
@@ -42,7 +39,7 @@ const ResetPassword: React.FC = () => {
   return (
     <Layout style={{ background: '#F7F8FC', fontFamily: 'Poppins', marginTop: '1rem', minHeight: "97vh" }}>
       <Header style={{ height: '65px', background: 'none', justifyContent: 'space-between', alignItems: 'center' }}>
-        <UnuthNavbar/>
+        <UnauthNavbar/>
       </Header>
       <Content>
         <Row style={{ alignItems: 'center', justifyContent: 'center'}} gutter={[16, 16]}>      

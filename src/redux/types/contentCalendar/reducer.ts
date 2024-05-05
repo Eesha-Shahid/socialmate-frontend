@@ -1,6 +1,6 @@
 import { MediaType } from "@/types";
-
 export interface IScheduledPost {
+    _id: string;
     media_type: MediaType
     caption?: string;
     description?: string;
@@ -10,3 +10,5 @@ export interface IScheduledPost {
     scheduled_time: Date;
     platform: string[];
 }
+
+export interface IUpdateScheduledPostData extends Partial<IScheduledPost> {}

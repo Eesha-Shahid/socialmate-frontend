@@ -15,9 +15,11 @@ import {
 } from "antd";
 import Link from "antd/es/typography/Link";
 import React, { useState } from "react";
-import Illustration from "../illustration";
+import { Illustration } from "components";
 import { useAppDispatch } from "@/redux/store";
 import { forgotPassword, login, register } from "@/redux/actions/authAction";
+import { useSelector } from "react-redux";
+import { AuthSelector } from "@/redux/reducers";
 
 const { Title, Text } = Typography;
 
@@ -25,6 +27,8 @@ const UnauthForm = () => {
 
   const dispatch = useAppDispatch();
   const [currentLabel, setCurrentLabel] = useState<string>("Sign In");
+
+  const { loading } = useSelector(AuthSelector);
 
   const switchForm = (newLabel: string) => {
     setCurrentLabel(newLabel);
@@ -115,7 +119,6 @@ const UnauthForm = () => {
   }
 
   const onFinish: FormProps<UnAuthFieldTypes>['onFinish'] = (values: any) => {
-    console.log('Success:', values);
     switch (currentLabel) {
       case "Sign Up":
         dispatch(register({ username: values.username, email: values.email, password: values.password }));
@@ -270,7 +273,7 @@ const UnauthForm = () => {
               )}
 
               <Form.Item wrapperCol={{ span: 24 }}>
-                <Button type="primary" htmlType="submit" block>
+                <Button type="primary" htmlType="submit" loading={loading} block>
                   {getFormAction()}
                 </Button>
               </Form.Item>

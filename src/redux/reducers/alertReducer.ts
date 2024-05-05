@@ -16,9 +16,9 @@ const alertSlice = createSlice({
       const currentState = current(state);
       state.alerts = state.alerts ? [payload, ...state.alerts] : [payload];
     },
-    removeAlert: (state, { payload }: PayloadAction<Pick<IAlert, "id">>) => {
+    removeAlert: (state, { payload }: PayloadAction<Pick<IAlert, "message">>) => {
       state.alerts = state.alerts?.filter((alert) => {
-        return alert.id !== payload.id;
+        return alert.message !== payload.message;
       }) as IAlert[];
     },
     alertReset: () => {

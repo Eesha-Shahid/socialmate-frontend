@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getScheduledPostsSuccess } from "../reducers/contentCalendarReducer";
+import { getScheduledPostsSuccess, updateScheduledPosts } from "../reducers/contentCalendarReducer";
 import axiosInstance from "@/utils/axiosInstace";
+import { IUpdateScheduledPostData } from "../types/contentCalendar/reducer";
+import { updateAlert } from "./alertAction";
+import { NotificationType } from "@/types";
 
 export const getScheduledPosts = createAsyncThunk(
   "instagramSummary/getScheduledPosts",
@@ -16,5 +19,17 @@ export const getScheduledPosts = createAsyncThunk(
         return thunkAPI.rejectWithValue(err.response.data);
       }
     }
+  }
+);
+
+export const updateScheduledPost = createAsyncThunk(
+  "instagramSummary/updatedScheduledPost",
+  async (postData: IUpdateScheduledPostData, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    console.log(postData);
+    const response = await axiosInstance.post("/user/update-scheduled-post", postData);
+    console.log(response.data)
+    dispatch(updateScheduledPosts(response.data))
+    dispatch(updateAlert({ type: response.data.post ? NotificationType.Success : NotificationType.Error, message: response.data.message }))
   }
 );
