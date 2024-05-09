@@ -3,15 +3,16 @@ import { getPaymentMethods, getSubscriptionHistry } from "@/redux/actions/subscr
 import { SubscriptionSelector } from "@/redux/reducers";
 import { useAppDispatch } from "@/redux/store";
 import { SubscriptionStatus } from "@/types";
-import { Button, Table, Tag, Typography } from "antd";
+import { Button, Carousel, Col, Row, Table, Tag, Typography } from "antd";
 import moment from "moment";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import ReactCreditCards from "react-credit-cards-2";
 import { useSelector } from "react-redux";
 const { Title } = Typography;
 
 const Subscriptions = () => {
-
   const dispatch = useAppDispatch();
+  const [selectedCardIndex, setSelectedCardIndex] = useState(0);
   const { paymentMethods, subscriptionHistory } = useSelector(SubscriptionSelector);
 
   useEffect(() => {
@@ -95,12 +96,30 @@ const Subscriptions = () => {
   ];
   
   return (
-    <>
-      <Title className="gradient-text">Your Payment Methods</Title>
-      <Table dataSource={actualPaymentMethod} columns={paymentCol} />
-      <Title className="gradient-text">Your Subscription History</Title>
-      <Table dataSource={actualSubscriptionHistory} columns={subscriptionCol} />
-    </>
+    <Row gutter={[16, 16]}>
+      <Col span={18}>
+        <Title className="gradient-text">Your Payment Methods</Title>
+        <Table dataSource={actualPaymentMethod} columns={paymentCol} />
+      </Col>
+      <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} span={6}>
+        <Carousel style={{ width: 400 }} arrows infinite={false} beforeChange={(prev, next) => setSelectedCardIndex(next)}>
+          {paymentMethods?.map((card, index) => (
+            <div key={index}>
+              <ReactCreditCards
+                name={card.holder_name}
+                number={card.card_number}
+                expiry={`${card.exp_month}/${card.exp_year}`}
+                cvc={card.cvc}
+              />
+            </div>
+          ))}
+        </Carousel>
+      </Col>
+      <Col span={24}>
+        <Title className="gradient-text">Your Subscription History</Title>
+        <Table dataSource={actualSubscriptionHistory} columns={subscriptionCol} />
+      </Col>
+    </Row>
     );
 };
 

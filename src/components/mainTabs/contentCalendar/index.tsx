@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Badge, Calendar, Space } from 'antd';
+import { Avatar, Badge, Calendar, Space, Image, Row } from 'antd';
 import { FacebookIcon, InstagramMediumIcon, RedditIcon } from "@/assets/icons";
 import { Dayjs } from "dayjs";
 import { useAppDispatch } from "@/redux/store";
 import { getScheduledPosts } from "@/redux/actions/contentCalendarAction";
 import { useSelector } from "react-redux";
 import { ContentCalendarSelector } from "@/redux/reducers";
-import PostDetails from "@/components/postDetails";
+import {PostDetails, TextWithGradientBorder} from "components";
+import { renderTime } from "@/utils";
+import { Clock } from "akar-icons";
 
 const ContentCalendar = () => {
   const dispatch = useAppDispatch();
@@ -46,7 +48,24 @@ const ContentCalendar = () => {
       return posts.map(post => ({
         content: (
           <Space direction="vertical">
+            <Row align="middle">
+              <Clock style={{ marginRight: '1rem' }}/>
+              {renderTime(post.scheduled_time)}
+            </Row>
             {post.caption || 'Scheduled post'}
+            <Image style={{ borderRadius: '15px' }} preview={false} src={post.media[0]} alt="Image"/>
+            <Space direction="vertical">
+              {post.hashtags?.map((tag: string, index: number) => (
+                <React.Fragment key={index}>
+                  <TextWithGradientBorder 
+                    editable={false}
+                    text={`#${tag}`}
+                    gradientText={true}
+                    className={tag ? '' : 'text-mute'}
+                  />
+                </React.Fragment>
+              ))}
+            </Space>
             <Avatar.Group>
               {post.platform.includes('instagram') && <Avatar icon={<InstagramMediumIcon />} />}
               {post.platform.includes('facebook') && <Avatar icon={<FacebookIcon />} />}

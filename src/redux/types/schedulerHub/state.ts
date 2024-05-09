@@ -1,6 +1,6 @@
-import { IGeneratedCaptionResponseData } from "./reducer";
+// import { IGeneratedCaptionResponseData } from "./reducer";
 
 export interface SchedulerHubState {
-    generatedCaption: IGeneratedCaptionResponseData | null,
+    generatedCaption: string[] | null,
     generatedCaptionLoading: boolean
 }

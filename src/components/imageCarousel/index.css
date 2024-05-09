@@ -1,0 +1,18 @@
+.slick-list {
+    /* padding: 0px 0px !important; */
+}
+
+.custom-carousel .slick-slide {
+    /* margin: 10rem 1rem !important; */
+    /* margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important; */
+}
+
+.ant-carousel {
+    /* line-height: 0 !important;
+    height: 30rem !important; */
+}
+
+.ant-carousel .slick-slider {
+    /* position: absolute !important; */
+}

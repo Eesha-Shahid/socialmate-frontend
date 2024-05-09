@@ -14,6 +14,13 @@ import ImageCarousel from "./imageCarousel";
 import Illustration from "./layouts/unauthLayout/illustration";
 import UnauthForm from "./layouts/unauthLayout/unauthForm";
 import PostOptionCard from "./mainTabs/schedulerHub/postOptionCard";
+import AssistantButton from "./assistantButton";
+import StepOne from "./mainTabs/schedulerHub/stepOne";
+import AiAssistant from "./aiAssistant";
+import IntegrationCard from "./integrationCard";
+import PostDetails from "./postDetails";
+import InstagramDashboard from "./mainTabs/dashboard/instagram";
+import InfluencerCampaign from "./influencerCampaign";
 
 export {
     Navbar,
@@ -23,6 +30,7 @@ export {
     AuthLayout,
     Illustration,
     Dashboard,
+    InstagramDashboard,
     ContentCalendar,
     Integrations,
     SchedulerHub,
@@ -31,5 +39,11 @@ export {
     Alert,
     ImageCarousel,
     TextWithGradientBorder,
-    PostOptionCard
+    PostOptionCard,
+    AssistantButton,
+    StepOne,
+    AiAssistant,
+    IntegrationCard,
+    PostDetails,
+    InfluencerCampaign
 }

@@ -1,4 +1,4 @@
-import { Typography } from 'antd';
+import { Button, Typography } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import TextArea from 'antd/es/input/TextArea';
 import data from '@emoji-mart/data'
@@ -8,14 +8,19 @@ import { FaceHappy } from 'akar-icons';
 const { Text } = Typography;
 
 const TextWithGradientBorder: React.FC<ITextWithGradientBorderProps> = ({ 
-  text, className, gradientText, editable, maxLength, onTextChange, emoji, placeholder
+  text, className, gradientText, editable, maxLength, onTextChange, emoji, placeholder, selected, onClick, button, onButtonClick, loading
 }) => {
+  const autoSize = selected == null ? true: { minRows: 3, maxRows: 10} 
   const outerBorderRadius = editable == false? '18px': '20px'
   const innerBorderRadius = editable  == false? '16px': '18px'
   const padding = editable == false? '5px 20px': '10px 18px'
 
   const [editedText, setEditedText] = useState(text);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  const borderColor = (selected == null) || (selected == true)
+    ? "linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%)" 
+    : "rgba(0, 0, 0, 0.45)"
 
   // useEffect(() => {
   //   setEditedText(text);
@@ -27,12 +32,23 @@ const TextWithGradientBorder: React.FC<ITextWithGradientBorderProps> = ({
     if (onTextChange) {
       onTextChange(newText);
     }
+    // console.log(newText)
   };
+
+  const handleEmojiChange = (emoji: any) => {
+    const newText = editedText + emoji.native;
+    setEditedText(newText);
+    if (onTextChange) {
+      onTextChange(newText);
+    }
+    console.log(newText)
+  }
 
   return (
     <div 
-      style={{ borderRadius: outerBorderRadius, height: 'auto' }}
+      style={{ background: borderColor, borderRadius: outerBorderRadius, height: 'auto', cursor: 'pointer' }}
       className="outer-gradient-border"
+      onClick={onClick}
     >
       <div 
         style={{ padding: padding, borderRadius: innerBorderRadius, height: 'auto' }} 
@@ -48,13 +64,16 @@ const TextWithGradientBorder: React.FC<ITextWithGradientBorderProps> = ({
               maxLength={maxLength}
               style={{ border: 'none' }} 
               className={gradientText ? 'gradient-text' : ''} 
-              autoSize
               placeholder={placeholder}
               defaultValue={text} 
+              autoSize={autoSize}
             />
+            {button && (
+              <Button style={{ marginTop: '1rem', display: 'flex' , alignSelf: 'flex-end' }} loading={loading} className='gradient-btn' type="primary" onClick={onButtonClick}>{button}</Button>
+            )}
             {showEmojiPicker && (
               <div className="emoji-picker-container">
-                <Picker data={data} onEmojiSelect={(emoji: any) => setEditedText(editedText + emoji.native)} />
+                <Picker data={data} onEmojiSelect={handleEmojiChange} />
               </div>
             )}
             {emoji && (

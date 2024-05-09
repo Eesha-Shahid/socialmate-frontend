@@ -8,4 +8,9 @@ interface ITextWithGradientBorderProps {
     onTextChange?: (text: string) => void;
     emoji?: boolean;
     placeholder?: string;
+    onClick?: () => void;
+    selected?: boolean;
+    button?: string;
+    onButtonClick?: () => void;
+    loading?: boolean;
 }

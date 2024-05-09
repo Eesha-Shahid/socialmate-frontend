@@ -6,12 +6,16 @@ import TabPane from "antd/es/tabs/TabPane";
 import { logout } from "@/redux/actions/authAction";
 import { useAppDispatch } from "@/redux/store";
 import { navigationIcons, navigationItems } from "@/constants/topNavItems";
+import { useRouter } from "next/navigation";
 const { Title } = Typography;
 
 const Navbar: React.FC = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
+  
   const handleLogout = () => {
     dispatch(logout());
+    router.push('/')
   };
   const items: MenuProps['items'] = [
     {

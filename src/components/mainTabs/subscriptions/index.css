@@ -1,0 +1,24 @@
+.ant-table {
+    background: none !important;
+}
+
+.ant-table-wrapper .ant-table-thead >tr {
+    background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%) !important; 
+    border-color: transparent !important;
+}
+
+.ant-table-wrapper .ant-table-thead >tr>th {
+    /* background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%) !important;  */
+    background: transparent !important;
+    color: white !important;
+}
+
+.ant-table-wrapper .ant-table-thead >tr>th:first-child {
+    border-top-left-radius: 15px !important;
+    border-bottom-left-radius: 15px !important;
+}
+
+.ant-table-wrapper .ant-table-thead >tr>th:last-child {
+    border-top-right-radius: 15px !important;
+    border-bottom-right-radius: 15px !important;
+}

@@ -16,15 +16,13 @@ const ProfileViewsSummary: React.FC<IProfileViewsSummaryProps> = ({
   return (
     <>
       {data && (
-        <Col span={24}>
-          <Card title="Profile Views" bordered={false}>
-            <Row gutter={[16, 16]}>
-              {renderTimePeriodStats("Day", data.day_views)}
-              {renderTimePeriodStats("Week", data.week_views)}
-              {renderTimePeriodStats("Month", data.month_views)}
-            </Row>
-          </Card>
-        </Col>
+        <Card title="Profile Views" bordered={false}>
+          <Row gutter={[16, 16]}>
+            {renderTimePeriodStats("Day", data.day_views)}
+            {renderTimePeriodStats("Week", data.week_views)}
+            {renderTimePeriodStats("Month", data.month_views)}
+          </Row>
+        </Card>
       )}
     </>
   );

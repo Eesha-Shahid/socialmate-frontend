@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url(../../node_modules/react-credit-cards-2/dist/es/styles-compiled.css);
 
 :root {
   --max-width: 1100px;
@@ -118,21 +119,9 @@ body {
   font-style: italic;
 } */
 
-.ant-picker-calendar .ant-picker-calendar-header{
-  background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%);
-  justify-content: center !important;
-  margin-bottom: 1rem;
-  border-radius: 0.8rem;
-}
-
 .ant-radio-group-outline{
   border-radius: 0.5rem !important;
   background: #FFFFFF;
-  padding: 0.5rem 1rem !important;
-}
-
-.ant-radio-button-wrapper{
-  /* border: 2px solid red !important; */
 }
 
 .ant-radio-button-checked{
@@ -141,20 +130,18 @@ body {
   border-color: white !important;
 }
 
-/* .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
-  border-color: none;
-  color: 0px 1px 4px 0px #9972CB !important;
-} */
-
 .ant-card {
   box-shadow: 7px 7px 9px 0px rgba(51, 86, 201, 0.1) !important;
 }
 
-.ant-card-bordered {
-}
 
 .needle {
   display: none;
+}
+
+/* Tab */
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+  color: black !important;
 }
 
 /* Button */
@@ -223,8 +210,65 @@ body {
   font-family: "Poppins", sans-serif !important;
 }
 
+.ant-carousel {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-select {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-picker-calendar {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-radio-button-wrapper span {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-badge {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-table {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-tabs {
+  /* font-family: "Poppins", sans-serif !important; */
+}
+
+.ant-tabs-tabpane.ant-tabs-tabpane-active{
+  color: black !important;
+}
+
+
 input {
   font-family: "Poppins", sans-serif !important;
+}
+
+/* Stepper */
+.ant-steps {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.ant-steps-item-icon.ant-steps-icon {
+  transition: all 0.3s !important;
+}
+
+.ant-steps-item-tail {
+  width: 97% !important;
+  top: 23px !important;
+  margin-inline-start: 80px !important;
+}
+
+.ant-steps-item-title {
+  padding-inline-start: 20px !important;
+}
+
+.ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-tail::after {
+  background-color: none !important;
+  background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%) !important;
 }
 
 /* Text */
@@ -236,6 +280,16 @@ input {
   -webkit-text-fill-color: transparent;
 }
 
+.gradient-btn {
+  background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%) !important;
+  color: white !important;
+  border-radius: 20px !important;
+}
+
+.gradient-btn:hover {
+  color: rgb(236, 235, 235) !important;
+}
+
 .text-bold {
   font-weight: 500 !important;
 }
@@ -244,9 +298,35 @@ input {
   color: #797878 !important;
 }
 
+/* Card Component */
+.rccs__card--unknown > div {
+  background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%) !important; 
+}
+
+/* Carousel */
+:where(.css-dev-only-do-not-override-42nv3w).ant-carousel .slick-dots-bottom {
+  bottom: -15px !important;
+}
+
+.slick-dots li button {
+  /* background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%) !important; */
+  background: #343434 !important;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+
+/* Toggle Switch */
+.ant-switch.ant-switch-checked{
+  background: #343434 !important;
+}
 
 /* Components */
 @import url(../components/layouts/authLayout/navbar/index.css);
 @import url(../components/mainTabs/contentCalendar/index.css);
+@import url(../components/imageCarousel/index.css);
 @import url(../components/textWithGradientBorder/index.css);
 @import url(../components/mainTabs/schedulerHub/index.css);
+@import url(../components/assistantButton/index.css);
+@import url(../components/integrationCard/index.css);
+@import url(../components/mainTabs/subscriptions/index.css);
+@import url(../components/influencerCampaign/index.css);

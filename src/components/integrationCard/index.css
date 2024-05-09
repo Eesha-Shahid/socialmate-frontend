@@ -1,0 +1,5 @@
+.ant-divider-vertical.integration-divider {
+    border-inline-start: 2px solid transparent !important; 
+    border-image: linear-gradient(180deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%) 1 !important;  
+    border-radius: 5px;
+}

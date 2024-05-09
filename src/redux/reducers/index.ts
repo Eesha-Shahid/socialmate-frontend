@@ -5,6 +5,8 @@ import contentCalendarReducer, { ContentCalendarSelector } from "./contentCalend
 import subscriptionReducer, { SubscriptionSelector } from "./subscriptionReducer";
 import schedulerHubReducer, { SchedulerHubSelector } from "./schedulerHubReducer";
 import alertReducer, { AlertSelector } from "./alertReducer";
+import integrationsReducer, { IntegrationsSelector } from "./integrationsReducer";
+import influencerCampaignReducer, { InfluencerCampaignSelector } from "./influencerCampaignReducer";
 
 export const appReducer = combineReducers({
   auth: authReducer,
@@ -12,7 +14,9 @@ export const appReducer = combineReducers({
   contentCalendar: contentCalendarReducer,
   subscription: subscriptionReducer,
   schedulerHub: schedulerHubReducer,
-  alert: alertReducer
+  alert: alertReducer,
+  integrations: integrationsReducer,
+  influencerCampaign: influencerCampaignReducer
 });
 
 export {
@@ -21,7 +25,9 @@ export {
     ContentCalendarSelector,
     SubscriptionSelector,
     SchedulerHubSelector,
-    AlertSelector
+    AlertSelector,
+    IntegrationsSelector,
+    InfluencerCampaignSelector,
 }
 
 export type RootState = ReturnType<typeof appReducer>;

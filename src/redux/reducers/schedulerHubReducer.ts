@@ -15,6 +15,7 @@ const schedulerHubSlice = createSlice({
         state,
         { payload }: PayloadAction<IGeneratedCaptionResponseData>
     ) => {
+    state.generatedCaptionLoading = true;
     state.generatedCaption = payload;
     state.generatedCaptionLoading = false;
     },

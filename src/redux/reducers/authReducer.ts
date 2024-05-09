@@ -26,8 +26,11 @@ const authSlice = createSlice({
     registerSuccess: (state) => {
       return state;
     },
-    loginSuccess: () => {},
+    loginSuccess: (state) => {
+      state.loading = false
+    },
     loginFailure: (state) => {
+      state.loading = false
       return state;
     },
     setLoading: (state, { payload }: PayloadAction<{ loading: boolean }>) => {
@@ -45,6 +48,7 @@ export const {
   userLoaded,
   registerSuccess,
   loginSuccess,
+  loginFailure,
   setLoading 
 } = authSlice.actions;
 

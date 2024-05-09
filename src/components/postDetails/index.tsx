@@ -92,7 +92,7 @@ const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, 
             <Button type="primary" size="small" onClick={() => saveChanges()}>Save</Button>
           </Col>
         </Row>
-    }
+      }
     >
       <Space direction="vertical" style={{ width: '100%' }}>
         {selectedPost && (

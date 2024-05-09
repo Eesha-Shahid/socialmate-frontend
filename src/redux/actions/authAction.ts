@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/utils/axiosInstace";
 import { IForgotPassowrdFormData, ILoginFormData, IResetPasswordFormData, ISignupFormData, IUser, IloginResponseData } from "../types/auth/reducer";
-import { authReset, loginSuccess, setLoading, userLoaded } from "../reducers/authReducer";
+import { authReset, loginFailure, loginSuccess, setLoading, userLoaded } from "../reducers/authReducer";
 import { setAuthToken } from "@/utils/authToken";
 import store from "../store";
 import { updateAlert } from "./alertAction";
@@ -21,6 +21,7 @@ export const login = createAsyncThunk(
       dispatch(loadUser());
       return response.data;
     } catch (err: any) {
+      dispatch(loginFailure());
       if (err.response?.status === 401) { 
         dispatch(updateAlert({ type: NotificationType.Error, message: err?.response.data.message }))
         return thunkAPI.rejectWithValue(err?.response.data.message);
@@ -74,7 +75,7 @@ export const loadUser = createAsyncThunk(
 
       dispatch(
         userLoaded({
-          user: { ...res.data.user } as IUser,
+          user: { ...res.data } as IUser,
           role: user.user_type,
           token: localStorage.getItem('token'),
           isAuthenticated: true

@@ -4,14 +4,18 @@ import { Col, Layout, Row, Image, Typography, Space, Button, Dropdown, MenuProps
 import { Bell, Gear, Moon, Person } from 'akar-icons';
 import { logout } from '@/redux/actions/authAction';
 import { useAppDispatch } from '@/redux/hooks';
+import { useRouter } from 'next/navigation';
 const { Footer, Header } = Layout;
 
 const { Title } = Typography;
   
-const CreateLayout: React.FC<AuthLayoutProps> = ({ children }) => {
+const AuthLayoutTwo: React.FC<AuthLayoutTwoProps> = ({ children }) => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
+  
   const handleLogout = () => {
     dispatch(logout());
+    router.push('/')
   };
   
   const items: MenuProps['items'] = [
@@ -85,4 +89,4 @@ const CreateLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   );
 };
 
-export default CreateLayout;
+export default AuthLayoutTwo;

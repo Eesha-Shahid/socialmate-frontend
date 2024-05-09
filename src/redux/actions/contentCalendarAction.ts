@@ -6,7 +6,7 @@ import { updateAlert } from "./alertAction";
 import { NotificationType } from "@/types";
 
 export const getScheduledPosts = createAsyncThunk(
-  "instagramSummary/getScheduledPosts",
+  "contentCalendar/getScheduledPosts",
   async (_, thunkAPI) => {
     try {
       const { dispatch } = thunkAPI;
@@ -23,12 +23,10 @@ export const getScheduledPosts = createAsyncThunk(
 );
 
 export const updateScheduledPost = createAsyncThunk(
-  "instagramSummary/updatedScheduledPost",
+  "contentCalendar/updatedScheduledPost",
   async (postData: IUpdateScheduledPostData, thunkAPI) => {
     const { dispatch } = thunkAPI;
-    console.log(postData);
     const response = await axiosInstance.post("/user/update-scheduled-post", postData);
-    console.log(response.data)
     dispatch(updateScheduledPosts(response.data))
     dispatch(updateAlert({ type: response.data.post ? NotificationType.Success : NotificationType.Error, message: response.data.message }))
   }

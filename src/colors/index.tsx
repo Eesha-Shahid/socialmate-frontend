@@ -7,7 +7,8 @@ const color: IColor = {
   red: '#CC3362',
   blue: '#5287F1',
   pink: '#FF4EA3',
-  grey: '#666666'
+  grey: '#666666',
+  lightGrey: '#F3F4F6'
 }
 
 export const getColor = (type: string): string => {

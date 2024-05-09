@@ -14,7 +14,14 @@ const alertSlice = createSlice({
     setAlert: (state, { payload }: PayloadAction<IAlert>) => {
       const NOT_FOUND = -1;
       const currentState = current(state);
+      console.log(currentState)
       state.alerts = state.alerts ? [payload, ...state.alerts] : [payload];
+      // const sameMessageIndex = currentState.findIndex((alert) => {
+      //   return alert.message === payload.message;
+      // });
+      // if (sameMessageIndex === NOT_FOUND) {
+      //   state.push(payload);
+      // }
     },
     removeAlert: (state, { payload }: PayloadAction<Pick<IAlert, "message">>) => {
       state.alerts = state.alerts?.filter((alert) => {

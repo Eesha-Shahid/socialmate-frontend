@@ -1,0 +1,17 @@
+.assistant-btn.ant-btn-default, .assistant-btn.ant-btn {
+    background: #F3F4F6;
+    border: 0 !important;
+    border-radius: 20px;
+}
+
+.assistant-btn.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover{
+    background: #e6e7e9;
+}
+
+/* .assistant-btn span{
+    padding-bottom: 0.4rem;
+}
+
+.assistant-btn-text {
+    padding-bottom: 2rem;
+} */

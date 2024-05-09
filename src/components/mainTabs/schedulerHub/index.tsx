@@ -75,7 +75,7 @@ const SchedulerHub = () => {
     <Row style={{ justifyContent: 'space-evenly' }} align='middle'>
       <Col span={11}>
         <PostOptionCard
-          onClick={() => router.push('/post/create')}
+          onClick={() => router.push('/create')}
           imageSrc="/images/SimpleCreate.png"
           title="Simple"
           description="Tap into AI for a 3-Step Traffic Boost for Postings on Daily Basis"
@@ -86,7 +86,7 @@ const SchedulerHub = () => {
       </Col>
       <Col span={11}>
         <PostOptionCard
-          onClick={() => router.push('/ad/create')}
+          onClick={() => router.push('/create')}
           imageSrc="/images/AdvancedCreate.png"
           title="Advanced"
           description="Elevate Strategies with Advanced Tools for Ads and Influencers"

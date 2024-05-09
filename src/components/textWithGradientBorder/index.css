@@ -1,6 +1,5 @@
 .outer-gradient-border {
     position: relative;
-    background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%);
     padding: 2px;
 }
 
@@ -39,4 +38,8 @@
 
 .emoji-button {
     cursor: pointer;
+}
+
+.text-mute .ant-typography {
+    color: rgba(0, 0, 0, 0.45) !important
 }

@@ -15,8 +15,8 @@ const ImageCarousel: React.FC<IImageCarouselProps> = ({ media }) => {
         className="custom-carousel"
     >
         {media.map((url: string, index: number) => (
-        <div key={index} style={{ padding: '0 15px' }}>
-          <Image src={url} alt={`Media ${index + 1}`} style={{ maxWidth: '100%', height: 'auto' }} />
+        <div key={index} style={{ marginRight: '2rem' }}>
+          <Image src={url} alt={`Media ${index + 1}`} style={{ marginRight: '2rem', borderRadius: '15px', maxWidth: '100%', height: 'auto' }} />
         </div>
       ))}
     </Carousel>
