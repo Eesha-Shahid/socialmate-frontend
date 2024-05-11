@@ -30,10 +30,10 @@ export default function InstagramLogo() {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(15.9375 64.6489) rotate(-90) scale(59.4645 55.3066)"
         >
-          <stop stop-color="#FFDD55" />
-          <stop offset="0.1" stop-color="#FFDD55" />
-          <stop offset="0.5" stop-color="#FF543E" />
-          <stop offset="1" stop-color="#C837AB" />
+          <stop stopColor="#FFDD55" />
+          <stop offset="0.1" stopColor="#FFDD55" />
+          <stop offset="0.5" stopColor="#FF543E" />
+          <stop offset="1" stopColor="#C837AB" />
         </radialGradient>
         <radialGradient
           id="paint1_radial_725_3234"
@@ -43,9 +43,9 @@ export default function InstagramLogo() {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(-10.0502 4.34988) rotate(78.681) scale(26.5809 109.567)"
         >
-          <stop stop-color="#3771C8" />
-          <stop offset="0.128" stop-color="#3771C8" />
-          <stop offset="1" stop-color="#6600FF" stop-opacity="0" />
+          <stop stopColor="#3771C8" />
+          <stop offset="0.128" stopColor="#3771C8" />
+          <stop offset="1" stopColor="#6600FF" stop-opacity="0" />
         </radialGradient>
         <clipPath id="clip0_725_3234">
           <rect

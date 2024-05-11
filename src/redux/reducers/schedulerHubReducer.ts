@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SchedulerHubState } from "../types/schedulerHub/state";
-import { IGeneratedCaptionResponseData } from "../types/schedulerHub/reducer";
 
 const initialState: SchedulerHubState = {
     generatedCaption: null,
@@ -13,11 +12,11 @@ const schedulerHubSlice = createSlice({
   reducers: {
     generateCaptionSuccess: (
         state,
-        { payload }: PayloadAction<IGeneratedCaptionResponseData>
+        { payload }: PayloadAction<any>
     ) => {
-    state.generatedCaptionLoading = true;
-    state.generatedCaption = payload;
-    state.generatedCaptionLoading = false;
+      state.generatedCaptionLoading = true;
+      state.generatedCaption = payload;
+      state.generatedCaptionLoading = false;
     },
     generateCaptionFailure: (state) => {
       state.generatedCaptionLoading = false;
@@ -30,7 +29,8 @@ const schedulerHubSlice = createSlice({
 
 export const {
     generateCaptionSuccess,
-    generateCaptionFailure
+    generateCaptionFailure,
+    SchedulerHubReset
 } = schedulerHubSlice.actions;
 
 export default schedulerHubSlice.reducer;

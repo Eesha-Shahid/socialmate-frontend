@@ -6,10 +6,11 @@ import { useSelector } from 'react-redux';
 import { SchedulerHubSelector } from '@/redux/reducers';
 import { useAppDispatch } from '@/redux/store';
 import { generateCaption } from '@/redux/actions/schedulerHubAction';
+import { SchedulerHubReset } from '@/redux/reducers/schedulerHubReducer';
 
 const { Title, Text } = Typography;
 
-const AiAssistant: React.FC<IAiAssistantProps> = ({ visible, onClose }) => {
+const AiAssistant: React.FC<IAiAssistantProps> = ({ visible, onClose, onSelect }) => {
   const [inputValue, setInputValue] = useState('');
   const [selectedSuggestion, setSelectedSuggestion] = useState<string | null>(null);
 
@@ -18,6 +19,15 @@ const AiAssistant: React.FC<IAiAssistantProps> = ({ visible, onClose }) => {
 
   const handleInputChange = (text: string) => {
     setInputValue(text);
+    dispatch(SchedulerHubReset())
+  };
+
+  const handleSelect = () => {
+    if (selectedSuggestion) {
+      onSelect(selectedSuggestion);
+      onClose();
+      dispatch(SchedulerHubReset())
+    }
   };
 
   const handleSuggestionClick = (suggestion: string) => {
@@ -26,16 +36,9 @@ const AiAssistant: React.FC<IAiAssistantProps> = ({ visible, onClose }) => {
   };
 
   const handleGenerateClick = () => {
-    console.log('Prompt:', inputValue);
     dispatch(generateCaption({ queryString: inputValue }));
     setSelectedSuggestion(null);
   };
-
-  // const suggestions = [
-  //   'Sample Caption Sample Caption Sample Caption Sample Caption Sample Caption Sample Caption', 
-  //   'Sample Caption Sample Caption Sample Caption Sample Caption Sample Caption', 
-  //   'Sample Caption Sample Caption Sample Caption'
-  // ];
 
   return (
     <Drawer
@@ -50,7 +53,7 @@ const AiAssistant: React.FC<IAiAssistantProps> = ({ visible, onClose }) => {
             <Title level={4} className="gradient-text" style={{ textAlign: 'center', marginBottom: '26.6px' }}>AI Assistant</Title>
           </Col>
           <Col span={4}>
-            <Button type="primary" size="small">Select</Button>
+            <Button type="primary" size="small" onClick={handleSelect}>Select</Button>
           </Col>
         </Row>
       }

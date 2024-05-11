@@ -15,7 +15,7 @@ const InfluencerCampaign:React.FC<IInfluencerCampaignProps> = () => {
   useEffect(()=> {
     dispatch(getInfluencers());
     dispatch(getInfluencerList());
-  },[dispatch, influencerList, influencers])
+  },[influencerList, influencers])
 
   interface DataType {
     key: React.Key;

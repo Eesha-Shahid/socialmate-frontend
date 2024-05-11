@@ -5,6 +5,7 @@ import { Bell, Gear, Moon, Person } from 'akar-icons';
 import { logout } from '@/redux/actions/authAction';
 import { useAppDispatch } from '@/redux/hooks';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 const { Footer, Header } = Layout;
 
 const { Title } = Typography;
@@ -20,13 +21,13 @@ const AuthLayoutTwo: React.FC<AuthLayoutTwoProps> = ({ children }) => {
   
   const items: MenuProps['items'] = [
     {
-      label: <a href="https://www.antgroup.com">View Profile</a>,
+      label: <Link href="/profile">View Profile</Link>,
       key: '0',
     },
-    {
-      label: <a href="https://www.aliyun.com">Option 2</a>,
-      key: '1',
-    },
+    // {
+    //   label: <a href="https://www.aliyun.com">Option 2</a>,
+    //   key: '1',
+    // },
     {
       type: 'divider',
     },
@@ -75,15 +76,15 @@ const AuthLayoutTwo: React.FC<AuthLayoutTwoProps> = ({ children }) => {
             preview={false}
             style={{ height: "55px", width: "55px", marginRight: "1rem" }}
             />
-            <Title level={4}>Social Mate</Title>
+            <Title style={{ cursor: 'pointer' }} onClick={()=> router.push('/')} level={4}>Social Mate</Title>
           </Row>
           </Col>
           <Col style={{ display: "flex", justifyContent: "end" }} md={4}>
           {renderIcons()}
           </Col>
         </Row>
-        {children}
       </Header>
+        {children}
       <Footer style={{ background: 'none' }} />
     </Layout>
   );

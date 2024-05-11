@@ -1,6 +1,7 @@
 import { SubscriptionStatus } from "@/types";
 
 export interface IPaymentMethod {
+    _id: string;
     holder_name: string;
     card_number: string;
     exp_month: string;
@@ -14,3 +15,9 @@ export interface ISubscriptionHistory extends Pick<IPaymentMethod, 'holder_name'
     status: SubscriptionStatus;
     expiration_date: Date;
 }
+
+export interface SetDefaultPaymentMethodDto {
+    cardId: string;
+}
+
+export interface AddPaymentMethodDto extends Omit<IPaymentMethod, '_id' | 'default'>{}

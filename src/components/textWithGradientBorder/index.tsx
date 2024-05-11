@@ -22,17 +22,12 @@ const TextWithGradientBorder: React.FC<ITextWithGradientBorderProps> = ({
     ? "linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%)" 
     : "rgba(0, 0, 0, 0.45)"
 
-  // useEffect(() => {
-  //   setEditedText(text);
-  // }, [text]);
-
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const newText = e.target.value;
     setEditedText(newText);
     if (onTextChange) {
       onTextChange(newText);
     }
-    // console.log(newText)
   };
 
   const handleEmojiChange = (emoji: any) => {

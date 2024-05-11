@@ -10,7 +10,6 @@ const Dashboard: React.FC = () => {
   const { user } = useSelector(AuthSelector);
   const { integrations } = useSelector(IntegrationsSelector);
   const [selectedAvatars, setSelectedAvatars] = useState<number[]>([]);
-  console.log(integrations);
 
   const handleAvatarClick = (index: number) => {
     setSelectedAvatars((prevSelected) =>

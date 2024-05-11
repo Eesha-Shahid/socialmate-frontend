@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
 import { Image, Row, Col, Typography } from "antd";
+import { useRouter } from "next/navigation";
 const { Title } = Typography;
 
 const UnauthNavbar: React.FC = () => {
+  const router = useRouter();
   return (
     <>
       <Row style={{ width: "100%" }} justify="space-between" align="middle">
@@ -15,7 +17,7 @@ const UnauthNavbar: React.FC = () => {
               preview={false}
               style={{ height: "55px", width: "55px", marginRight: "1rem" }}
             />
-            <Title level={4}>Social Mate</Title>
+            <Title style={{ cursor: 'pointer' }} onClick={()=> router.push('/')} level={4}>Social Mate</Title>
           </Row>
         </Col>
       </Row>

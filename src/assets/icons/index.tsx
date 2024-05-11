@@ -16,6 +16,8 @@ import PaymentIcon from './PaymentIcon';
 import InstagramLogo from './InstagramLogo';
 import FacebookLogo from './FacebookLogo';
 import RedditLogo from './RedditLogo';
+import NextIcon from './NextIcon';
+import DisabledNextIcon from './DisabledNextIcon';
 
 export {
     FollowersIcon,
@@ -35,5 +37,7 @@ export {
     PaymentIcon,
     InstagramLogo,
     FacebookLogo,
-    RedditLogo
+    RedditLogo,
+    NextIcon,
+    DisabledNextIcon
 }

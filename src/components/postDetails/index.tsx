@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Avatar, Space, Drawer, Typography, Divider, Carousel, Image, Button, Row, Col } from 'antd';
+import React, { useEffect, useState } from "react";
+import { Avatar, Space, Drawer, Typography, Divider, Row, Col, Select, Button } from 'antd';
+import type {SelectProps} from 'antd';
 import { FacebookIcon, InstagramMediumIcon, RedditIcon } from "@/assets/icons";
 import { Calendar as CalendarIcon, Clock } from "akar-icons";
 import { IPostDetailsProps } from "./types";
@@ -7,11 +8,19 @@ import { ImageCarousel, TextWithGradientBorder } from 'components';
 import { IUpdateScheduledPostData } from "@/redux/types/contentCalendar/reducer";
 import { updateScheduledPost } from "@/redux/actions/contentCalendarAction";
 import { useAppDispatch } from "@/redux/hooks";
-const { Title } = Typography;
+import { getInfluencerList } from "@/redux/actions/influencerCampaignAction";
+import { useSelector } from "react-redux";
+import { InfluencerCampaignSelector } from "@/redux/reducers";
+import { Country } from "@/types";
+const { Title, Text } = Typography;
 
 const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, sidebarVisible}) => {
 
   const dispatch = useAppDispatch();
+  const { influencerList } = useSelector(InfluencerCampaignSelector);
+  const [ hashtagList, setHashtagList] = useState<any>();
+  const [ tagList, setTagList] = useState<any>();
+  const [ location, setLocation] = useState<any>();
   const [modifiedPostData, setModifiedPostData] = useState<IUpdateScheduledPostData>({ _id: selectedPost._id });
 
   const handleTextChange = (fieldName: string, newText: string) => {
@@ -21,16 +30,34 @@ const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, 
     }));
   };
 
+  useEffect(()=> {
+    dispatch(getInfluencerList());
+  },[influencerList])
+
   const saveChanges = () => {
-    dispatch(updateScheduledPost(modifiedPostData));
+    const updateData = {
+      ...modifiedPostData,
+      hashtags: hashtagList && hashtagList.length > 0 ? hashtagList: [],
+      tagged_accounts: tagList && tagList.length > 0 ? tagList: [],
+      location: location ? location: null
+    }
+    dispatch(updateScheduledPost(updateData));
   };
   
   const renderPlatforms = (platforms: string[]) => (
-    <Space style={{ marginBottom: '1rem' }}>
-      {platforms.includes('instagram') && <Avatar icon={<InstagramMediumIcon />} />}
-      {platforms.includes('facebook') && <Avatar icon={<FacebookIcon />} />}
-      {platforms.includes('reddit') && <Avatar icon={<RedditIcon />} />}
-    </Space>
+    <>
+      {platforms.length > 0 &&
+        <Space style={{ marginBottom: '1rem' }}>
+          {platforms.includes('instagram') && <Avatar icon={<InstagramMediumIcon />} />}
+          {platforms.includes('facebook') && <Avatar icon={<FacebookIcon />} />}
+          {platforms.includes('reddit') && <Avatar icon={<RedditIcon />} />}
+        </Space>
+      }
+      {
+        platforms.length == 0 &&
+        <Text>No Platforms</Text>
+      }
+    </>
   );
   
   const renderDetail = (type: string, text: string | undefined) => {
@@ -61,20 +88,86 @@ const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, 
     </Space>
   );
   
-  const renderHashtags = (hashtags: string[] | undefined) => (
-    <Space>
-      {hashtags?.map((tag: string, index: number) => (
-        <React.Fragment key={index}>
-          <TextWithGradientBorder 
-            editable={false}
-            text={`#${tag}`}
-            gradientText={true}
-            className={tag ? '' : 'text-mute'}
-          />
-        </React.Fragment>
-      ))}
-    </Space>
-  );
+  const renderHashtags = () => {
+    const handleHashtagChange = (value: string[]) => {
+      setHashtagList(value)
+    };
+
+    const hashtagOptions: SelectProps['options'] = [];
+
+    {selectedPost.hashtags?.map((hashtag,index) => (
+      hashtagOptions.push({
+        value: hashtag,
+        label: hashtag,
+      })
+    ))}
+
+    return(
+      <Select
+        mode="tags"
+        style={{ width: '100%' }}
+        placeholder="Add Hashtags"
+        tokenSeparators={[',']}
+        defaultValue={selectedPost.hashtags}
+        onChange={handleHashtagChange}
+        maxTagCount="responsive"
+        options={hashtagOptions}
+      />
+    )
+  }
+
+  const renderTaggedAccounts = () => {
+    const handleTagChange = (value: string[]) => {
+      setTagList(value)
+    };
+
+    const tagOptions: SelectProps['options'] = [];
+
+    {influencerList?.map(influencer => (
+      tagOptions.push({
+        value: influencer.name,
+        label: influencer.name,
+      })
+    ))}
+    
+    return(
+      <Select
+        mode="tags"
+        style={{ width: '100%' }}
+        placeholder="Add Accounts"
+        tokenSeparators={[',']}
+        defaultValue={selectedPost.tagged_accounts}
+        maxTagCount="responsive"
+        onChange={handleTagChange}
+        options={tagOptions}
+      />
+    )
+  }
+
+  const renderLocation = () => {
+    const handleLocationChange = (value: string) => {
+      setLocation(value)
+    };
+
+    const locationOptions: SelectProps['options'] = [];
+
+    {Object.values(Country)?.map(country => (
+      locationOptions.push({
+        value: country,
+        label: country
+      })
+    ))}
+  
+    return (
+      <Select
+        style={{ width: '100%' }}
+        placeholder="Add Location"
+        defaultValue={selectedPost.location}
+        onChange={handleLocationChange}
+        options={locationOptions}
+      />
+    )
+  }
 
   return (
     <Drawer
@@ -112,12 +205,12 @@ const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, 
             {renderDateTime(selectedPost.scheduled_time)}
             <Divider />
             <Title level={4}>Hashtags</Title>
-            {renderHashtags(selectedPost.hashtags)}
+            {renderHashtags()}
             <Divider />
             <Title level={4}>Location</Title>
-            {renderDetail("location", selectedPost.location)}
+            {renderLocation()}
             <Title level={4}>Tagged</Title>
-            {renderHashtags(selectedPost.hashtags)}
+            {renderTaggedAccounts()}
           </div>
         )}
       </Space>

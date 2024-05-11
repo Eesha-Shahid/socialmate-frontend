@@ -23,6 +23,23 @@ const subscriptionSlice = createSlice({
     getPaymentMethodsFailure: (state) => {
       state.paymentMethodsLoading = false;
     },
+    setDefaultPaymentMethod: (state, { payload }: PayloadAction<IPaymentMethod>) => {
+      if (state.paymentMethods) {
+        state.paymentMethods.forEach((card, ) => {
+          if (card._id === payload._id) {
+            card.default = true;
+          } else {
+            card.default = false;
+          }
+        });
+      }
+    },
+    addPaymentMethod: (state, { payload }: PayloadAction<IPaymentMethod>) => {
+      if (!state.paymentMethods) {
+        state.paymentMethods = [];
+      }
+      state.paymentMethods.push(payload);
+    },
     getSubscriptionHistorySuccess: (
       state,
       { payload }: PayloadAction<ISubscriptionHistory[]>

@@ -4,6 +4,7 @@ export enum UserRoles {
 }
 
 export enum MediaType {
+  Text = "TEXT",
   Image = 'IMAGE',
   Video = 'VIDEO',
   Carousel_Album = 'CAROUSEL_ALBUM'

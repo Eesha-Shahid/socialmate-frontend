@@ -1,5 +1,5 @@
 import { getColor } from "@/colors";
-import { getPaymentMethods, getSubscriptionHistry } from "@/redux/actions/subscriptionAction";
+import { getPaymentMethods, getSubscriptionHistry, setDefaultPaymentMethod } from "@/redux/actions/subscriptionAction";
 import { SubscriptionSelector } from "@/redux/reducers";
 import { useAppDispatch } from "@/redux/store";
 import { SubscriptionStatus } from "@/types";
@@ -18,7 +18,11 @@ const Subscriptions = () => {
   useEffect(() => {
     dispatch(getSubscriptionHistry());
     dispatch(getPaymentMethods());
-  }, []);
+  }, [paymentMethods, subscriptionHistory]);
+
+  const handleSetDefault = (cardId: string) => {
+    dispatch(setDefaultPaymentMethod({ cardId }));
+  }
 
   const actualPaymentMethod = paymentMethods?.map(({ default: isDefault, exp_month, exp_year, ...rest }, index) => ({
     ...rest,
@@ -57,7 +61,9 @@ const Subscriptions = () => {
       title: 'Action',
       dataIndex: 'action',
       key: '5',
-      render: (action: string) => <Button type={action === 'Default' ? 'primary' : 'default'}>{action}</Button>,
+      render: (action: string, record: any) => {
+        return action === 'Default' ? <Tag color="green">Default</Tag> : <Button type="default" onClick={() => handleSetDefault(record._id)}>Set Default</Button>;
+      }
     }
   ];
   

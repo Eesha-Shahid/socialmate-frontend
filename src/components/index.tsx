@@ -21,6 +21,8 @@ import IntegrationCard from "./integrationCard";
 import PostDetails from "./postDetails";
 import InstagramDashboard from "./mainTabs/dashboard/instagram";
 import InfluencerCampaign from "./influencerCampaign";
+import StepThree from "./mainTabs/schedulerHub/stepThree";
+import StepTwo from "./mainTabs/schedulerHub/stepTwo";
 
 export {
     Navbar,
@@ -42,6 +44,8 @@ export {
     PostOptionCard,
     AssistantButton,
     StepOne,
+    StepTwo,
+    StepThree,
     AiAssistant,
     IntegrationCard,
     PostDetails,

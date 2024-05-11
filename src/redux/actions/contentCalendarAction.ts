@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getScheduledPostsSuccess, updateScheduledPosts } from "../reducers/contentCalendarReducer";
-import axiosInstance from "@/utils/axiosInstace";
-import { IUpdateScheduledPostData } from "../types/contentCalendar/reducer";
+import { addScheduledPosts, getScheduledPostsSuccess, updateScheduledPosts } from "../reducers/contentCalendarReducer";
+import axiosInstance, { multipartConfig } from "@/utils/axiosInstace";
+import { CreateScheduledPostDto, IUpdateScheduledPostData } from "../types/contentCalendar/reducer";
 import { updateAlert } from "./alertAction";
 import { NotificationType } from "@/types";
 
@@ -17,6 +17,56 @@ export const getScheduledPosts = createAsyncThunk(
         return thunkAPI.rejectWithValue(err?.response.data.message[0]);
       } else {
         return thunkAPI.rejectWithValue(err.response.data);
+      }
+    }
+  }
+);
+
+export const createScheduledPost = createAsyncThunk(
+  "schedulerHub/createScheduledPost",
+  async (createScheduledPostDto: CreateScheduledPostDto, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    try {
+      const formData = new FormData();
+      formData.append('file', createScheduledPostDto.file); 
+      const { file, ...postData } = createScheduledPostDto;
+      formData.append('addScheduledPostDto', JSON.stringify(postData));
+      const response = await axiosInstance.post(`/user/add-scheduled-post`, formData);
+      console.log(response.data.post);
+      dispatch(addScheduledPosts(response.data.post))
+      dispatch(updateAlert({ type: NotificationType.Success, message: response.data.message }))
+    } catch (err: any) {
+      dispatch(updateAlert({ type: NotificationType.Error, message: err.response.data.message }))
+      if (err.response?.status === 400) { 
+        return thunkAPI.rejectWithValue(err?.response.data.message[0]);
+      }
+      else{
+        return thunkAPI.rejectWithValue(err.response.data)
+      }
+    }
+  }
+);
+
+export const createPost = createAsyncThunk(
+  "schedulerHub/createPost",
+  async (createScheduledPostDto: CreateScheduledPostDto, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    try {
+      const formData = new FormData();
+      formData.append('file', createScheduledPostDto.file); 
+      const { file, ...postData } = createScheduledPostDto;
+      formData.append('addScheduledPostDto', JSON.stringify(postData));
+      const response = await axiosInstance.post(`/user/create-post`, formData);
+      console.log(response.data.post);
+      // dispatch(addScheduledPosts(response.data.post))
+      dispatch(updateAlert({ type: NotificationType.Success, message: response.data.message }))
+    } catch (err: any) {
+      dispatch(updateAlert({ type: NotificationType.Error, message: err.response.data.message }))
+      if (err.response?.status === 400) { 
+        return thunkAPI.rejectWithValue(err?.response.data.message[0]);
+      }
+      else{
+        return thunkAPI.rejectWithValue(err.response.data)
       }
     }
   }

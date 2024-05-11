@@ -320,6 +320,16 @@ input {
   background: #343434 !important;
 }
 
+input[type='file'] {
+  color: transparent;
+  /* visibility: hidden; */
+}
+
+.ant-image-mask {
+  margin-top: 2rem !important;
+  border-radius: 15px !important;
+}
+
 /* Components */
 @import url(../components/layouts/authLayout/navbar/index.css);
 @import url(../components/mainTabs/contentCalendar/index.css);

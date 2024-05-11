@@ -1,15 +1,17 @@
 'use client'
-import { StepOne } from 'components';
-import { Button, Steps, Typography, message  } from 'antd';
+import { StepOne, StepThree, StepTwo } from 'components';
+import { Button, Row, Steps, Typography  } from 'antd';
 import React, { useState } from 'react';
 import { ICreateAdProps } from './types';
-import Icon, { SmileOutlined, UserOutlined } from '@ant-design/icons';
-import { CreativeIcon, PaymentIcon, TargetingIcon } from '@/assets/icons';
+import Icon from '@ant-design/icons';
+import { CreativeIcon, DisabledNextIcon, NextIcon, PaymentIcon, TargetingIcon } from '@/assets/icons';
+import { useRouter } from 'next/navigation';
 
 const { Title } = Typography
 
 const CreateAd: React.FC<ICreateAdProps> = ({ type2 }) => {
   const [current, setCurrent] = useState(0);
+  const router = useRouter();
 
   const next = () => {
     setCurrent(current + 1);
@@ -31,14 +33,14 @@ const CreateAd: React.FC<ICreateAdProps> = ({ type2 }) => {
     },
     {
       title: 'Targeting & Delivery',
-      content: <StepOne />,
+      content: <StepTwo />,
       icon: current === 1 
         ? <Icon component={TargetingIcon} /> 
         : <Icon component={TargetingIcon} style={{ filter: 'grayscale(100%)' }} />,
     },
     {
       title: 'Payment',
-      content: <StepOne />,
+      content: <StepThree />,
       icon: current === 2 
         ? <Icon component={PaymentIcon} /> 
         : <Icon component={PaymentIcon} style={{ filter: 'grayscale(100%)' }} />,
@@ -54,39 +56,40 @@ const CreateAd: React.FC<ICreateAdProps> = ({ type2 }) => {
         Let&apos;s create some magic!
     </Title>
     <Steps
-      style={{ marginTop: '3rem' }}
+      size='small'
+      style={{ marginTop: '5rem' }}
       labelPlacement="vertical"
       current={current}
       responsive={true}
       items={items}
     />
     <div 
-      style={{ background: borderColor, borderRadius: '20px', height: 'auto', margin: '3rem' }}
+      style={{ background: borderColor, borderRadius: '20px', height: 'auto', margin: '5rem' }}
       className="outer-gradient-border"
     >
       <div 
-        style={{ padding: '10px 18px', borderRadius: '18px', height: 'auto' }} 
+        style={{ padding: '2rem', borderRadius: '18px', height: 'auto' }} 
         className='inner-text'
-      >
-        {current < steps.length - 1 && (
-        <Button type="primary" onClick={() => next()}>
-          Next
-        </Button>
-      )}
-      {current === steps.length - 1 && (
-        <Button type="primary" onClick={() => message.success('Processing complete!')}>
-          Done
-        </Button>
-      )}
-      {current > 0 && (
-        <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-          Previous
-        </Button>
-      )}
-        <div>{steps[current].content}</div>    
+      >     
+        <div>{steps[current].content}</div>
+        <Row justify='space-between' style={{ margin: '1rem' }}>
+          {current > 0 && (
+            <Icon component={NextIcon} onClick={() => prev()} style={{ transform: 'rotate(180deg)' }} />
+          )}
+          {current == 0 && (
+            <Icon component={DisabledNextIcon} style={{ transform: 'rotate(180deg)' }} />
+          )}
+          {current < steps.length - 1 &&
+            <Icon component={NextIcon} onClick={() => next()} />
+          }
+          {current === steps.length - 1 && (
+            <Button type="primary" onClick={() => router.push('/')}>
+              Done
+            </Button>
+          )}    
+        </Row>
       </div>
     </div>
-      
     </>
   );
 };

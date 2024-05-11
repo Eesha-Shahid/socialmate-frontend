@@ -7,9 +7,9 @@ const PostOptionCard: React.FC<IPostOptionCardProps> = ({ onClick, imageSrc, tit
   return (
     <Card bordered={false} style={{ marginTop: '1rem' }} hoverable >
       <Space direction="vertical" style={{ justifyContent: 'center' }}>
-        <Row align="middle">
+        <Row justify='center'>
           <Col>
-            <Image preview={false} alt="example" src={imageSrc} style={{ width: width }} />
+            <Image preview={false} alt="example" src={imageSrc} style={{ width: width, marginBottom: '0rem 1rem' }} />
           </Col>
         </Row>
         <Row justify="center">

@@ -7,6 +7,7 @@ import { logout } from "@/redux/actions/authAction";
 import { useAppDispatch } from "@/redux/store";
 import { navigationIcons, navigationItems } from "@/constants/topNavItems";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 const { Title } = Typography;
 
 const Navbar: React.FC = () => {
@@ -19,13 +20,13 @@ const Navbar: React.FC = () => {
   };
   const items: MenuProps['items'] = [
     {
-      label: <a href="https://www.antgroup.com">View Profile</a>,
+      label: <Link href="/profile">View Profile</Link>,
       key: '0',
     },
-    {
-      label: <a href="https://www.aliyun.com">Option 2</a>,
-      key: '1',
-    },
+    // {
+    //   label: <a href="https://www.aliyun.com">Option 2</a>,
+    //   key: '1',
+    // },
     {
       type: 'divider',
     },
@@ -99,7 +100,7 @@ const Navbar: React.FC = () => {
               preview={false}
               style={{ height: "55px", width: "55px", marginRight: "1rem" }}
             />
-            <Title level={4}>Social Mate</Title>
+            <Title style={{ cursor: 'pointer' }} onClick={()=> router.push('/')} level={4}>Social Mate</Title>
           </Row>
         </Col>
         <Col style={{ display: "flex", justifyContent: "end" }} md={4}>
