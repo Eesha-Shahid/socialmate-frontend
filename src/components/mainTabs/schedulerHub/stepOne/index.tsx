@@ -9,13 +9,14 @@ import { getInfluencerList } from '@/redux/actions/influencerCampaignAction';
 import { useAppDispatch } from '@/redux/store';
 import { Calendar, Clock } from 'akar-icons';
 import dayjs from 'dayjs';
-import { Country, MediaType, Platform } from '@/types';
+import { Country, MediaType, NotificationType, Platform } from '@/types';
 import { createPost, createScheduledPost } from '@/redux/actions/contentCalendarAction';
 import { useRouter } from 'next/navigation';
 import axiosInstance from '@/utils/axiosInstace';
 import { getColor } from '@/colors';
 import { generateCaption } from '@/redux/actions/schedulerHubAction';
 import TextArea from 'antd/es/input/TextArea';
+import { updateAlert } from '@/redux/actions/alertAction';
 const { Text, Title } = Typography;
 
 const StepOne = () => {
@@ -29,8 +30,11 @@ const StepOne = () => {
   const [ timeString, setTimeString] = useState<any>();
   const [ dateString, setDateString] = useState<any>();
   const [ sentiment, setSentiment ] = useState<any>('None');
+  const [ sentimentLoading, setSentimentLoading ] = useState(false);
   const [ descriptionSentiment, setDescriptionSentiment ] = useState<any>('None');
+  const [ descriptionSentimentLoading, setDescriptionSentimentLoading ] = useState(false);
   const [ captionFromImage, setCaptionFromImage ] = useState<any>('None');
+  const [ captionFromImageLoading, setCaptionFromImageLoading ] = useState(false);
   const [file, setFile] = useState<File | null>();
   const [ suggestedCaption, setSuggestedCaption ] = useState<any>();
   const router = useRouter();
@@ -127,6 +131,7 @@ const StepOne = () => {
 
     dispatch(createPost(scheduled_post))
     router.push('/');
+    dispatch(updateAlert({ type: NotificationType.Info, message: 'Your post will be uploaded shortly.' }))
   }
 
   const handleTextChange = (fieldName: string, newText: string) => {
@@ -158,8 +163,9 @@ const StepOne = () => {
         if (file){
           formData.append('file', file); 
         }
+        setCaptionFromImageLoading(true)
         const response = await axiosInstance.post(`/user/generate-caption-from-image`, formData);
-        console.log(response)
+        setCaptionFromImageLoading(false)
         setCaptionFromImage(response.data.caption)
       } catch (err: any) {
         setCaptionFromImage('Error')
@@ -169,16 +175,16 @@ const StepOne = () => {
     return (
       <>
         <input type="file" onChange={handleChange} />
-        {file && <Image alt='Image' src={URL.createObjectURL(file)} />}
-        <Col style={{ display: 'flex',justifyContent: 'center', alignItems: 'center', marginTop: '2rem' }}>
-          <Button type='primary' disabled={file == null} onClick={generateCaptionFromImage}>Generate Caption</Button>
-        </Col>
-        {captionFromImage && (
+        {file && (
           <>
-          <Col>
-            <Text style={{ fontWeight: '500', marginBottom: '2rem' }}>Caption:</Text>
-            <TextArea value={captionFromImage}/>
-          </Col>
+            <Image alt='Image' src={URL.createObjectURL(file)} />
+            <Col style={{ display: 'flex',justifyContent: 'center', alignItems: 'center', marginTop: '2rem' }}>
+              <Button type='primary' loading={captionFromImageLoading} onClick={generateCaptionFromImage}>Generate Caption</Button>
+            </Col>
+            <Col>
+              <Text style={{ fontWeight: '500', marginBottom: '2rem' }}>Caption:</Text>
+              <TextArea value={captionFromImage}/>
+            </Col>
           </>
         )}
       </>
@@ -261,7 +267,9 @@ const StepOne = () => {
   const renderCaption = () => {
     const handleCalculateSentiment = async() => {
       try {
+        setSentimentLoading(true)
         const response = await axiosInstance.post(`/user/calculate-sentiment`, { caption: createScheduledPostDto.caption });
+        setSentimentLoading(false)
         setSentiment(response.data.sentiment)
       } catch (err: any) {
         setSentiment('Error')
@@ -284,7 +292,7 @@ const StepOne = () => {
         />
         </Col>
         <Col style={{ display: 'flex', alignItems: 'center' }} span={24}>
-          <Button type='primary' style={{ marginRight: '1rem' }} onClick={handleCalculateSentiment}>Calculate Sentiment</Button>
+          <Button type='primary' loading={sentimentLoading} style={{ marginRight: '1rem' }} onClick={handleCalculateSentiment}>Calculate Sentiment</Button>
           <Tag color={sentiment == 'Positive' ? getColor('green'): sentiment == 'Negative' ? getColor('red') : getColor('lightGrey')} style={{ fontSize: '1rem', padding: '0.5rem 1.5rem' }}>{sentiment}</Tag>
         </Col>
       </>
@@ -295,7 +303,9 @@ const StepOne = () => {
 
     const handleCalculateSentiment = async() => {
       try {
+        setDescriptionSentimentLoading(true)
         const response = await axiosInstance.post(`/user/calculate-sentiment`, { caption: createScheduledPostDto.description });
+        setDescriptionSentimentLoading(false)
         setDescriptionSentiment(response.data.sentiment)
       } catch (err: any) {
         setDescriptionSentiment('Error')
@@ -317,7 +327,7 @@ const StepOne = () => {
         />
         </Col>
         <Col style={{ display: 'flex', alignItems: 'center' }} span={24}>
-          <Button type='primary' style={{ marginRight: '1rem' }} onClick={handleCalculateSentiment}>Calculate Sentiment</Button>
+          <Button type='primary' loading={descriptionSentimentLoading}  style={{ marginRight: '1rem' }} onClick={handleCalculateSentiment}>Calculate Sentiment</Button>
           <Tag color={descriptionSentiment == 'Positive' ? getColor('green'): descriptionSentiment == 'Negative' ? getColor('red') : getColor('lightGrey')} style={{ fontSize: '1rem', padding: '0.5rem 1.5rem' }}>{descriptionSentiment}</Tag>
         </Col>
       </>

@@ -27,10 +27,22 @@ const GoalsSummary: React.FC<IGoalsSummaryProps> = ({
         {goalsData && analyticsData && (
           <Col span={24}>
             <Card title="Goals" bordered={false}>
-              <Row justify="space-between" align="middle">
+              <Row justify="space-between" align="middle" style={{ margin: '0.3rem 0' }}>
                 <Col>
                   <Typography.Text className="text-mute">Reach</Typography.Text>
                   <h1>{goalsData.reach}</h1>
+                </Col>
+                <Col>
+                  <GaugeChart
+                    style={{ fontWeight: "400", width: "80%" }}
+                    nrOfLevels={32}
+                    textColor="black"
+                    animate={false}
+                    arcsLength={[percentage, 1 - percentage]}
+                    colors={[getColor("peach"), "#E5E5EF"]}
+                    percent={percentage}
+                    arcPadding={0.02}
+                  />
                 </Col>
                 <Col>
                   <Typography.Text style={{ color: getColor("red") }}>
@@ -38,18 +50,6 @@ const GoalsSummary: React.FC<IGoalsSummaryProps> = ({
                   </Typography.Text>
                   <h1>{remaining ? remaining : "Unknown"}</h1>
                 </Col>
-              </Row>
-              <Row justify="center">
-                <GaugeChart
-                  nrOfLevels={32}
-                  textColor="black"
-                  animate={false}
-                  arcsLength={[percentage, 1 - percentage]}
-                  colors={[getColor("blue"), "#E5E5EF"]}
-                  percent={percentage}
-                  arcPadding={0.02}
-                  style={{ width: "50%" }}
-                />
               </Row>
             </Card>
           </Col>

@@ -22,10 +22,6 @@ const ContentCalendar = () => {
       setSelectedPost(null);
     }
   }, [scheduledPosts, sidebarVisible]);
-  
-  const onPanelChange = (value: Dayjs, mode: string) => {
-    console.log(value.format('YYYY-MM-DD'), mode);
-  };
 
   const showSidebar = (post: any) => {
     setSelectedPost(post);
@@ -47,13 +43,13 @@ const ContentCalendar = () => {
     if (posts && posts.length > 0) {
       return posts.map(post => ({
         content: (
-          <Space direction="vertical">
+          <Space direction="vertical" style={{ width: '94%', height: 'auto' }}>
             <Row align="middle">
               <Clock style={{ marginRight: '1rem' }}/>
               {renderTime(post.scheduled_time)}
             </Row>
-            {post.caption || 'Scheduled post'}
             <Image style={{ borderRadius: '15px' }} preview={false} src={post.media[0]} alt="Image"/>
+            {post.caption || 'Scheduled post'}
             <Space direction="vertical">
               {post.hashtags?.map((tag: string, index: number) => (
                 <React.Fragment key={index}>
@@ -95,7 +91,7 @@ const ContentCalendar = () => {
 
   return (
     <div>
-      <Calendar style={{ margin: '2rem', background: 'none' }} cellRender={dateCellRender} onPanelChange={onPanelChange} />
+      <Calendar style={{ margin: '2rem', background: 'none', alignItems: 'center' }} cellRender={dateCellRender} />
       {selectedPost && <PostDetails selectedPost={selectedPost} sidebarVisible={sidebarVisible} closeSidebar={closeSidebar} />}
     </div>
   );

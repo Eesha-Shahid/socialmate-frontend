@@ -26,10 +26,22 @@ const MilestonesSummary: React.FC<IMilestonesSummaryProps> = ({
         {milestonesData && analyticsData && (
           <Col span={24}>
             <Card title="Milestones" bordered={false}>
-              <Row justify="space-between" align="middle">
+              <Row justify="space-between" align="middle" style={{ margin: '0.4rem 0' }}>
                 <Col>
                   <Typography.Text className="text-mute">Reach</Typography.Text>
                   <h1>{milestonesData.reach}</h1>
+                </Col>
+                <Col>
+                  <GaugeChart
+                    style={{ fontWeight: "500", width: "80%" }}
+                    nrOfLevels={2}
+                    textColor="black"
+                    animate={false}
+                    arcsLength={[percentage, 1 - percentage]}
+                    colors={[getColor("peach"), "#E5E5EF"]}
+                    percent={percentage}
+                    arcPadding={0.02}
+                  />
                 </Col>
                 <Col>
                   <Typography.Text style={{ color: getColor("red") }}>
@@ -37,18 +49,6 @@ const MilestonesSummary: React.FC<IMilestonesSummaryProps> = ({
                   </Typography.Text>
                   <h1>{remaining ? remaining : "Unknown"}</h1>
                 </Col>
-              </Row>
-              <Row justify="center">
-                <GaugeChart
-                  style={{ fontWeight: "500", width: "50%" }}
-                  nrOfLevels={2}
-                  textColor="black"
-                  animate={false}
-                  arcsLength={[percentage, 1 - percentage]}
-                  colors={[getColor("blue"), "#E5E5EF"]}
-                  percent={percentage}
-                  arcPadding={0.02}
-                />
               </Row>
             </Card>
           </Col>

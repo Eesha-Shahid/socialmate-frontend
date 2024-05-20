@@ -4,6 +4,10 @@ import TextArea from 'antd/es/input/TextArea';
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 import { FaceHappy } from 'akar-icons';
+import { useSelector } from 'react-redux';
+import { SchedulerHubSelector } from '@/redux/reducers';
+import { useAppDispatch } from '@/redux/store';
+import { generateCaption } from '@/redux/actions/schedulerHubAction';
 
 const { Text } = Typography;
 

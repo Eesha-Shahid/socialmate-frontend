@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Divider, Row, Switch, Typography, Avatar, Space } from "antd";
-import Icon, { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+import Icon from "@ant-design/icons";
 import { IIntegrationCardProps } from "./types";
 import { capitalize, renderDate, renderTime } from "@/utils";
 import { Clock, Plus, TrashCan } from "akar-icons";

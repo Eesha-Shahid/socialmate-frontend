@@ -8,6 +8,7 @@ const color: IColor = {
   blue: '#5287F1',
   pink: '#FF4EA3',
   grey: '#666666',
+  peach: '#D96570',
   lightGrey: '#F3F4F6'
 }
 

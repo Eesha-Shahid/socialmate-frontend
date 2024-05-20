@@ -37,7 +37,7 @@ const AnalyticsSummary: React.FC<IAnalyticsSummaryProps> = ({
             },
             { title: "Reach", data: data.reach, icon: ReachIcon },
           ].map((item, index) => (
-            <Col span={index == 0 ? 9 : 5} key={index}>
+            <Col span={index == 0 ? 9: 5} key={index}>
               <AnalyticsCard
                 title={item.title}
                 data={item.data}

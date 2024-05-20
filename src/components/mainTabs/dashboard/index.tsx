@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import InstagramDashboard from "./instagram";
-import { Avatar, Col, Row, Space, Typography } from "antd";
+import { Avatar, Button, Col, Row, Space, Typography } from "antd";
 import { InstagramIcon, FacebookIcon, RedditIcon } from "@/assets/icons";
 import Icon, { UserOutlined } from "@ant-design/icons";
-import { AuthSelector, IntegrationsSelector } from "@/redux/reducers";
+import { AuthSelector } from "@/redux/reducers";
 import { useSelector } from "react-redux";
 const Dashboard: React.FC = () => {
 
   const { user } = useSelector(AuthSelector);
-  const { integrations } = useSelector(IntegrationsSelector);
-  const [selectedAvatars, setSelectedAvatars] = useState<number[]>([]);
+  const [selectedAvatars, setSelectedAvatars] = useState<number[]>([2]);
 
   const handleAvatarClick = (index: number) => {
     setSelectedAvatars((prevSelected) =>
@@ -69,21 +68,21 @@ const Dashboard: React.FC = () => {
   const renderTopBar = () => {
     return (
       <>
-        <Col span={20}>
+        <Col span={19}>
           <Typography.Title className="gradient-text">
             Hello {user?.username}
           </Typography.Title>
         </Col>
         <Col span={4}>
-        <Row justify="center" align="middle" style={{ height: '200px' }}>
-          <Col>
-            <Avatar.Group size="large">
-              {renderAvatar(1, FacebookIcon)}
-              {renderAvatar(2, InstagramIcon)}
-              {renderAvatar(3, RedditIcon)}
-            </Avatar.Group>
-          </Col>
-        </Row>
+          <Row justify="center" align="middle" style={{ height: '120px' }}>
+            <Col>
+              <Avatar.Group size="large">
+                {renderAvatar(1, FacebookIcon)}
+                {renderAvatar(2, InstagramIcon)}
+                {renderAvatar(3, RedditIcon)}
+              </Avatar.Group>
+            </Col>
+          </Row>
         </Col>
       </>
     );

@@ -34,6 +34,9 @@ const instagramSummarySlice = createSlice({
     getAnalyticsSummaryFailure: (state) => {
       state.analyticsSummaryLoading = false;
     },
+    setAnalyticsSummaryLoading: (state, { payload }: PayloadAction<any>) => {
+      state.analyticsSummaryLoading = payload;
+    },
     getScheduledPostSummarySuccess: (
       state,
       { payload }: PayloadAction<IUpcomingPostsSummary>
@@ -44,6 +47,9 @@ const instagramSummarySlice = createSlice({
     },
     getScheduledPostSummaryFailure: (state) => {
       state.upcomingPostsLoading = false;
+    },
+    setScheduledPostsLoading: (state, { payload }: PayloadAction<any>) => {
+      state.upcomingPostsLoading = payload;
     },
     getAccountDetailsSummarySuccess: (
       state,
@@ -56,6 +62,9 @@ const instagramSummarySlice = createSlice({
     getAccountDetailsSummaryFailure: (state) => {
       state.accountDetailsSummaryLoading = false;
     },
+    setAccountDetailsSummaryLoading: (state, { payload }: PayloadAction<any>) => {
+      state.accountDetailsSummary = payload;
+    },
     getProfileViewsSummarySuccess: (
       state,
       { payload }: PayloadAction<IProfileViewsSummary>
@@ -66,6 +75,9 @@ const instagramSummarySlice = createSlice({
     },
     getProfileViewsSummarySFailure: (state) => {
       state.profileViewsSummaryLoading = false;
+    },
+    setProfileViewsSummaryLoading: (state, { payload }: PayloadAction<any>) => {
+      state.profileViewsSummaryLoading = payload;
     },
     getAudienceInsightsSummarySuccess: (
       state,
@@ -78,6 +90,9 @@ const instagramSummarySlice = createSlice({
     getAudienceInsightsSummarySFailure: (state) => {
       state.audienceInsightsSummaryLoading = false;
     },
+    setAudienceInsightsSummaryLoading: (state, { payload }: PayloadAction<any>) => {
+      state.audienceInsightsSummaryLoading = payload;
+    },
     getCampaignSummarySuccess: (
       state,
       { payload }: PayloadAction<ICampaignSummary>
@@ -88,6 +103,9 @@ const instagramSummarySlice = createSlice({
     },
     getCampaignSummarySFailure: (state) => {
       state.campaignSummaryLoading = false;
+    },
+    setCampaignSummaryLoading: (state, { payload }: PayloadAction<any>) => {
+      state.campaignSummaryLoading = payload;
     },
     getMilestonesSummarySuccess: (
       state,
@@ -100,6 +118,9 @@ const instagramSummarySlice = createSlice({
     getMilestonesySummaryFailure: (state) => {
       state.milestonesSummaryLoading = false;
     },
+    setMilestonesySummaryLoading: (state, { payload }: PayloadAction<any>) => {
+      state.milestonesSummaryLoading = payload;
+    },
     getGoalsSummarySuccess: (
       state,
       { payload }: PayloadAction<IGoalsSummary>
@@ -111,6 +132,9 @@ const instagramSummarySlice = createSlice({
     getGoalsSummaryFailure: (state) => {
       state.goalsSummaryLoading = false;
     },
+    setGoalsSummaryLoading: (state, { payload }: PayloadAction<any>) => {
+      state.goalsSummaryLoading = payload;
+    },
     SummaryReset: () => {
       return initialState;
     },
@@ -120,20 +144,28 @@ const instagramSummarySlice = createSlice({
 export const {
   getAnalyticsSummarySuccess,
   getAnalyticsSummaryFailure,
+  setAnalyticsSummaryLoading,
   getScheduledPostSummarySuccess,
   getScheduledPostSummaryFailure,
+  setScheduledPostsLoading,
   getAccountDetailsSummarySuccess,
   getAccountDetailsSummaryFailure,
+  setAccountDetailsSummaryLoading,
   getProfileViewsSummarySuccess,
   getProfileViewsSummarySFailure,
+  setProfileViewsSummaryLoading,
   getAudienceInsightsSummarySuccess,
   getAudienceInsightsSummarySFailure,
+  setAudienceInsightsSummaryLoading,
   getCampaignSummarySuccess,
   getCampaignSummarySFailure,
+  setCampaignSummaryLoading,
   getMilestonesSummarySuccess,
   getMilestonesySummaryFailure,
+  setMilestonesySummaryLoading,
   getGoalsSummarySuccess,
-  getGoalsSummaryFailure
+  getGoalsSummaryFailure,
+  setGoalsSummaryLoading
 } = instagramSummarySlice.actions;
 
 export default instagramSummarySlice.reducer;

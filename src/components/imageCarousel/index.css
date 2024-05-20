@@ -16,3 +16,15 @@
 .ant-carousel .slick-slider {
     /* position: absolute !important; */
 }
+
+.single-image-gallery .ant-image {
+    width: 60% !important;
+}
+
+.single-image-gallery .ant-image-mask, .image-gallery .ant-image-mask{
+    top: -34px !important;
+}
+
+.image-gallery .ant-image-mask{
+    width: 96% !important;
+}

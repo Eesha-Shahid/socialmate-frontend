@@ -10,16 +10,16 @@ const schedulerHubSlice = createSlice({
   name: "schedulerHub",
   initialState,
   reducers: {
-    generateCaptionSuccess: (
-        state,
-        { payload }: PayloadAction<any>
-    ) => {
+    generateCaptionSuccess: ( state, { payload }: PayloadAction<any>) => {
       state.generatedCaptionLoading = true;
       state.generatedCaption = payload;
       state.generatedCaptionLoading = false;
     },
     generateCaptionFailure: (state) => {
       state.generatedCaptionLoading = false;
+    },
+    setGeneratedCaptionLoading: (state, { payload }: PayloadAction<any>) => {
+      state.generatedCaptionLoading = payload;
     },
     SchedulerHubReset: () => {
       return initialState;
@@ -30,7 +30,8 @@ const schedulerHubSlice = createSlice({
 export const {
     generateCaptionSuccess,
     generateCaptionFailure,
-    SchedulerHubReset
+    SchedulerHubReset,
+    setGeneratedCaptionLoading
 } = schedulerHubSlice.actions;
 
 export default schedulerHubSlice.reducer;

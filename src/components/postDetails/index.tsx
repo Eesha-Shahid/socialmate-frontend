@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Space, Drawer, Typography, Divider, Row, Col, Select, Button } from 'antd';
+import { Avatar, Space, Drawer, Typography, Divider, Row, Col, Select, Button,Image } from 'antd';
 import type {SelectProps} from 'antd';
 import { FacebookIcon, InstagramMediumIcon, RedditIcon } from "@/assets/icons";
 import { Calendar as CalendarIcon, Clock } from "akar-icons";
@@ -191,6 +191,15 @@ const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, 
         {selectedPost && (
           <div style={{ padding: '1rem' }}>
             <ImageCarousel media={selectedPost.media}/>
+            {/* <div className="gallery">
+              {
+                selectedPost.media.map((url: string, index: number) => (
+                  <figure key={index} className="image-card">
+                    <Image src={url} alt={`Media ${index + 1}`} />
+                  </figure>
+                ))
+              }
+            </div> */}
             <Divider />
             <Title level={4}>Platforms</Title>
             {renderPlatforms(selectedPost.platform)}

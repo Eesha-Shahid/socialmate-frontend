@@ -9,6 +9,7 @@ const UnauthLayout: React.FC<UnauthLayoutProps> = ({ children }) => {
 
   return (
     <Layout style={{ background: '#F7F8FC', fontFamily: 'Poppins', marginTop: '1rem', minHeight: "97vh" }}>
+      <div className="unauth-gradient-purple"></div>      
       <Header style={{ height: '65px', background: 'none', justifyContent: 'space-between', alignItems: 'center' }}>
         <UnauthNavbar/>
       </Header>
@@ -16,6 +17,7 @@ const UnauthLayout: React.FC<UnauthLayoutProps> = ({ children }) => {
         <UnauthForm/>
       </Content>
       <Footer />
+      <div className="unauth-gradient-blue"></div>
     </Layout>
   );
 };

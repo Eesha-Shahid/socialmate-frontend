@@ -4,12 +4,12 @@ import { useAppDispatch } from "@/redux/store";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button, Table, Tag, Typography, type TableColumnsType, type TableProps } from 'antd';
-import { Country, Gender, Industry } from "@/types";
+import { Country, Gender } from "@/types";
 import { getColor } from "@/colors";
+import dynamic from "next/dynamic";
 
 const InfluencerCampaign:React.FC<IInfluencerCampaignProps> = () => {
   const dispatch = useAppDispatch();
-
   const { influencerList, influencers } = useSelector(InfluencerCampaignSelector);
 
   useEffect(()=> {
@@ -81,15 +81,6 @@ const InfluencerCampaign:React.FC<IInfluencerCampaignProps> = () => {
       defaultSortOrder: 'descend',
       sorter: (a, b) => a.age - b.age,
       sortDirections: ['descend'],
-    },
-    {
-      title: 'Industry',
-      dataIndex: 'industry',
-      filters: Object.values(Industry).map(industry => ({
-        text: industry,
-        value: industry,
-      })),
-      onFilter: (value, record) => record.industry.indexOf(value as string) === 0,
     },
     {
       title: 'Industry',
