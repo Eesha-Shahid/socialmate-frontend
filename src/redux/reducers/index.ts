@@ -7,6 +7,7 @@ import schedulerHubReducer, { SchedulerHubSelector } from "./schedulerHubReducer
 import alertReducer, { AlertSelector } from "./alertReducer";
 import integrationsReducer, { IntegrationsSelector } from "./integrationsReducer";
 import influencerCampaignReducer, { InfluencerCampaignSelector } from "./influencerCampaignReducer";
+import adCampaignReducer, { AdCampaignSelector } from "./adCampaignReducer";
 
 export const appReducer = combineReducers({
   auth: authReducer,
@@ -16,7 +17,8 @@ export const appReducer = combineReducers({
   schedulerHub: schedulerHubReducer,
   alert: alertReducer,
   integrations: integrationsReducer,
-  influencerCampaign: influencerCampaignReducer
+  influencerCampaign: influencerCampaignReducer,
+  adCampaign: adCampaignReducer
 });
 
 export {
@@ -28,6 +30,7 @@ export {
     AlertSelector,
     IntegrationsSelector,
     InfluencerCampaignSelector,
+    AdCampaignSelector
 }
 
 export type RootState = ReturnType<typeof appReducer>;

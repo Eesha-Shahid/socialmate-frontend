@@ -1,7 +1,7 @@
 import { DeleteFilled } from "@ant-design/icons";
 import { TableProps, Tag, Space } from "antd";
 
-export const paymentMethodColumns: TableProps<DataType>["columns"] = [
+export const paymentMethodColumns: TableProps<PaymentDataType>["columns"] = [
   {
     title: "Holder Name",
     dataIndex: "holder_name",
