@@ -12,17 +12,21 @@ const alertSlice = createSlice({
   initialState,
   reducers: {
     setAlert: (state, { payload }: PayloadAction<IAlert>) => {
-      const NOT_FOUND = -1;
-      const currentState = current(state);
-      console.log(currentState)
-      state.alerts = state.alerts ? [payload, ...state.alerts] : [payload];
-      // const sameMessageIndex = currentState.findIndex((alert) => {
-      //   return alert.message === payload.message;
-      // });
-      // if (sameMessageIndex === NOT_FOUND) {
-      //   state.push(payload);
-      // }
-    },
+      if (!state.alerts) {
+          state.alerts = [payload];
+      } else {
+          // Check if the message text already exists
+          const existingIndex = state.alerts.findIndex(alert => alert.message === payload.message);
+          
+          // If the message text doesn't exist, add the alert
+          if (existingIndex === -1) {
+              state.alerts = [payload, ...state.alerts];
+          } else {
+              // If the message text exists, replace the existing alert with the new one
+              state.alerts[existingIndex] = payload;
+          }
+      }
+    },   
     removeAlert: (state, { payload }: PayloadAction<Pick<IAlert, "message">>) => {
       state.alerts = state.alerts?.filter((alert) => {
         return alert.message !== payload.message;

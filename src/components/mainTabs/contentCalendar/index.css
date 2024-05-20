@@ -7,14 +7,6 @@
     align-items: center;
 }
 
-/* .ant-picker-calendar-year-select:not(.ant-radio-button-wrapper:first-child):is(.ant-radio-button-wrapper-checked){
-    margin-right: 45rem !important;
-} */
-
-/* .ant-picker-calendar-month-select{
-    margin-right: 35rem !important;
-} */
-
 .ant-picker-calendar-header .ant-select-selector {
     border: none !important;
     background: none !important;
@@ -123,9 +115,9 @@
 }
 
 .ant-picker-calendar-date-content {
-    padding: 10px 5px !important;
+    /* padding: 10px 5px !important; */
     line-height: 0 !important;
-    height: 25rem !important;
+    height: auto !important;
     width: 12rem !important; 
 }
 

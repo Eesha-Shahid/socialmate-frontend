@@ -20,6 +20,7 @@ import { useAppDispatch } from "@/redux/store";
 import { forgotPassword, login, register } from "@/redux/actions/authAction";
 import { useSelector } from "react-redux";
 import { AuthSelector } from "@/redux/reducers";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 const { Title, Text } = Typography;
 
@@ -27,7 +28,6 @@ const UnauthForm = () => {
 
   const dispatch = useAppDispatch();
   const [currentLabel, setCurrentLabel] = useState<string>("Sign In");
-
   const { loading } = useSelector(AuthSelector);
 
   const switchForm = (newLabel: string) => {
@@ -139,18 +139,18 @@ const UnauthForm = () => {
   const illustrationData = getIllustrationData();
 
   return (
-    <Row style={{ alignItems: 'center', justifyContent: 'center'}} gutter={[16, 16]}>      
+    <Row style={{ alignItems: 'center', justifyContent: 'center', marginTop: '3rem'}} gutter={[16, 16]}>      
       <Illustration heading={illustrationData.heading} subheading={illustrationData.subheading} />
       <Col
         span={8}
         style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
-        <Space size="middle" direction="vertical" style={{ width: "100%" }}>
-          <Col span={24}>
-            <Title level={2} style={{ textAlign: "center" }}>
+        <Col span={12} style={{ display: 'block' }}>
+            <Title level={2} className="infinite-typewriter">
               {currentLabel}
             </Title>
           </Col>
+        <Space size="middle" direction="vertical" style={{ width: "100%" }}>
           {(currentLabel == 'Sign Up' || currentLabel == 'Sign In') && (
             <>
               <Col span={24}>

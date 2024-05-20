@@ -4,7 +4,9 @@ import { ICampaignProps } from "./types"
 
 const Campaign:React.FC<ICampaignProps> = () => {
     return (
-      <InfluencerCampaign data={null} dataLoading={false}/>
+      <div style={{ margin: '2rem' }}>
+        <InfluencerCampaign data={null} dataLoading={false}/>
+      </div>
     )
 }
 

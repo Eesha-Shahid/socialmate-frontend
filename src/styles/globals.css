@@ -119,6 +119,26 @@ body {
   font-style: italic;
 } */
 
+.unauth-gradient-purple {
+  width: 30%;
+  height: 30%;
+  top: -50px;
+  left: -130px;
+  background: radial-gradient(circle, rgba(154, 114, 203, 0.54) 54%, rgba(154, 114, 203, 0.44) 44%, rgba(154, 114, 203, 0.34) 34%, rgba(154, 114, 203, 0.24) 24%, rgba(154, 114, 203, 0) 0%);
+  filter: blur(90.17px);
+  position: absolute;
+}
+
+.unauth-gradient-blue {
+  position: absolute;
+  width: 20%;
+  height: 10%;
+  filter: blur(110px);
+  bottom: 0px;
+  left: 40%;
+  background: radial-gradient(circle, #5082ED 54%, #5082ED 44%, #5082ED 34%, #5082ED 24%, #5082ED 0%);
+}
+
 .ant-radio-group-outline{
   border-radius: 0.5rem !important;
   background: #FFFFFF;
@@ -331,6 +351,7 @@ input[type='file'] {
 }
 
 /* Components */
+@import url(../components/layouts/unauthLayout/unauthForm/index.css);
 @import url(../components/layouts/authLayout/navbar/index.css);
 @import url(../components/mainTabs/contentCalendar/index.css);
 @import url(../components/imageCarousel/index.css);
@@ -340,3 +361,4 @@ input[type='file'] {
 @import url(../components/integrationCard/index.css);
 @import url(../components/mainTabs/subscriptions/index.css);
 @import url(../components/influencerCampaign/index.css);
+@import url(../components/postDetails/index.css);

@@ -13,7 +13,7 @@ const { Title, Text } = Typography;
 const AiAssistant: React.FC<IAiAssistantProps> = ({ visible, onClose, onSelect }) => {
   const [inputValue, setInputValue] = useState('');
   const [selectedSuggestion, setSelectedSuggestion] = useState<string | null>(null);
-
+  
   const dispatch = useAppDispatch();
   const { generatedCaption, generatedCaptionLoading } = useSelector(SchedulerHubSelector);
 
