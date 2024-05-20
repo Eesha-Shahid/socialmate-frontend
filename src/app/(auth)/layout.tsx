@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { Col, Layout, Row, Image, Typography, Space, Button, Dropdown, MenuProps } from 'antd';
-import { Bell, Gear, Moon, Person } from 'akar-icons';
+import { Gear, Moon, Person, Question } from 'akar-icons';
 import { logout } from '@/redux/actions/authAction';
 import { useAppDispatch } from '@/redux/hooks';
 import { useRouter } from 'next/navigation';
@@ -24,10 +24,6 @@ const AuthLayoutTwo: React.FC<AuthLayoutTwoProps> = ({ children }) => {
       label: <Link href="/profile">View Profile</Link>,
       key: '0',
     },
-    // {
-    //   label: <a href="https://www.aliyun.com">Option 2</a>,
-    //   key: '1',
-    // },
     {
       type: 'divider',
     },
@@ -52,7 +48,8 @@ const AuthLayoutTwo: React.FC<AuthLayoutTwoProps> = ({ children }) => {
       <Button
         style={{ color: "black" }}
         type="text"
-        icon={<Bell strokeWidth={1.5} />}
+        icon={<Question strokeWidth={1.5} />}
+        onClick={()=> router.push('/help')}
       />
       <Dropdown menu={{ items }} trigger={['click']}>
         <Button

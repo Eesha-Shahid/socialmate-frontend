@@ -24,6 +24,8 @@ import StepThree from "./mainTabs/schedulerHub/stepThree";
 import StepTwo from "./mainTabs/schedulerHub/stepTwo";
 import Influencers from "./influencers";
 import Ads from "./ads";
+import Feedbacks from "./feedback";
+import Rate from "./rate";
 
 export {
     Navbar,
@@ -51,5 +53,7 @@ export {
     IntegrationCard,
     PostDetails,
     Influencers,
-    Ads
+    Ads,
+    Feedbacks,
+    Rate
 }

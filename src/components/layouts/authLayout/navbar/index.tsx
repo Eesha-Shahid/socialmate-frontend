@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Button, Image, Tabs, Space, Row, Col, Typography, Dropdown, MenuProps } from "antd";
-import { Bell, Gear, Moon, Person } from "akar-icons";
+import { Gear, Moon, Person, Question } from "akar-icons";
 import TabPane from "antd/es/tabs/TabPane";
 import { logout } from "@/redux/actions/authAction";
 import { useAppDispatch } from "@/redux/store";
@@ -23,10 +23,6 @@ const Navbar: React.FC = () => {
       label: <Link href="/profile">View Profile</Link>,
       key: '0',
     },
-    // {
-    //   label: <a href="https://www.aliyun.com">Option 2</a>,
-    //   key: '1',
-    // },
     {
       type: 'divider',
     },
@@ -77,7 +73,8 @@ const Navbar: React.FC = () => {
       <Button
         style={{ color: "black" }}
         type="text"
-        icon={<Bell strokeWidth={1.5} />}
+        icon={<Question strokeWidth={1.5} />}
+        onClick={()=> router.push('/help')}
       />
       <Dropdown menu={{ items }} trigger={['click']}>
         <Button
