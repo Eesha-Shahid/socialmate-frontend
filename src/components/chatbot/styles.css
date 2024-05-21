@@ -1,0 +1,102 @@
+
+  
+  .chat-icon {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%); 
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .chat-container {
+    position: fixed;
+    bottom: 130px;
+    right: 40px;
+    width: 450px;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1.5px solid white;
+    box-shadow: 5px 5px 15px 15px rgba(42, 61, 123, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .chat-header {
+    background: linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%); 
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+  }
+  
+  .chat-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+  }
+
+  .chat-body::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .chat-body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%);
+    border-radius: 4px;
+  }
+  
+  .chat-body::-webkit-scrollbar-thumb:hover {
+    background: #C8C8C8;
+    opacity: 0.5;
+  }
+  
+  .chat-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  
+  textarea {
+    width: calc(100% - 20px);
+    margin: 10px;
+    padding: 15px 20px 0px 20px;
+    resize: none;
+    background: #fff;
+    border: 0.5px solid #C8C8C8;
+    border-radius: 20px;
+    font-family: 'Poppins';
+
+  }
+
+  textarea:focus {
+    border: 2px solid #C8C8C8;
+    outline: none;
+  }
+  
+  .send-btn {
+    margin: 10px;
+    border-radius: 15px !important;
+    height:40px !important;
+  }
+
+  .query {
+    background-color: #F7F8FC;
+    padding: 14px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .response {
+    background-color: #F7F8FC;
+    padding: 14px;
+    border-radius: 20px;
+  }
+  
