@@ -1,6 +1,6 @@
 'use client'
 import { Feedbacks, Rate } from "@/components";
-import { Alert, Tabs, Typography } from "antd";
+import { Tabs, Typography } from "antd";
 const { Title } = Typography;
 
 const Help:React.FC = () => {

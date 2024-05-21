@@ -1,5 +1,5 @@
 import { TextWithGradientBorder } from "components"
-import { Row, Col, Typography, Carousel, Space } from "antd"
+import { Row, Col, Typography, Carousel, Space, Button } from "antd"
 import { useSelector } from "react-redux";
 import { SubscriptionSelector } from "@/redux/reducers";
 import ReactCreditCards from "react-credit-cards-2";
@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { addPaymentMethod, getPaymentMethods } from "@/redux/actions/subscriptionAction";
 import { useAppDispatch } from "@/redux/store";
 import { Plus } from "akar-icons";
+import { PlusCircleFilled } from "@ant-design/icons";
 
 const {Text} = Typography;
 

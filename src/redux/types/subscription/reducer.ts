@@ -11,6 +11,7 @@ export interface IPaymentMethod {
 }
 
 export interface ISubscriptionHistory extends Pick<IPaymentMethod, 'holder_name' | 'card_number'> {
+    _id: string;
     amount: number;
     status: SubscriptionStatus;
     expiration_date: Date;

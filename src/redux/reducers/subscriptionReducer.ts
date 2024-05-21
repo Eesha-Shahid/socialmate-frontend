@@ -7,6 +7,9 @@ const initialState: SubscriptionState = {
   paymentMethodsLoading: false,
   subscriptionHistory: null,
   subscriptionHistoryLoading: false,
+  addPaymentMethodLoading: false,
+  addSubscriptionLoading: false,
+  cancelSubscriptionLoading: false
 };
 
 const subscriptionSlice = createSlice({
@@ -34,11 +37,14 @@ const subscriptionSlice = createSlice({
         });
       }
     },
-    addPaymentMethod: (state, { payload }: PayloadAction<IPaymentMethod>) => {
+    addPaymentMethodSuccess: (state, { payload }: PayloadAction<IPaymentMethod>) => {
       if (!state.paymentMethods) {
         state.paymentMethods = [];
       }
       state.paymentMethods.push(payload);
+    },
+    setAddPaymentMethodLoading: (state, { payload }: PayloadAction<any>) => {
+      state.addPaymentMethodLoading = payload;
     },
     getSubscriptionHistorySuccess: (
       state,
@@ -50,6 +56,25 @@ const subscriptionSlice = createSlice({
     getSubscriptionHistoryFailure: (state) => {
       state.subscriptionHistoryLoading = false;
     },
+    addSubscriptionSuccess: (state, { payload }: PayloadAction<ISubscriptionHistory>) => {
+      if (!state.subscriptionHistory) {
+        state.subscriptionHistory = [];
+      }
+      state.subscriptionHistory.unshift(payload);
+    },    
+    cancelSubscriptionSuccess: (state, { payload }: PayloadAction<ISubscriptionHistory>) => {
+      if (state.subscriptionHistory) {
+        state.subscriptionHistory = state.subscriptionHistory.map(subscription =>
+          subscription._id === payload._id ? { ...subscription, status: 'Inactive' } : subscription
+        ) as ISubscriptionHistory[];
+      }
+    },
+    setAddSubscriptionLoading: (state, { payload }: PayloadAction<any>) => {
+      state.addSubscriptionLoading = payload;
+    },
+    setCancelSubscriptionLoading: (state, { payload }: PayloadAction<any>) => {
+      state.cancelSubscriptionLoading = payload;
+    },
     SubscriptionReset: () => {
       return initialState;
     },
@@ -59,8 +84,14 @@ const subscriptionSlice = createSlice({
 export const { 
   getPaymentMethodsSuccess, 
   getPaymentMethodsFailure,
+  addPaymentMethodSuccess,
   getSubscriptionHistorySuccess,
-  getSubscriptionHistoryFailure
+  getSubscriptionHistoryFailure,
+  addSubscriptionSuccess,
+  cancelSubscriptionSuccess,
+  setAddPaymentMethodLoading,
+  setAddSubscriptionLoading,
+  setCancelSubscriptionLoading
 } =
   subscriptionSlice.actions;
 

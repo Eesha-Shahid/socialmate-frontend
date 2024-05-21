@@ -1,10 +1,11 @@
 import { getColor } from "@/colors";
-import { getPaymentMethods, getSubscriptionHistry, setDefaultPaymentMethod } from "@/redux/actions/subscriptionAction";
+import { addSubscription, cancelSubscription, getPaymentMethods, getSubscriptionHistry, setDefaultPaymentMethod } from "@/redux/actions/subscriptionAction";
 import { SubscriptionSelector } from "@/redux/reducers";
 import { useAppDispatch } from "@/redux/store";
-import { SubscriptionStatus } from "@/types";
+import { PlusCircleFilled } from "@ant-design/icons";
 import { Button, Carousel, Col, Row, Table, Tag, Typography } from "antd";
 import moment from "moment";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ReactCreditCards from "react-credit-cards-2";
 import { useSelector } from "react-redux";
@@ -12,6 +13,7 @@ const { Title } = Typography;
 
 const Subscriptions = () => {
   const dispatch = useAppDispatch();
+  const router= useRouter();
   const [selectedCardIndex, setSelectedCardIndex] = useState(0);
   const { paymentMethods, subscriptionHistory } = useSelector(SubscriptionSelector);
 
@@ -23,6 +25,14 @@ const Subscriptions = () => {
   const handleSetDefault = (cardId: string) => {
     dispatch(setDefaultPaymentMethod({ cardId }));
   }
+
+  const handleCancel = () => {
+    dispatch(cancelSubscription());
+  };
+
+  const handleSubscribe = () => {
+    dispatch(addSubscription());
+  };
 
   const actualPaymentMethod = paymentMethods?.map(({ default: isDefault, exp_month, exp_year, ...rest }, index) => ({
     ...rest,
@@ -90,21 +100,33 @@ const Subscriptions = () => {
       key: '4',
     },
     {
-      title: 'Status',
+      title: 'Action',
       dataIndex: 'status',
-      key: '5',
-      render: (status: SubscriptionStatus) => (
-        <Tag color={status == 'Active' ? getColor('green') : getColor('red')} key={status}>
-          {status.toUpperCase()}
-        </Tag>
-      )
-    }
+      key: '6',
+      render: (status: any) => (
+        status === 'Active' ? (
+          <Button onClick={() => handleCancel()}>Cancel</Button>
+        ) : (
+          <Tag color={getColor('red')} key={status}>
+            {status.toUpperCase()}
+          </Tag>
+        )
+      ),
+    },
   ];
+
+  const allInactive = subscriptionHistory?.every(subscription => subscription.status !== 'Active');
   
   return (
     <Row gutter={[16, 16]}>
       <Col span={18}>
-        <Title className="gradient-text">Your Payment Methods</Title>
+        <Row>
+          <Title className="gradient-text">Your Payment Methods</Title>
+          <PlusCircleFilled 
+            onClick={()=> router.push('/payment')}
+            style={{ fontSize: '2rem', color: getColor('red'), marginLeft: '2rem' }}
+          />
+        </Row>
         <Table dataSource={actualPaymentMethod} columns={paymentCol} />
       </Col>
       <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} span={6}>
@@ -122,7 +144,10 @@ const Subscriptions = () => {
         </Carousel>
       </Col>
       <Col span={24}>
-        <Title className="gradient-text">Your Subscription History</Title>
+        <Row align='middle'>
+          <Title className="gradient-text">Your Subscription History</Title>
+          {allInactive && <Button onClick={() => handleSubscribe()} type="primary">Subscribe</Button>}
+        </Row>
         <Table dataSource={actualSubscriptionHistory} columns={subscriptionCol} />
       </Col>
     </Row>

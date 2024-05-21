@@ -5,4 +5,7 @@ export interface SubscriptionState {
     paymentMethodsLoading: boolean;
     subscriptionHistory: ISubscriptionHistory[] | null;
     subscriptionHistoryLoading: boolean;
+    addPaymentMethodLoading: boolean;
+    addSubscriptionLoading: boolean;
+    cancelSubscriptionLoading: boolean;
 }
