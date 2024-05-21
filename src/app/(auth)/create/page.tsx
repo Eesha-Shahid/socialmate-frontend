@@ -83,7 +83,7 @@ const CreateAd: React.FC<ICreateAdProps> = ({ type2 }) => {
             <Icon component={NextIcon} onClick={() => next()} />
           }
           {current === steps.length - 1 && (
-            <Button type="primary" onClick={() => router.push('/')}>
+            <Button type="primary" onClick={() => router.push('/auth')}>
               Done
             </Button>
           )}    

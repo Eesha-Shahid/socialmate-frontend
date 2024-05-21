@@ -6,15 +6,16 @@ import { useSelector } from "react-redux";
 import { Button, Table, Tag, Typography } from 'antd';
 import { getColor } from "@/colors";
 import { InfluencerColumns } from "../tableColumn/influencers";
+import { HeartFilled, HeartOutlined } from "@ant-design/icons";
 
-const Influencers:React.FC<IInfluencerCampaignProps> = () => {
+const InfluencerDiscovery:React.FC = () => {
   const dispatch = useAppDispatch();
-  const { influencerList, influencers } = useSelector(InfluencerCampaignSelector);
+  const { influencerList, influencers, influencersLoading } = useSelector(InfluencerCampaignSelector);
 
   useEffect(()=> {
     dispatch(getInfluencers());
     dispatch(getInfluencerList());
-  },[influencerList, influencers])
+  },[])
 
   const handleClick = (id: string) => {
     isInfluencerAdded(id)
@@ -42,22 +43,23 @@ const Influencers:React.FC<IInfluencerCampaignProps> = () => {
       </Button>
     ),
     action: (
-      <Button 
-        type="primary"
-        style={{ background: isInfluencerAdded(influencer._id)? getColor('red'): getColor('green')}}
-        onClick={ () => handleClick(influencer._id)}
-      >
-        {isInfluencerAdded(influencer._id) ? 'Remove from list' : 'Add to list'}
-      </Button>
-    ),
+      <>
+        {isInfluencerAdded(influencer._id) ? 
+          <HeartFilled style={{ color: getColor('red'), fontSize: '2rem' }}  onClick={() => handleClick(influencer._id)} />
+          :
+          <HeartOutlined style={{ fontSize: '2rem', strokeWidth: '1.5' }}  onClick={() => handleClick(influencer._id)} />
+        }
+      </>
+    )
   }));
 
   return (
     <>
     <Typography.Title style={{ textAlign: 'center' }} className="gradient-text">
-        Influencers
+        Influencer Discovery
     </Typography.Title>
     <Table
+      loading={influencersLoading}
       columns={InfluencerColumns}
       dataSource={tableData}
     />
@@ -65,4 +67,4 @@ const Influencers:React.FC<IInfluencerCampaignProps> = () => {
   )
 }
 
-export default Influencers;
+export default InfluencerDiscovery;

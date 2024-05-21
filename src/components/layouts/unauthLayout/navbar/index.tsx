@@ -17,7 +17,7 @@ const UnauthNavbar: React.FC = () => {
               preview={false}
               style={{ height: "55px", width: "55px", marginRight: "1rem" }}
             />
-            <Title style={{ cursor: 'pointer' }} onClick={()=> router.push('/')} level={4}>Social Mate</Title>
+            <Title style={{ cursor: 'pointer' }} onClick={()=> router.push('/auth')} level={4}>Social Mate</Title>
           </Row>
         </Col>
       </Row>
