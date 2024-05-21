@@ -9,6 +9,7 @@ interface IDemographics {
 export interface IInfluencer {
     _id: string;
     name: string;
+    username: string;
     industry: Industry[];
     demographics: IDemographics;
     follower_count: number;

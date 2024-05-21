@@ -21,6 +21,9 @@ const influencerCampaignSlice = createSlice({
     getInfluencersFailure: (state) => {
       state.influencersLoading = false;
     },
+    setInfluencersLoading: (state, { payload }: PayloadAction<any>) => {
+      state.influencersLoading = payload;
+    },
     getInfluencerListSuccess: ( state, { payload }: PayloadAction<IInfluencer[]>) => {
         state.influencerListLoading = true;
         state.influencerList = payload;
@@ -29,20 +32,20 @@ const influencerCampaignSlice = createSlice({
     getInfluencerListFailure: (state) => {
       state.influencerListLoading = false;
     },
-    addInfluencerToList: (state, { payload }: PayloadAction<IInfluencer>) => {
+    addInfluencerToListSuccess: (state, { payload }: PayloadAction<IInfluencer>) => {
       if (!state.influencerList) {
         state.influencerList = [];
       }
       state.influencerList.push(payload);
-      if (state.influencers) {
-        state.influencers = state.influencers.filter(influencer => influencer._id !== payload._id);
-      }
+      // if (state.influencers) {
+      //   state.influencers = state.influencers.filter(influencer => influencer._id !== payload._id);
+      // }
     },
-    removeInfluencerFromList: (state, { payload }: PayloadAction<IInfluencer>) => {
-      if (!state.influencers) {
-        state.influencers = [];
-      }
-      state.influencers.push(payload);
+    removeInfluencerFromListSuccess: (state, { payload }: PayloadAction<IInfluencer>) => {
+      // if (!state.influencers) {
+      //   state.influencers = [];
+      // }
+      // state.influencers.push(payload);
       if (state.influencerList) {
         state.influencerList = state.influencerList.filter(influencer => influencer._id !== payload._id);
       }
@@ -56,8 +59,11 @@ const influencerCampaignSlice = createSlice({
 export const {
     getInfluencersSuccess,
     getInfluencersFailure,
+    setInfluencersLoading,
     getInfluencerListSuccess,
     getInfluencerListFailure,
+    addInfluencerToListSuccess,
+    removeInfluencerFromListSuccess,
     influencerCampaignReset
 } = influencerCampaignSlice.actions;
 

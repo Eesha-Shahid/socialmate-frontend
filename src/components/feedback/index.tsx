@@ -13,7 +13,7 @@ const Feedbacks: React.FC = () => {
 
   const onFinish = (values: any) => {
     dispatch(submitFeedback(values.feedback))
-    router.push('/')
+    router.push('/auth')
   };
 
   return (

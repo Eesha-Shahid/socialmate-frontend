@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/utils/axiosInstace";
-import { getInfluencerListFailure, getInfluencerListSuccess, getInfluencersFailure, getInfluencersSuccess } from "../reducers/influencerCampaignReducer";
+import { addInfluencerToListSuccess, getInfluencerListFailure, getInfluencerListSuccess, getInfluencersFailure, getInfluencersSuccess, removeInfluencerFromListSuccess, setInfluencersLoading } from "../reducers/influencerCampaignReducer";
 import { UpdateInfluencerDto } from "../types/influencerCampaign/reducer";
 import { updateAlert } from "./alertAction";
 import { NotificationType } from "@/types";
@@ -10,9 +10,9 @@ export const getInfluencers = createAsyncThunk(
   async (_, thunkAPI) => {
     const { dispatch } = thunkAPI;
     try {
+      dispatch(setInfluencersLoading(true))
       const response = await axiosInstance.get(`/user/influencers`);
       dispatch(getInfluencersSuccess(response.data));
-
     } catch (err: any) {
         dispatch(getInfluencersFailure());
       if (err.response?.status === 400) {
@@ -49,7 +49,7 @@ export const addInfluencerToList = createAsyncThunk(
     const { dispatch } = thunkAPI;
     try {
       const response = await axiosInstance.post(`/user/influencer-list/add`, updateInfluencerDto);
-      dispatch(addInfluencerToList(response.data))
+      dispatch(addInfluencerToListSuccess(response.data.influencer))
       dispatch(updateAlert({ type: NotificationType.Success, message: response.data.message }))
     } catch (err: any) {
       dispatch(updateAlert({ type: NotificationType.Error, message: err.data.message }))
@@ -64,7 +64,7 @@ export const removeInfluencerFromList = createAsyncThunk(
     const { dispatch } = thunkAPI;
     try {
       const response = await axiosInstance.post(`/user/influencer-list/remove`, updateInfluencerDto);
-      dispatch(removeInfluencerFromList(response.data))
+      dispatch(removeInfluencerFromListSuccess(response.data.influencer))
       dispatch(updateAlert({ type: NotificationType.Success, message: response.data.message }))
     } catch (err: any) {
       dispatch(updateAlert({ type: NotificationType.Error, message: err.data.message }))

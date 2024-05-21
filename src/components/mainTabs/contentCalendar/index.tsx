@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { ContentCalendarSelector } from "@/redux/reducers";
 import {PostDetails, TextWithGradientBorder} from "components";
 import { renderTime } from "@/utils";
-import { Clock } from "akar-icons";
+import { Clock, DoubleCheck } from "akar-icons";
 
 const ContentCalendar = () => {
   const dispatch = useAppDispatch();
@@ -45,7 +45,11 @@ const ContentCalendar = () => {
         content: (
           <Space direction="vertical" style={{ width: '94%', height: 'auto' }}>
             <Row align="middle">
-              <Clock style={{ marginRight: '1rem' }}/>
+              {post.scheduled_time < new Date() ? (
+                  <DoubleCheck style={{ color: 'green', marginRight: '1rem' }} />
+              ) : (
+                  <Clock style={{ marginRight: '1rem' }} />
+              )}
               {renderTime(post.scheduled_time)}
             </Row>
             <Image style={{ borderRadius: '15px' }} preview={false} src={post.media[0]} alt="Image"/>

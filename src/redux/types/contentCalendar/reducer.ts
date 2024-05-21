@@ -4,7 +4,6 @@ export interface IScheduledPost {
     media_type: MediaType
     caption?: string;
     description?: string;
-    location?:string;
     subreddit?: string;
     flair_id?:string;
     flair_text?: string;
@@ -19,7 +18,6 @@ export interface CreateScheduledPostDto {
     media_type: MediaType;
     caption: string | null;
     description: string | null;
-    location:string | null;
     hashtags: string[] | [];
     tagged_accounts: string[] | [];
     subreddit?: string;

@@ -27,6 +27,7 @@ export const createScheduledPost = createAsyncThunk(
   async (createScheduledPostDto: CreateScheduledPostDto, thunkAPI) => {
     const { dispatch } = thunkAPI;
     try {
+      console.log(createScheduledPostDto);
       const formData = new FormData();
       formData.append('file', createScheduledPostDto.file); 
       const { file, ...postData } = createScheduledPostDto;

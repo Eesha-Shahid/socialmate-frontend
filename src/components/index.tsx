@@ -22,10 +22,11 @@ import PostDetails from "./postDetails";
 import InstagramDashboard from "./mainTabs/dashboard/instagram";
 import StepThree from "./mainTabs/schedulerHub/stepThree";
 import StepTwo from "./mainTabs/schedulerHub/stepTwo";
-import Influencers from "./influencers";
+import InfluencerDiscovery from "./influencerDiscovery";
 import Ads from "./ads";
 import Feedbacks from "./feedback";
 import Rate from "./rate";
+import InfluencerAnalysis from "./influencerAnalysis";
 
 export {
     Navbar,
@@ -52,7 +53,8 @@ export {
     AiAssistant,
     IntegrationCard,
     PostDetails,
-    Influencers,
+    InfluencerDiscovery,
+    InfluencerAnalysis,
     Ads,
     Feedbacks,
     Rate
