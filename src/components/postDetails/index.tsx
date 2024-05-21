@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Space, Drawer, Typography, Divider, Row, Col, Select, Button,Image } from 'antd';
-import type {SelectProps} from 'antd';
+import { Avatar, Space, Drawer, Typography, Divider, Row, Col, Select, Button,Image, DatePicker, TimePicker } from 'antd';
+import type {DatePickerProps, SelectProps, TimePickerProps} from 'antd';
 import { FacebookIcon, InstagramMediumIcon, RedditIcon } from "@/assets/icons";
 import { Calendar as CalendarIcon, Clock } from "akar-icons";
 import { IPostDetailsProps } from "./types";
@@ -11,7 +11,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { getInfluencerList } from "@/redux/actions/influencerCampaignAction";
 import { useSelector } from "react-redux";
 import { InfluencerCampaignSelector } from "@/redux/reducers";
-import { Country } from "@/types";
+import moment from "moment";
 const { Title, Text } = Typography;
 
 const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, sidebarVisible}) => {
@@ -20,7 +20,6 @@ const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, 
   const { influencerList } = useSelector(InfluencerCampaignSelector);
   const [ hashtagList, setHashtagList] = useState<any>();
   const [ tagList, setTagList] = useState<any>();
-  const [ location, setLocation] = useState<any>();
   const [modifiedPostData, setModifiedPostData] = useState<IUpdateScheduledPostData>({ _id: selectedPost._id });
 
   const handleTextChange = (fieldName: string, newText: string) => {
@@ -39,7 +38,6 @@ const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, 
       ...modifiedPostData,
       hashtags: hashtagList && hashtagList.length > 0 ? hashtagList: [],
       tagged_accounts: tagList && tagList.length > 0 ? tagList: [],
-      location: location ? location: null
     }
     dispatch(updateScheduledPost(updateData));
   };
@@ -73,20 +71,32 @@ const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, 
     )
   };
 
-  const renderDateTime = (scheduledTime: Date) => (
-    <Space direction="horizontal">
-      <CalendarIcon />
-      <TextWithGradientBorder 
-        editable={false}
-        text={new Date(scheduledTime).toLocaleDateString()}
-      />
-      <Clock />
-      <TextWithGradientBorder 
-        editable={false}
-        text={new Date(scheduledTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-      />
-    </Space>
-  );
+  const renderDateTime = (scheduledTime: Date) => {
+    const onDateChange: DatePickerProps['onChange'] = (date, dateString) => {
+      // setDateString(date)
+    };
+    
+    const onTimeChange: TimePickerProps['onChange'] = (time, timeString) => {
+      // setTimeString(time)
+    };
+
+    return (
+      <Space direction="horizontal">
+        <CalendarIcon/>
+        <DatePicker
+          // value={new Date(scheduledTime)}
+          format='YYYY-MM-DD'
+          onChange={onDateChange}
+        />
+        <Clock />
+        <TimePicker 
+            // value={moment(scheduledTime, "HH:mm:ss")}
+            format="HH:mm"
+            onChange={onTimeChange} 
+          />
+      </Space>
+    )
+  };
   
   const renderHashtags = () => {
     const handleHashtagChange = (value: string[]) => {
@@ -144,31 +154,6 @@ const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, 
     )
   }
 
-  const renderLocation = () => {
-    const handleLocationChange = (value: string) => {
-      setLocation(value)
-    };
-
-    const locationOptions: SelectProps['options'] = [];
-
-    {Object.values(Country)?.map(country => (
-      locationOptions.push({
-        value: country,
-        label: country
-      })
-    ))}
-  
-    return (
-      <Select
-        style={{ width: '100%' }}
-        placeholder="Add Location"
-        defaultValue={selectedPost.location}
-        onChange={handleLocationChange}
-        options={locationOptions}
-      />
-    )
-  }
-
   return (
     <Drawer
       width={600}
@@ -191,15 +176,6 @@ const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, 
         {selectedPost && (
           <div style={{ padding: '1rem' }}>
             <ImageCarousel media={selectedPost.media}/>
-            {/* <div className="gallery">
-              {
-                selectedPost.media.map((url: string, index: number) => (
-                  <figure key={index} className="image-card">
-                    <Image src={url} alt={`Media ${index + 1}`} />
-                  </figure>
-                ))
-              }
-            </div> */}
             <Divider />
             <Title level={4}>Platforms</Title>
             {renderPlatforms(selectedPost.platform)}
@@ -216,8 +192,6 @@ const PostDetails: React.FC<IPostDetailsProps> = ({ selectedPost, closeSidebar, 
             <Title level={4}>Hashtags</Title>
             {renderHashtags()}
             <Divider />
-            <Title level={4}>Location</Title>
-            {renderLocation()}
             <Title level={4}>Tagged</Title>
             {renderTaggedAccounts()}
           </div>

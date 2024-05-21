@@ -18,6 +18,7 @@ import { generateCaption, getSubreddits } from '@/redux/actions/schedulerHubActi
 import TextArea from 'antd/es/input/TextArea';
 import { updateAlert } from '@/redux/actions/alertAction';
 import { IFlair } from '@/redux/types/schedulerHub/reducer';
+import moment from 'moment';
 const { Text, Title } = Typography;
 
 const StepOne = () => {
@@ -31,7 +32,7 @@ const StepOne = () => {
   const [ subreddit, setSubreddit] = useState<any>();
   const [selectedSubreddit, setSelectedSubreddit] = useState<any>();
   const [ flair, setFlair] = useState<any>();
-  const [ location, setLocation] = useState<any>();
+  // const [ location, setLocation] = useState<any>();
   const [ timeString, setTimeString] = useState<any>();
   const [ dateString, setDateString] = useState<any>();
   const [ sentiment, setSentiment ] = useState<any>('None');
@@ -73,33 +74,34 @@ const StepOne = () => {
     if (selectedAvatars.includes(3)) {
       platform.push(Platform.Reddit)
     }
-    
-    // Formatting date and time
-    // const date = dayjs(dateString).format('YYYY-MM-DD');;
-    // const time = dayjs(timeString).format('HH:mm');
-    // const [hours, minutes] = time.split(':');
-    // const [year, month, day] = date.split('-');
-    // const isoString = new Date(Number(year), Number(month) - 1, Number(day), Number(hours), Number(minutes)).toISOString();
-    // console.log(isoString);
+
+    // Formatiing date and time
+    const dateTime = moment(dateString).set({
+      hour: timeString.hour(),
+      minute: timeString.minute(),
+      second: timeString.second(),
+    });
 
     const scheduled_post = {
       ...createScheduledPostDto,
       caption: createScheduledPostDto.caption ? createScheduledPostDto.caption : null,
       description: createScheduledPostDto.description ? createScheduledPostDto.description : null,
-      media_type: (createScheduledPostDto.caption != '' || createScheduledPostDto.description != '') ? MediaType.Image : MediaType.Text,
+      media_type: file ? MediaType.Text : MediaType.Image,
       hashtags: hashtagList && hashtagList.length > 0 ? hashtagList: [],
       tagged_accounts: tagList && tagList.length > 0 ? tagList: [],
-      scheduled_time: new Date(Date.now()),
+      subreddit: subreddit,
+      flair_id: flair && flair._id ? flair._id : null,
+      flair_text: flair && flair.text ? flair.text : null,
+      scheduled_time: new Date(dateTime.toISOString()),
       platform: platform,
       file: file ? file : null,
-      location: location ? location: null
     }
 
     dispatch(createScheduledPost(scheduled_post))
-    router.push('/');
+    router.push('/auth');
   }
 
-  const handlePost = () => {
+  const handlePost = () => { 
 
     // Including platforms
     let platform = [];
@@ -112,14 +114,6 @@ const StepOne = () => {
     if (selectedAvatars.includes(3)) {
       platform.push(Platform.Reddit)
     }
-    
-    // Formatting date and time
-    // const date = dayjs(dateString).format('YYYY-MM-DD');;
-    // const time = dayjs(timeString).format('HH:mm');
-    // const [hours, minutes] = time.split(':');
-    // const [year, month, day] = date.split('-');
-    // const isoString = new Date(Number(year), Number(month) - 1, Number(day), Number(hours), Number(minutes)).toISOString();
-    // console.log(isoString);
 
     const new_post = {
       ...createScheduledPostDto,
@@ -134,11 +128,10 @@ const StepOne = () => {
       scheduled_time: new Date(Date.now()),
       platform: platform,
       file: file ? file : null,
-      location: location ? location: null
     }
 
     dispatch(createPost(new_post))
-    router.push('/');
+    router.push('/auth');
     dispatch(updateAlert({ type: NotificationType.Info, message: 'Your post will be uploaded shortly.' }))
   }
 
@@ -417,7 +410,7 @@ const StepOne = () => {
 
   const renderDate = () => {
     const onDateChange: DatePickerProps['onChange'] = (date, dateString) => {
-      setDateString(dateString)
+      setDateString(date)
     };
 
     return (
@@ -433,7 +426,7 @@ const StepOne = () => {
 
   const renderTime = () => {
     const onTimeChange: TimePickerProps['onChange'] = (time, timeString) => {
-      setTimeString(timeString)
+      setTimeString(time)
     };
 
     return (
@@ -470,8 +463,8 @@ const StepOne = () => {
 
     {influencerList?.map(influencer => (
       tagOptions.push({
-        value: influencer.name,
-        label: influencer.name,
+        value: influencer.username,
+        label: influencer.username,
       })
     ))}
   
@@ -491,38 +484,6 @@ const StepOne = () => {
               options={tagOptions}
               maxCount={3}
             />
-        </Col>
-      </>
-    )
-  }
-
-  const renderLocation = () => {
-    const handleLocationChange = (value: string) => {
-      setLocation(value)
-    };
-
-    const locationOptions: SelectProps['options'] = [];
-
-    {Object.values(Country)?.map(country => (
-      locationOptions.push({
-        value: country,
-        label: country
-      })
-    ))}
-  
-    return (
-      <>
-        <Col span={24}>
-          <Text strong>Location:</Text>
-        </Col>
-        <Col span={24}>
-          <Select
-            variant="borderless"
-            style={{ width: '100%' }}
-            placeholder="Add Location"
-            onChange={handleLocationChange}
-            options={locationOptions}
-          />
         </Col>
       </>
     )
@@ -557,7 +518,6 @@ const StepOne = () => {
           <Space size='middle' direction='vertical' style={{ width: '100%' }}>
             <Divider>Overall</Divider>
             {renderCaption()}
-            {renderLocation()}
             {renderScheduleTime()}
             <Divider>For Reddit</Divider>
             {renderDescription()}
