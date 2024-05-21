@@ -40,7 +40,6 @@ const TextWithGradientBorder: React.FC<ITextWithGradientBorderProps> = ({
     if (onTextChange) {
       onTextChange(newText);
     }
-    console.log(newText)
   }
 
   return (

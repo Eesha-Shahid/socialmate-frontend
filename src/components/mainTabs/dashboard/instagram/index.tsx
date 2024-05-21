@@ -62,7 +62,7 @@ const InstagramDashboard:React.FC = () => {
       <Card style={{ 
         background: 'linear-gradient(90deg, #5082ED 0%, #9A72CB 27%, #B86DA2 63%, #D96570 100%)' ,
         display: 'flex',
-        justifyContent: 'center', // Horizontally center the content
+        justifyContent: 'center',
         alignItems: 'center',
         padding: '0.4rem 0'
       }} bordered={false}>
@@ -70,8 +70,9 @@ const InstagramDashboard:React.FC = () => {
             <Text style={{ color:"white", fontSize: '1rem' }}>Want to access Premium tools?</Text>
             <Text style={{ color:"white" }}>Check out our premium package.</Text>
             <Row align='middle' justify='space-between'>
-              <Button style={{ background: 'white', borderRadius: '20px', marginRight: '0.4rem' }}><span style={{ fontSize: '1rem' }} className="gradient-text">Upgrade to Pro</span></Button>
-              <Button style={{ background: 'white', borderRadius: '20px' }} onClick={() => router.push('/campaign')}><span style={{ fontSize: '1rem' }} className="gradient-text">Influencer Campaign</span></Button>
+              {/* <Button style={{ background: 'white', borderRadius: '20px', marginRight: '0.4rem' }}><span style={{ fontSize: '1rem' }} className="gradient-text">Upgrade to Pro</span></Button> */}
+              <Button style={{ background: 'white', borderRadius: '20px', marginRight:'1rem' }} onClick={() => router.push('/influencer-campaign')}><span style={{ fontSize: '1rem' }} className="gradient-text">Influencers</span></Button>
+              <Button style={{ background: 'white', borderRadius: '20px' }} onClick={() => router.push('/advertisement-campaign')}><span style={{ fontSize: '1rem' }} className="gradient-text">Advertisements</span></Button>
             </Row>
         </Space>
       </Card>

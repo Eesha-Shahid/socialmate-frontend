@@ -22,14 +22,10 @@ const contentCalendarSlice = createSlice({
       state.scheduledPostsLoading = false;
     },
     addScheduledPosts: ( state, { payload }: PayloadAction<IScheduledPost>) => {
-      console.log(state.scheduledPosts)
-      console.log("Updating scheduled posts")
       if (!state.scheduledPosts) {
         state.scheduledPosts = [];
       }
       state.scheduledPosts.push(payload);
-      console.log(state.scheduledPosts)
-      console.log("Updated scheduled posts")
     },
     updateScheduledPosts: (state, {payload}: PayloadAction<IScheduledPost>) => {
       if (state.scheduledPosts !== null) {

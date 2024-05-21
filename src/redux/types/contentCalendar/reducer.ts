@@ -5,6 +5,9 @@ export interface IScheduledPost {
     caption?: string;
     description?: string;
     location?:string;
+    subreddit?: string;
+    flair_id?:string;
+    flair_text?: string;
     hashtags?: string[];
     tagged_accounts?: string[];
     media: string[];
@@ -19,7 +22,9 @@ export interface CreateScheduledPostDto {
     location:string | null;
     hashtags: string[] | [];
     tagged_accounts: string[] | [];
-    // media: (string | undefined)[] | [];
+    subreddit?: string;
+    flair_id?:string;
+    flair_text?: string;
     scheduled_time: Date | null;
     platform: string[] | [];    
     file: any;

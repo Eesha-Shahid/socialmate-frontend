@@ -1,4 +1,4 @@
-interface DataType {
+interface PaymentDataType {
   key: string;
   holder_name: string;
   card_number: string;

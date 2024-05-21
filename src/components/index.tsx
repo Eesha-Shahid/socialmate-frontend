@@ -20,9 +20,12 @@ import AiAssistant from "./aiAssistant";
 import IntegrationCard from "./integrationCard";
 import PostDetails from "./postDetails";
 import InstagramDashboard from "./mainTabs/dashboard/instagram";
-import InfluencerCampaign from "./influencerCampaign";
 import StepThree from "./mainTabs/schedulerHub/stepThree";
 import StepTwo from "./mainTabs/schedulerHub/stepTwo";
+import Influencers from "./influencers";
+import Ads from "./ads";
+import Feedbacks from "./feedback";
+import Rate from "./rate";
 
 export {
     Navbar,
@@ -49,5 +52,8 @@ export {
     AiAssistant,
     IntegrationCard,
     PostDetails,
-    InfluencerCampaign
+    Influencers,
+    Ads,
+    Feedbacks,
+    Rate
 }
