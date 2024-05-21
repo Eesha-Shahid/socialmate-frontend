@@ -35,3 +35,10 @@ export const navigationItems: TabsProps['items'] = [
     children: <Subscriptions/>,
   },
 ];
+
+export const NAV_LINKS = [
+  { href: '/', key: 'home', label: 'Home' },
+  { href: 'solutions', key: 'solutions', label: 'Solutions' },
+  { href: 'platforms', key: 'platforms', label: 'Platforms' },
+  { href: 'pricing', key: 'pricing', label: 'Pricing' },
+];
