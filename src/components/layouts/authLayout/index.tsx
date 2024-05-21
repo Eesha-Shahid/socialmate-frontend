@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import { Navbar } from '@/components';
 const { Header, Footer } = Layout;
   
-const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
+const AuthLayout: React.FC = () => {
   return (
     <Layout style={{ background: '#F7F8FC', fontFamily: 'Poppins', marginTop: '1rem' }}>
       <Header style={{ height: '65px', background: 'none', justifyContent: 'space-between', alignItems: 'center' }}>
