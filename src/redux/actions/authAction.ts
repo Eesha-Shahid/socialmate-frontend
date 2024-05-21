@@ -12,8 +12,10 @@ export const login = createAsyncThunk(
   async (formData: ILoginFormData, thunkAPI) => {
     const { dispatch } = thunkAPI;
     try {
+      console.log(formData);
       dispatch(setLoading({loading: true}))
       const response = await axiosInstance.post("/auth/login", formData);
+      console.log(response.data);
       const responseData = response.data as IloginResponseData;
       localStorage.setItem('token', responseData.token)
       dispatch(loginSuccess());
