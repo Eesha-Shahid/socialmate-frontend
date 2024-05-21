@@ -16,7 +16,7 @@ const AuthLayoutTwo: React.FC<AuthLayoutTwoProps> = ({ children }) => {
   
   const handleLogout = () => {
     dispatch(logout());
-    router.push('/')
+    router.push('/auth')
   };
   
   const items: MenuProps['items'] = [

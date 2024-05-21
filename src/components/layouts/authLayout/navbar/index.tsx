@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
   
   const handleLogout = () => {
     dispatch(logout());
-    router.push('/')
+    router.push('/auth')
   };
   const items: MenuProps['items'] = [
     {

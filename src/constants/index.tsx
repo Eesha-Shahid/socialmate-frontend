@@ -1,8 +1,9 @@
 import { profileDropdownItems } from "./profileDropdownItems";
-import { navigationIcons, navigationItems } from "./topNavItems";
+import { navigationIcons, navigationItems, NAV_LINKS } from "./topNavItems";
 
 export {
     navigationItems,
     navigationIcons,
-    profileDropdownItems
+    profileDropdownItems,
+    NAV_LINKS
 }

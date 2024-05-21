@@ -1,3 +1,4 @@
+'use client'
 import { GoogleIcon } from "@/assets/icons";
 import Icon from "@ant-design/icons";
 import {
