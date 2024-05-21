@@ -28,7 +28,6 @@ export const setDefaultPaymentMethod = createAsyncThunk(
     try {
       const { dispatch } = thunkAPI;
       const response = await axiosInstance.post(`/user/set-default-card`, setDefaultPaymentMethodDto);
-      console.log(response.data)
       dispatch(setDefaultPaymentMethod(response.data.card));
     } catch (err: any) {
       if (err.response?.status === 400) {
@@ -45,9 +44,7 @@ export const addPaymentMethod = createAsyncThunk(
   async (addPaymentMethodDto: AddPaymentMethodDto, thunkAPI) => {
     try {
       const { dispatch } = thunkAPI;
-      console.log(addPaymentMethodDto)
       const response = await axiosInstance.post(`/user/add-card`, addPaymentMethodDto);
-      console.log(response.data)
       dispatch(addPaymentMethod(response.data.card));
       dispatch(updateAlert({ type: NotificationType.Success, message: response.data.message }))
     } catch (err: any) {

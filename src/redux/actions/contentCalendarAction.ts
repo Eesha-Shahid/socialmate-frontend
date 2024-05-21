@@ -32,7 +32,6 @@ export const createScheduledPost = createAsyncThunk(
       const { file, ...postData } = createScheduledPostDto;
       formData.append('addScheduledPostDto', JSON.stringify(postData));
       const response = await axiosInstance.post(`/user/add-scheduled-post`, formData);
-      console.log(response.data.post);
       dispatch(addScheduledPosts(response.data.post))
       dispatch(updateAlert({ type: NotificationType.Success, message: response.data.message }))
     } catch (err: any) {
@@ -57,10 +56,10 @@ export const createPost = createAsyncThunk(
       const { file, ...postData } = createScheduledPostDto;
       formData.append('addScheduledPostDto', JSON.stringify(postData));
       const response = await axiosInstance.post(`/user/create-post`, formData);
-      console.log(response.data.post);
-      // dispatch(addScheduledPosts(response.data.post))
+      console.log(response.data);
       dispatch(updateAlert({ type: NotificationType.Success, message: response.data.message }))
     } catch (err: any) {
+      console.log(err)
       dispatch(updateAlert({ type: NotificationType.Error, message: err.response.data.message }))
       if (err.response?.status === 400) { 
         return thunkAPI.rejectWithValue(err?.response.data.message[0]);

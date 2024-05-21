@@ -1,7 +1,7 @@
 import axiosInstance from "@/utils/axiosInstace";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IGeneratedCaptionFormData } from "../types/schedulerHub/reducer";
-import { generateCaptionSuccess, setGeneratedCaptionLoading } from "../reducers/schedulerHubReducer";
+import { generateCaptionSuccess, getSubredditFailure, getSubredditSuccess, setGeneratedCaptionLoading } from "../reducers/schedulerHubReducer";
 import { updateAlert } from "./alertAction";
 import { NotificationType } from "@/types";
 
@@ -26,3 +26,21 @@ export const generateCaption = createAsyncThunk(
   }
 );
 
+
+export const getSubreddits = createAsyncThunk(
+  "schedulerHub/getSubreddits",
+  async (_, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    try {
+      const response = await axiosInstance.get(`/reddit/subreddits`);
+      dispatch(getSubredditSuccess(response.data));
+    } catch (err: any) {
+        dispatch(getSubredditFailure());
+      if (err.response?.status === 400) {
+        return thunkAPI.rejectWithValue(err?.response.data.message[0]);
+      } else {
+        return thunkAPI.rejectWithValue(err.response.data);
+      }
+    }
+  }
+);

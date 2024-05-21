@@ -32,7 +32,6 @@ const AiAssistant: React.FC<IAiAssistantProps> = ({ visible, onClose, onSelect }
 
   const handleSuggestionClick = (suggestion: string) => {
     setSelectedSuggestion(suggestion);
-    console.log(selectedSuggestion)
   };
 
   const handleGenerateClick = () => {

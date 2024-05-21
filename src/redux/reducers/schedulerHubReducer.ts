@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SchedulerHubState } from "../types/schedulerHub/state";
+import { ISubreddit } from "../types/schedulerHub/reducer";
 
 const initialState: SchedulerHubState = {
     generatedCaption: null,
-    generatedCaptionLoading: false
+    generatedCaptionLoading: false,
+    subreddits: null,
+    subredditsLoading: false,
 };
 
 const schedulerHubSlice = createSlice({
@@ -21,6 +24,14 @@ const schedulerHubSlice = createSlice({
     setGeneratedCaptionLoading: (state, { payload }: PayloadAction<any>) => {
       state.generatedCaptionLoading = payload;
     },
+    getSubredditSuccess: ( state, { payload }: PayloadAction<ISubreddit[]>) => {
+      state.subredditsLoading = true;
+      state.subreddits = payload;
+      state.subredditsLoading = false;
+    },
+    getSubredditFailure: (state) => {
+      state.subredditsLoading = false;
+    },
     SchedulerHubReset: () => {
       return initialState;
     },
@@ -30,8 +41,10 @@ const schedulerHubSlice = createSlice({
 export const {
     generateCaptionSuccess,
     generateCaptionFailure,
-    SchedulerHubReset,
-    setGeneratedCaptionLoading
+    setGeneratedCaptionLoading,
+    getSubredditSuccess,
+    getSubredditFailure,
+    SchedulerHubReset
 } = schedulerHubSlice.actions;
 
 export default schedulerHubSlice.reducer;

@@ -64,7 +64,6 @@ export const removeInfluencerFromList = createAsyncThunk(
     const { dispatch } = thunkAPI;
     try {
       const response = await axiosInstance.post(`/user/influencer-list/remove`, updateInfluencerDto);
-      console.log(response.data);
       dispatch(removeInfluencerFromList(response.data))
       dispatch(updateAlert({ type: NotificationType.Success, message: response.data.message }))
     } catch (err: any) {

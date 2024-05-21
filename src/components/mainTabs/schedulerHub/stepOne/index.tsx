@@ -1,9 +1,9 @@
 import { FacebookIcon, InstagramIcon, RedditIcon } from '@/assets/icons';
 import { AssistantButton, TextWithGradientBorder, AiAssistant} from 'components';
 import Icon, {UserOutlined } from '@ant-design/icons';
-import { Avatar, Button, Col, DatePicker, DatePickerProps, Image, Input, Row, Select, SelectProps, Space, Tag, TimePicker, TimePickerProps, Typography, Upload } from 'antd';
+import { Avatar, Button, Col, DatePicker, DatePickerProps, Divider, Image, Input, Row, Select, SelectProps, Space, Tag, TimePicker, TimePickerProps, Typography, Upload } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { InfluencerCampaignSelector } from '@/redux/reducers';
+import { InfluencerCampaignSelector, SchedulerHubSelector } from '@/redux/reducers';
 import { useSelector } from 'react-redux';
 import { getInfluencerList } from '@/redux/actions/influencerCampaignAction';
 import { useAppDispatch } from '@/redux/store';
@@ -14,9 +14,10 @@ import { createPost, createScheduledPost } from '@/redux/actions/contentCalendar
 import { useRouter } from 'next/navigation';
 import axiosInstance from '@/utils/axiosInstace';
 import { getColor } from '@/colors';
-import { generateCaption } from '@/redux/actions/schedulerHubAction';
+import { generateCaption, getSubreddits } from '@/redux/actions/schedulerHubAction';
 import TextArea from 'antd/es/input/TextArea';
 import { updateAlert } from '@/redux/actions/alertAction';
+import { IFlair } from '@/redux/types/schedulerHub/reducer';
 const { Text, Title } = Typography;
 
 const StepOne = () => {
@@ -24,8 +25,12 @@ const StepOne = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const dispatch = useAppDispatch();
   const { influencerList } = useSelector(InfluencerCampaignSelector);
+  const { subreddits } = useSelector(SchedulerHubSelector);
   const [ hashtagList, setHashtagList] = useState<any>();
   const [ tagList, setTagList] = useState<any>();
+  const [ subreddit, setSubreddit] = useState<any>();
+  const [selectedSubreddit, setSelectedSubreddit] = useState<any>();
+  const [ flair, setFlair] = useState<any>();
   const [ location, setLocation] = useState<any>();
   const [ timeString, setTimeString] = useState<any>();
   const [ dateString, setDateString] = useState<any>();
@@ -40,20 +45,20 @@ const StepOne = () => {
   const router = useRouter();
 
   const [ createScheduledPostDto, setCreateScheduledPostDto ] = useState({
-    media_type: '',
     caption: '',
     description: '',
-    location: '',
-    hashtags: [],
-    tagged_accounts: [],
-    media: [],
     scheduled_time: [],
-    platform: []
   });
 
   useEffect(()=> {
     dispatch(getInfluencerList());
+    dispatch(getSubreddits())
   },[influencerList, suggestedCaption])
+
+  
+  const toggleSidebar = () => {
+    setSidebarVisible(!sidebarVisible);
+  };
 
   const handleSchedule = () => {
 
@@ -116,20 +121,23 @@ const StepOne = () => {
     // const isoString = new Date(Number(year), Number(month) - 1, Number(day), Number(hours), Number(minutes)).toISOString();
     // console.log(isoString);
 
-    const scheduled_post = {
+    const new_post = {
       ...createScheduledPostDto,
       caption: createScheduledPostDto.caption ? createScheduledPostDto.caption : null,
       description: createScheduledPostDto.description ? createScheduledPostDto.description : null,
-      media_type: (createScheduledPostDto.caption != '' || createScheduledPostDto.description != '') ? MediaType.Image : MediaType.Text,
+      media_type: file ? MediaType.Text : MediaType.Image,
       hashtags: hashtagList && hashtagList.length > 0 ? hashtagList: [],
       tagged_accounts: tagList && tagList.length > 0 ? tagList: [],
+      subreddit: subreddit,
+      flair_id: flair && flair._id ? flair._id : null,
+      flair_text: flair && flair.text ? flair.text : null,
       scheduled_time: new Date(Date.now()),
       platform: platform,
       file: file ? file : null,
       location: location ? location: null
     }
 
-    dispatch(createPost(scheduled_post))
+    dispatch(createPost(new_post))
     router.push('/');
     dispatch(updateAlert({ type: NotificationType.Info, message: 'Your post will be uploaded shortly.' }))
   }
@@ -189,10 +197,6 @@ const StepOne = () => {
         )}
       </>
     );
-  };
-
-  const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
   };
 
   const renderAvatarGroup = () => {
@@ -359,6 +363,58 @@ const StepOne = () => {
     )
   }
 
+  const renderSubredditsAndFlairs = () => {
+
+    const handleSubredditChange = (value: string) => {
+      setSubreddit(value)
+      setSelectedSubreddit(subreddits?.find(subreddit => subreddit.name === value))
+    };
+
+    const handleFlairChange = (value: string) => {
+      const selectedFlair = selectedSubreddit.flairs.find((flair: IFlair) => flair.text === value);
+      setFlair({ _id: selectedFlair.id, text: selectedFlair.text });
+    };
+
+    const subredditOptions: SelectProps['options'] = subreddits?.map(subreddit => ({
+      value: subreddit.name,
+      label: subreddit.name,
+    })) || [];
+    
+    const flairOptions: SelectProps['options'] = selectedSubreddit?.flairs?.map((flair: IFlair) => ({
+      value: flair.text,
+      label: flair.text,
+    })) || [];
+
+    return (
+      <>
+        <Col span={24}>
+          <Text strong>Tag Community:</Text>
+        </Col>
+        <Col span={24}>
+            <Select
+              variant="borderless"
+              style={{ width: '100%' }}
+              placeholder="Add Community"
+              onChange={handleSubredditChange}
+              options={subredditOptions}
+            />
+        </Col>
+        <Col span={24}>
+          <Text strong>Tag Flair:</Text>
+        </Col>
+        <Col span={24}>
+            <Select
+              variant="borderless"
+              style={{ width: '100%' }}
+              placeholder="Add Flair"
+              onChange={handleFlairChange}
+              options={flairOptions}
+            />
+        </Col>
+      </>
+    )
+  }
+
   const renderDate = () => {
     const onDateChange: DatePickerProps['onChange'] = (date, dateString) => {
       setDateString(dateString)
@@ -499,12 +555,16 @@ const StepOne = () => {
         </Col>
         <Col xs={24} md={18}>
           <Space size='middle' direction='vertical' style={{ width: '100%' }}>
+            <Divider>Overall</Divider>
             {renderCaption()}
-            {renderDescription()}
-            {renderHashtags()}
-            {renderTaggedAccounts()}
             {renderLocation()}
             {renderScheduleTime()}
+            <Divider>For Reddit</Divider>
+            {renderDescription()}
+            {renderSubredditsAndFlairs()}
+            <Divider>For Instagram</Divider>
+            {renderHashtags()}
+            {renderTaggedAccounts()}
             <Col span={4}>
               <Button type='primary' onClick={handlePost}>Post</Button>
             </Col>
