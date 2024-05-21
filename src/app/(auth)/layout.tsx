@@ -81,6 +81,7 @@ const AuthLayoutTwo: React.FC<AuthLayoutTwoProps> = ({ children }) => {
           </Col>
         </Row>
       </Header>
+      
         {children}
       <Footer style={{ background: 'none' }} />
     </Layout>
