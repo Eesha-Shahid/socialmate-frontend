@@ -3,4 +3,5 @@ export interface IPostOptionCardProps {
   imageSrc: string;
   title: string;
   description: string;
+  disabled: boolean;
 }

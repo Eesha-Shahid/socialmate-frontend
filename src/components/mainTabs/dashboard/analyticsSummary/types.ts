@@ -1,4 +1,4 @@
 interface IAnalyticsSummaryProps{
-    data: IAnalyticsSummary;
+    data: IAnalyticsSummary | null;
     dataLoading: boolean;
 }

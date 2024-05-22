@@ -6,7 +6,9 @@ const initialState: AuthState = {
   role: null,
   token: null,
   isAuthenticated: false,
-  loading: false
+  loading: false,
+  googleLoginLoading: false,
+  googleSignupLoading: false
   // invalidToken?: boolean | null;
 };
 
@@ -33,6 +35,12 @@ const authSlice = createSlice({
       state.loading = false
       return state;
     },
+    setGoogleLoginLoading: (state, { payload }: PayloadAction<any>) => {
+      state.loading = payload.loading;
+    },
+    setGoogleSignupLoading: (state, { payload }: PayloadAction<any>) => {
+      state.loading = payload.loading;
+    },
     setLoading: (state, { payload }: PayloadAction<{ loading: boolean }>) => {
       state.loading = payload.loading;
     },
@@ -49,7 +57,9 @@ export const {
   registerSuccess,
   loginSuccess,
   loginFailure,
-  setLoading 
+  setLoading,
+  setGoogleLoginLoading,
+  setGoogleSignupLoading
 } = authSlice.actions;
 
 export default authSlice.reducer;

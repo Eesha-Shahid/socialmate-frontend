@@ -6,6 +6,8 @@ export interface AuthState {
   token?: string | null;
   isAuthenticated?: boolean;
   loading?: boolean;
+  googleLoginLoading?: boolean;
+  googleSignupLoading?: boolean;
   // invalidToken?: boolean | null;
 };
 

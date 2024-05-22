@@ -1,4 +1,4 @@
 interface IAccountDetailsSummaryProps {
-    data: IAccountDetailsSummary;
+    data: IAccountDetailsSummary | null;
     dataLoading: boolean;
 }

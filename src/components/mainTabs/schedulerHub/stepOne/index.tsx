@@ -9,19 +9,28 @@ import { getInfluencerList } from '@/redux/actions/influencerCampaignAction';
 import { useAppDispatch } from '@/redux/store';
 import { Calendar, Clock } from 'akar-icons';
 import dayjs from 'dayjs';
-import { Country, MediaType, NotificationType, Platform } from '@/types';
+import { MediaType, NotificationType, Platform } from '@/types';
 import { createPost, createScheduledPost } from '@/redux/actions/contentCalendarAction';
 import { useRouter } from 'next/navigation';
 import axiosInstance from '@/utils/axiosInstace';
 import { getColor } from '@/colors';
-import { generateCaption, getSubreddits } from '@/redux/actions/schedulerHubAction';
+import { getSubreddits } from '@/redux/actions/schedulerHubAction';
 import TextArea from 'antd/es/input/TextArea';
 import { updateAlert } from '@/redux/actions/alertAction';
 import { IFlair } from '@/redux/types/schedulerHub/reducer';
 import moment from 'moment';
-const { Text, Title } = Typography;
+const { Text } = Typography;
 
-const StepOne = () => {
+interface StepOneProps {
+  setCaptionPreview: (caption: string) => void;
+  setDescriptionPreview: (description: string) => void;
+  setFilePreview: (file: File | null) => void;
+  setHashtagPreview: (hashtagList: string) => void;
+  setFlairPreview: (flairList: string) => void;
+  setSubredditPreview: (subredditList: string) => void;
+}
+
+const StepOne:React.FC<StepOneProps> = ({ setCaptionPreview, setDescriptionPreview, setFilePreview, setHashtagPreview, setSubredditPreview, setFlairPreview }) => {
   const [selectedAvatars, setSelectedAvatars] = useState<number[]>([]);
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const dispatch = useAppDispatch();
@@ -32,7 +41,6 @@ const StepOne = () => {
   const [ subreddit, setSubreddit] = useState<any>();
   const [selectedSubreddit, setSelectedSubreddit] = useState<any>();
   const [ flair, setFlair] = useState<any>();
-  // const [ location, setLocation] = useState<any>();
   const [ timeString, setTimeString] = useState<any>();
   const [ dateString, setDateString] = useState<any>();
   const [ sentiment, setSentiment ] = useState<any>('None');
@@ -52,10 +60,12 @@ const StepOne = () => {
   });
 
   useEffect(()=> {
+  },[suggestedCaption])
+
+  useEffect(()=> {
     dispatch(getInfluencerList());
     dispatch(getSubreddits())
-  },[influencerList, suggestedCaption])
-
+  },[])
   
   const toggleSidebar = () => {
     setSidebarVisible(!sidebarVisible);
@@ -140,6 +150,8 @@ const StepOne = () => {
       ...(prevDto || {}),
       [fieldName]: newText,
     }));
+    if (fieldName == 'caption') setCaptionPreview(newText);
+    if (fieldName == 'description') setDescriptionPreview(newText);
      if (fieldName == 'caption') setSentiment('None')
      if (fieldName == 'description') setDescriptionSentiment('None')
   };  
@@ -156,6 +168,7 @@ const StepOne = () => {
 
     const handleChange = (e: any) => {
       setFile(e.target.files[0]);
+      setFilePreview(e.target.files[0]);
     }
 
     const generateCaptionFromImage = async() => {
@@ -253,7 +266,7 @@ const StepOne = () => {
     return (
       <Col>
         <Avatar.Group size="large">
-          {renderAvatar(1, FacebookIcon)}
+          {/* {renderAvatar(1, FacebookIcon)} */}
           {renderAvatar(2, InstagramIcon)}
           {renderAvatar(3, RedditIcon)}
         </Avatar.Group>
@@ -334,6 +347,7 @@ const StepOne = () => {
   const renderHashtags = () => {
     const handleHashtagChange = (value: string) => {
       setHashtagList(value)
+      setHashtagPreview(value)
     };
 
     return (
@@ -360,12 +374,14 @@ const StepOne = () => {
 
     const handleSubredditChange = (value: string) => {
       setSubreddit(value)
+      setSubredditPreview(value)
       setSelectedSubreddit(subreddits?.find(subreddit => subreddit.name === value))
     };
 
     const handleFlairChange = (value: string) => {
       const selectedFlair = selectedSubreddit.flairs.find((flair: IFlair) => flair.text === value);
       setFlair({ _id: selectedFlair.id, text: selectedFlair.text });
+      setFlairPreview(selectedFlair.text);
     };
 
     const subredditOptions: SelectProps['options'] = subreddits?.map(subreddit => ({

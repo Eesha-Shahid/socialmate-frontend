@@ -18,11 +18,10 @@ import Link from "antd/es/typography/Link";
 import React, { useState } from "react";
 import { Illustration } from "components";
 import { useAppDispatch } from "@/redux/store";
-import { forgotPassword, login, register } from "@/redux/actions/authAction";
+import { forgotPassword, googleLogin, googleSignup, login, register } from "@/redux/actions/authAction";
 import { useSelector } from "react-redux";
 import { AuthSelector } from "@/redux/reducers";
-import { Player } from "@lottiefiles/react-lottie-player";
-
+import { CredentialResponse, GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 const { Title, Text } = Typography;
 
 const UnauthForm = () => {
@@ -33,6 +32,14 @@ const UnauthForm = () => {
 
   const switchForm = (newLabel: string) => {
     setCurrentLabel(newLabel);
+  };
+
+  const handleGoogleLogin = async (credentialResponse: CredentialResponse) => {
+    dispatch(googleLogin(credentialResponse))
+  };
+
+  const handleGoogleSignup = async (credentialResponse: any) => {
+    dispatch(googleSignup(credentialResponse))
   };
 
   const getFormFields = () => {
@@ -152,29 +159,29 @@ const UnauthForm = () => {
             </Title>
           </Col>
         <Space size="middle" direction="vertical" style={{ width: "100%" }}>
-          {(currentLabel == 'Sign Up' || currentLabel == 'Sign In') && (
-            <>
-              <Col span={24}>
-                <Button
-                    style={{
-                    border: "none",
-                    boxShadow: "0px 1px 4px 0px #9972CB",
-                    borderRadius: "10px",
-                    padding: "1.5rem 0",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    }}
-                    htmlType="submit"
-                    icon={<Icon component={GoogleIcon} />}
-                    block
-                >
-                    {currentLabel} with Google
-                </Button>
-              </Col>
-              <Divider>OR</Divider>
-            </>
-          )}
+          <Row justify={'center'}>
+          {(currentLabel == 'Sign Up') && (
+            <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
+                <GoogleLogin
+                  size='large'
+                  text='signup_with'
+                  useOneTap={true}
+                  onSuccess={handleGoogleSignup}
+                  onError={() => {console.log("Signup Failed");}}
+                />
+              </GoogleOAuthProvider>
+            )}
+            {(currentLabel == 'Sign In') && (
+              <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
+                <GoogleLogin
+                  useOneTap={true}
+                  onSuccess={handleGoogleLogin}
+                  onError={() => {console.log("Login Failed");}}
+                />
+              </GoogleOAuthProvider>     
+            )}
+            </Row>
+            <Divider>OR</Divider>
           <Col span={24}>
             <Form
               validateTrigger= "onBlur"

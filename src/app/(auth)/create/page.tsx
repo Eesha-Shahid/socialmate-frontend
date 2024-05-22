@@ -11,6 +11,12 @@ const { Title } = Typography
 
 const CreateAd: React.FC<ICreateAdProps> = ({ type2 }) => {
   const [current, setCurrent] = useState(0);
+  const [ captionPreview, setCaptionPreview ] = useState('');
+  const [ descriptionPreview, setDescriptionPreview ] = useState('');
+  const [ hashtagPreview, setHashtagPreview ] = useState('');
+  const [ flairPreview, setFlairPreview ] = useState('');
+  const [ subredditPreview, setSubredditPreview ] = useState('');
+  const [filePreview, setFilePreview] = useState<File | null>(null);
   const router = useRouter();
 
   const next = () => {
@@ -26,21 +32,35 @@ const CreateAd: React.FC<ICreateAdProps> = ({ type2 }) => {
   const steps = [
     {
       title: 'Creative',
-      content: <StepOne />,
+      content: <StepOne 
+        setCaptionPreview={setCaptionPreview} 
+        setDescriptionPreview={setDescriptionPreview} 
+        setFilePreview={setFilePreview} 
+        setHashtagPreview={setHashtagPreview}
+        setFlairPreview={setFlairPreview}
+        setSubredditPreview={setSubredditPreview}
+      />,
       icon: current === 0 
         ? <Icon component={CreativeIcon} /> 
         : <Icon component={CreativeIcon} style={{ filter: 'grayscale(100%)' }} />,
     },
     {
-      title: 'Targeting & Delivery',
-      content: <StepTwo />,
+      title: 'Preview',
+      content: <StepTwo 
+        caption={captionPreview}  
+        description={descriptionPreview}  
+        file={filePreview} 
+        hashtag={hashtagPreview}
+        flair={flairPreview}
+        subreddit={subredditPreview}
+      />,
       icon: current === 1 
         ? <Icon component={TargetingIcon} /> 
         : <Icon component={TargetingIcon} style={{ filter: 'grayscale(100%)' }} />,
     },
     {
       title: 'Payment',
-      content: <StepThree />,
+      content: <StepThree/>,
       icon: current === 2 
         ? <Icon component={PaymentIcon} /> 
         : <Icon component={PaymentIcon} style={{ filter: 'grayscale(100%)' }} />,

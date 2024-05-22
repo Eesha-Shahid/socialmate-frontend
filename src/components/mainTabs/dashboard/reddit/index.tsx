@@ -10,7 +10,7 @@ import {
 } from "@/redux/actions/instagramSummaryAction";
 import { useAppDispatch } from "@/redux/hooks";
 import { loadUser } from "@/redux/actions/authAction";
-import { Button, Card, Carousel, Col, Row, Space, Typography, Image, Statistic, List } from "antd";
+import { Button, Card, Carousel, Col, Row, Space, Typography, Image, Statistic, List, Empty } from "antd";
 import { useEffect } from "react";
 import AccountDetailsSummary from "../accountDetailsSummary";
 import AnalyticsSummary from "../analyticsSummary";
@@ -23,7 +23,7 @@ import { getColor } from "@/colors";
 
 const { Text } = Typography;
 
-const InstagramDashboard:React.FC = () => {
+const RedditDashboard:React.FC = () => {
   const router = useRouter();
   
   const dispatch = useAppDispatch();
@@ -64,7 +64,7 @@ const InstagramDashboard:React.FC = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: analyticsSummary ? '0.4rem 0' : '1.8rem 0' 
+        padding: '1.8rem 0' 
       }} bordered={false}>
         <Space size='large' direction="vertical" style={{ alignItems: 'center' }}>
             <Text style={{ color:"white", fontSize: '1rem' }}>Want to access Premium tools?</Text>
@@ -83,11 +83,9 @@ const InstagramDashboard:React.FC = () => {
     <Space size='middle' direction="vertical" style={{ width: '100%' }}>
       <Row gutter={[16, 16]}>
         <Col span={18}>
-          {/* {renderUpcomingPosts()} */}
-          <AnalyticsSummary
-            data={analyticsSummary}
-            dataLoading={analyticsSummaryLoading}
-          />
+          <Card title="Analytics Summary" bordered={false}>
+            <Empty />
+          </Card>
         </Col>
         <Col span={6}>
           {renderCampaigns()}
@@ -99,30 +97,30 @@ const InstagramDashboard:React.FC = () => {
             gutter={[16, 16]}
             style={{ display: "flex", alignItems: "center" }}
           >
-            <AccountDetailsSummary
-              data={accountDetailsSummary}
-              dataLoading={accountDetailsSummaryLoading}
-            />
+            <Col span={24}>
+              <Card style={{ paddingBottom: '15.5rem' }} title="Account Details Summary" bordered={false}>
+                <Empty />
+              </Card>
+            </Col>
           </Row>
         </Col>
         <Col span={9}>
           <Row style={{ marginBottom: '1rem' }}>
             <Col span={24}>
-              <ProfileViewsSummary
-                data={profileViewsSummary}
-                dataLoading={profileViewsSummaryLoading}
-              />
+              <Card title="Profile Views Summary" bordered={false}>
+                <Empty />
+              </Card>
             </Col>
           </Row>
           <Row gutter={[16,16]}>
             <Col span={6}>
-              <Card style={{ height: accountDetailsSummary === null ? '14.6rem' : 'auto' }} title="Top Age" bordered={false}>
+              <Card style={{ height: '14.6rem' }} title="Top Age" bordered={false}>
                 <Row gutter={[16, 16]} style={{ padding: '0.4rem 0' }}>
                   <Col span={24}>
                     <Statistic
                       title="Male"
                       valueStyle={{ color: getColor("blue") }}
-                      value={audienceInsightsSummary?.audience_gender_age?.male || ''}
+                      value={''}
                       suffix="y/o"
                     />
                   </Col>
@@ -130,9 +128,7 @@ const InstagramDashboard:React.FC = () => {
                     <Statistic
                       title="Female"
                       valueStyle={{ color: getColor("pink") }}
-                      value={
-                        audienceInsightsSummary?.audience_gender_age?.female || ''
-                      }
+                      value={''}
                       suffix="y/o"
                     />
                   </Col>
@@ -140,11 +136,11 @@ const InstagramDashboard:React.FC = () => {
               </Card>
             </Col>
             <Col span={18}>
-              <Card style={{ height: accountDetailsSummary === null ? '14.6rem' : 'auto' }} title="Top Countries" bordered={false}>
+              <Card style={{ height: '14.6rem' }} title="Top Countries" bordered={false}>
                 <List
                   style={{ padding: '1.3rem 0' }}
                   size="small"
-                  dataSource={audienceInsightsSummary?.audience_country}
+                  dataSource={[]}
                   renderItem={(item) => <List.Item>{item}</List.Item>}
                 />
               </Card>
@@ -153,18 +149,16 @@ const InstagramDashboard:React.FC = () => {
         </Col>
         <Col span={6}>
           <Row gutter={[16, 16]}>
-              <MilestonesSummary
-                analyticsData={analyticsSummary}
-                milestonesData={milestonesSummary}
-                analyticsDataLoading={analyticsSummaryLoading}
-                milestonesDataLoading={milestonesSummaryLoading}
-              />
-              <GoalsSummary
-                analyticsData={analyticsSummary}
-                goalsData={goalsSummary}
-                analyticsDataLoading={analyticsSummaryLoading}
-                goalsDataLoading={goalsSummaryLoading}
-              />
+            <Col span={24}>
+              <Card style={{ padding: '0rem 5.3rem' }} title="Milestones" bordered={false}>
+                <Empty />
+              </Card>
+            </Col>
+            <Col span={24}>
+              <Card style={{ padding: '0rem 5.3rem' }} title="Goals" bordered={false}>
+                <Empty />
+              </Card>
+            </Col>
           </Row>
         </Col>
       </Row>
@@ -172,4 +166,4 @@ const InstagramDashboard:React.FC = () => {
   )
 }
 
-export default InstagramDashboard
+export default RedditDashboard;

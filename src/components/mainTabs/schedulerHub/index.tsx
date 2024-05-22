@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, List, Space, Image, Typography, Row } from "antd";
+import { Col, List, Space, Image, Typography, Row, Empty, Card } from "antd";
 import VirtualList from "rc-virtual-list";
 import { ContentCalendarSelector } from "@/redux/reducers";
 import { useSelector } from "react-redux";
@@ -26,9 +26,17 @@ const SchedulerHub = () => {
         ))}
       </Space>
     );
+  
+    if (!scheduledPosts || scheduledPosts.length === 0) {
+      return(
+        <Card style={{ height: '14.3rem' }}>
+          <Empty />
+        </Card>
+      )
+    }
+  
     return (
       <List>
-      {scheduledPosts && (
         <VirtualList
           data={scheduledPosts}
           height={670}
@@ -52,10 +60,9 @@ const SchedulerHub = () => {
             </div>
           )}
         </VirtualList>
-      )}
-    </List>
-    )
-  };
+      </List>
+    );
+  };  
 
   const renderPostSelection = () => (
     <Row align='middle'>
@@ -65,6 +72,7 @@ const SchedulerHub = () => {
           imageSrc="/images/SimpleCreate.png"
           title="Simple"
           description="Tap into AI for a 3-Step Traffic Boost for Postings on Daily Basis"
+          disabled= {!Boolean(scheduledPosts)}
         />
       </Col>
       <Col span={2} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -76,6 +84,7 @@ const SchedulerHub = () => {
           imageSrc="/images/AdvancedCreate.png"
           title="Advanced"
           description="Elevate Strategies with Advanced Tools for Ads and Influencers"
+          disabled= {!Boolean(scheduledPosts)}
         />
       </Col>
     </Row>

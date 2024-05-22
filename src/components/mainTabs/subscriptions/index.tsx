@@ -20,7 +20,7 @@ const Subscriptions = () => {
   useEffect(() => {
     dispatch(getSubscriptionHistry());
     dispatch(getPaymentMethods());
-  }, [paymentMethods, subscriptionHistory]);
+  }, []);
 
   const handleSetDefault = (cardId: string) => {
     dispatch(setDefaultPaymentMethod({ cardId }));
@@ -108,7 +108,7 @@ const Subscriptions = () => {
           <Button onClick={() => handleCancel()}>Cancel</Button>
         ) : (
           <Tag color={getColor('red')} key={status}>
-            {status.toUpperCase()}
+            {status?.toUpperCase()}
           </Tag>
         )
       ),
@@ -146,7 +146,7 @@ const Subscriptions = () => {
       <Col span={24}>
         <Row align='middle'>
           <Title className="gradient-text">Your Subscription History</Title>
-          {allInactive && <Button onClick={() => handleSubscribe()} type="primary">Subscribe</Button>}
+          {allInactive && <Button onClick={() => handleSubscribe()} style={{ marginLeft: '2rem' }} type="primary">Subscribe</Button>}
         </Row>
         <Table dataSource={actualSubscriptionHistory} columns={subscriptionCol} />
       </Col>

@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/utils/axiosInstace";
 import { IForgotPassowrdFormData, ILoginFormData, IResetPasswordFormData, ISignupFormData, IUser, IloginResponseData } from "../types/auth/reducer";
-import { authReset, loginFailure, loginSuccess, setLoading, userLoaded } from "../reducers/authReducer";
+import { authReset, loginFailure, loginSuccess, setGoogleLoginLoading, setGoogleSignupLoading, setLoading, userLoaded } from "../reducers/authReducer";
 import { setAuthToken } from "@/utils/authToken";
 import store from "../store";
 import { updateAlert } from "./alertAction";
 import { NotificationType } from "@/types";
+import { CredentialResponse } from "@react-oauth/google";
 
 export const login = createAsyncThunk(
   "auth/login",
@@ -15,7 +16,6 @@ export const login = createAsyncThunk(
       console.log(formData);
       dispatch(setLoading({loading: true}))
       const response = await axiosInstance.post("/auth/login", formData);
-      console.log(response.data);
       const responseData = response.data as IloginResponseData;
       localStorage.setItem('token', responseData.token)
       dispatch(loginSuccess());
@@ -105,6 +105,42 @@ export const resetPassword = createAsyncThunk(
     const { dispatch } = thunkAPI;
     const response = await axiosInstance.patch("/auth/reset-password", formData);
     dispatch(updateAlert({ type: response.data.success? NotificationType.Success : NotificationType.Error, message: response.data.message }))
+  }
+)
+
+export const googleSignup = createAsyncThunk(
+  'auth/googleSignup', 
+  async (credentialResponse: CredentialResponse, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    try {
+      dispatch(setGoogleSignupLoading(true))
+      const response = await axiosInstance.post("/auth/google-signup", { token: credentialResponse.credential });
+      const responseData = response.data as IloginResponseData;
+      localStorage.setItem('token', responseData.token)
+      dispatch(setGoogleSignupLoading(false))
+      dispatch(updateAlert({ type: NotificationType.Success, message: response.data.message }))
+      dispatch(loadUser());
+    } catch (error: any) {
+      dispatch(updateAlert({ type: NotificationType.Error, message: error?.response?.data }))
+    }
+  }
+)
+
+export const googleLogin = createAsyncThunk(
+  'auth/googleLogin', 
+  async (credentialResponse: CredentialResponse, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    try {
+      dispatch(setGoogleLoginLoading(true))
+      const response = await axiosInstance.post("/auth/google-login", { token: credentialResponse.credential });
+      const responseData = response.data as IloginResponseData;
+      localStorage.setItem('token', responseData.token)
+      dispatch(setGoogleLoginLoading(false))
+      dispatch(updateAlert({ type: NotificationType.Success, message: response.data.message }))
+      dispatch(loadUser());
+    } catch (error: any) {
+      dispatch(updateAlert({ type: NotificationType.Error, message: error?.response?.data }))
+    }
   }
 )
 

@@ -1,6 +1,6 @@
 interface IGoalsSummaryProps {
-    analyticsData: IAnalyticsSummary;
-    goalsData: IGoalsSummary;
+    analyticsData: IAnalyticsSummary | null;
+    goalsData: IGoalsSummary | null;
     analyticsDataLoading: boolean;
     goalsDataLoading: boolean;
 }

@@ -1,8 +1,7 @@
 import { InstagramMediumIcon } from "@/assets/icons";
 import Icon, { UserOutlined } from "@ant-design/icons";
-import { Col, Card, Space, Row, Avatar, Typography } from "antd";
+import { Col, Card, Space, Row, Avatar, Typography, Empty } from "antd";
 const { Title, Text } = Typography;
-
 
 const AccountDetailsSummary: React.FC<IAccountDetailsSummaryProps> = ({
   data,
@@ -19,7 +18,7 @@ const AccountDetailsSummary: React.FC<IAccountDetailsSummaryProps> = ({
 
   return (
     <>
-      {data && (
+      {data ? (
         <Col span={24}>
           <Card style={{ height: "100%" }} bordered={false}>
             <Space size="middle" direction="vertical" style={{ width: "100%" }}>
@@ -57,9 +56,7 @@ const AccountDetailsSummary: React.FC<IAccountDetailsSummaryProps> = ({
                           <Avatar
                             style={{ border: "5px solid white" }}
                             size={150}
-                            src={
-                              "https://ph-static.z-dn.net/files/df8/95df01df140ac863ca9260409a932cee.jpeg"
-                            }
+                            src={data.profile_picture_url}
                             icon={<UserOutlined />}
                           />
                         </div>
@@ -118,6 +115,12 @@ const AccountDetailsSummary: React.FC<IAccountDetailsSummaryProps> = ({
                 )}
               </Row>
             </Space>
+          </Card>
+        </Col>
+      ) : (
+        <Col span={24}>
+          <Card style={{ height: '30.5rem' }} title="Account Details Summary" bordered>
+            <Empty />
           </Card>
         </Col>
       )}

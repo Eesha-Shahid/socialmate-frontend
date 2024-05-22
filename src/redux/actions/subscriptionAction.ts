@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/utils/axiosInstace";
-import { addPaymentMethodSuccess, addSubscriptionSuccess, cancelSubscriptionSuccess, getPaymentMethodsSuccess, getSubscriptionHistorySuccess, setAddPaymentMethodLoading, setAddSubscriptionLoading, setCancelSubscriptionLoading } from "../reducers/subscriptionReducer";
+import { addPaymentMethodSuccess, addSubscriptionSuccess, cancelSubscriptionSuccess, getPaymentMethodsSuccess, getSubscriptionHistorySuccess, setAddPaymentMethodLoading, setAddSubscriptionLoading, setCancelSubscriptionLoading, setDefaultPaymentMethodSuccess } from "../reducers/subscriptionReducer";
 import { AddPaymentMethodDto, SetDefaultPaymentMethodDto } from "../types/subscription/reducer";
 import { updateAlert } from "./alertAction";
 import { NotificationType } from "@/types";
@@ -28,7 +28,7 @@ export const setDefaultPaymentMethod = createAsyncThunk(
     try {
       const { dispatch } = thunkAPI;
       const response = await axiosInstance.post(`/user/set-default-card`, setDefaultPaymentMethodDto);
-      dispatch(setDefaultPaymentMethod(response.data.card));
+      dispatch(setDefaultPaymentMethodSuccess(response.data.card));
     } catch (err: any) {
       if (err.response?.status === 400) {
         return thunkAPI.rejectWithValue(err?.response.data.message[0]);

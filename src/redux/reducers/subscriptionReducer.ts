@@ -26,7 +26,7 @@ const subscriptionSlice = createSlice({
     getPaymentMethodsFailure: (state) => {
       state.paymentMethodsLoading = false;
     },
-    setDefaultPaymentMethod: (state, { payload }: PayloadAction<IPaymentMethod>) => {
+    setDefaultPaymentMethodSuccess: (state, { payload }: PayloadAction<IPaymentMethod>) => {
       if (state.paymentMethods) {
         state.paymentMethods.forEach((card, ) => {
           if (card._id === payload._id) {
@@ -85,6 +85,7 @@ export const {
   getPaymentMethodsSuccess, 
   getPaymentMethodsFailure,
   addPaymentMethodSuccess,
+  setDefaultPaymentMethodSuccess,
   getSubscriptionHistorySuccess,
   getSubscriptionHistoryFailure,
   addSubscriptionSuccess,

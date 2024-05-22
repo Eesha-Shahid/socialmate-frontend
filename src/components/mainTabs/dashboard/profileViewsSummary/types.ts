@@ -1,4 +1,4 @@
 interface IProfileViewsSummaryProps{
-    data: IProfileViewsSummary;
+    data: IProfileViewsSummary | null;
     dataLoading: boolean;
 }
